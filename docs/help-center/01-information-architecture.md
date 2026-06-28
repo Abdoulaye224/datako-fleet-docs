@@ -5,6 +5,18 @@
 ```
 help.datako.app/
 │
+├── /profils/                      ← Sélecteur de profil (point d'entrée recommandé)
+│   ├── /profils/transporteur
+│   ├── /profils/marketeur
+│   ├── /profils/mixte
+│   ├── /profils/proprietaire
+│   ├── /profils/dg
+│   ├── /profils/comptable
+│   ├── /profils/daf
+│   ├── /profils/operateur
+│   ├── /profils/logistique
+│   └── /profils/super-admin
+│
 ├── /                              ← Accueil
 │   ├── Barre de recherche globale
 │   ├── Catégories en cartes (Transport, Rôles, Indicateurs, FAQ)
@@ -83,7 +95,24 @@ help.datako.app/
 
 ---
 
+## Navigation par profil — première classe
+
+La navigation par profil n'est pas un filtre optionnel. C'est la **porte d'entrée principale** pour les nouveaux utilisateurs.
+
+À l'arrivée sur l'Accueil, le call-to-action principal est "Quel est votre profil ?" — avant même les cartes de sections. L'utilisateur choisit son profil, et la sidebar se réorganise pour mettre son parcours en tête.
+
+Un utilisateur qui ne choisit pas de profil peut toujours naviguer librement (mode "Tout afficher").
+
+Le profil est persisté en `localStorage`. Il peut être changé depuis un pill dans le header.
+
+Pour le détail des 10 profils et leurs parcours : voir `08-profils.md`.
+
+---
+
 ## Catégories et leur logique
+
+### `/profils/` (première classe, V1)
+Sélecteur de profil avec grille de cartes interactives. Chaque profil a une page dédiée : parcours recommandé, actions typiques, erreurs fréquentes, indicateurs, exports.
 
 ### Transport (cœur du produit, V1)
 Tout ce qui concerne le module transport : enregistrement des rotations, suivi des livraisons, gestion de la flotte, facturation. C'est là que 80% des utilisateurs passent 80% de leur temps.
@@ -140,9 +169,12 @@ src/data/
   roles.ts            ← 5 rôles { id, nom, peutFaire, nePeutPasFaire, exemple }
   indicateurs.ts      ← 7 indicateurs { nom, definition, formule, exemple, conseil }
   faq.ts              ← N questions { question, reponse, categorie }
+  profils.ts          ← 10 profils { id, nom, modules, parcoursRecommande, actionsTupiques, erreurs, indicateurs, exports }
   onboarding.ts       ← 4 parcours { role, etapes[] }
   nouveautes.ts       ← N items { date, titre, description, categorie }
 ```
+
+Voir `08-profils.md` pour les interfaces TypeScript complètes et les données de chaque profil.
 
 **Règle absolue** : zéro contenu en dur dans les composants JSX. Tout passe par `src/data/`. Les composants n'ont aucune connaissance du domaine métier.
 

@@ -14,10 +14,30 @@ Ce site sera accessible à `help.datako.app`. Il est destiné aux clients (direc
 ## Stack
 
 ```
-React 19 + TypeScript + Vite + Tailwind CSS 3
+React 19 + TypeScript + Vite + Tailwind CSS 3 + Framer Motion
 ```
 
 Pas de framework de doc (Docusaurus, VitePress, etc.) — site React custom pour garder la flexibilité de design.
+
+**Framer Motion est obligatoire** (`npm install framer-motion`) pour les animations de page, les cartes interactives, les transitions et les micro-interactions. Voir `docs/help-center/09-ux-premium.md` pour les specs complètes.
+
+## Ambition UX
+
+Ce n'est **pas** un simple site de documentation. C'est un outil d'onboarding et de formation qui doit donner **envie** d'être utilisé.
+
+Exigences non-négociables :
+- Animations de page fluides (slide-up, fade)
+- Cartes interactives avec hover premium (lévitation, gradient glow)
+- Navigation par profil utilisateur (première classe, pas un filtre secondaire)
+- Recherche style Command Palette (Cmd+K, stagger results, surlignage)
+- Micro-interactions sur chaque élément cliquable
+- Expérience mobile soignée (swipe drawer, touch targets 44px)
+- Transitions Framer Motion sur accordéons, drawers, listes
+- Stagger lists sur toutes les grilles de cartes
+- Barre de progression animée sur les parcours guidés
+- Typographie premium (gradient sur H1, code inline stylé)
+
+Le résultat doit être digne d'un SaaS professionnel. Chaque composant doit avoir des états hover, focus et active soignés.
 
 ## Charte graphique Datakö
 
@@ -47,39 +67,86 @@ Thème dark par défaut (cohérent avec Fleet Manager).
 ```
 src/
   data/
-    transport.ts     ← contenu section Transport (pages, guides, FAQ)
-    vente.ts         ← contenu section Vente/Distribution (V2)
-    roles.ts         ← contenu section Rôles
-    indicateurs.ts   ← contenu section Indicateurs
-    faq.ts           ← FAQ globale
+    transport/
+      pages.ts         ← 10 pages de l'application
+      guides.ts        ← 10 guides pas-à-pas
+      cycle.ts         ← 6 étapes du cycle rotation
+      casParticuliers.ts
+    roles.ts           ← 5 rôles
+    indicateurs.ts     ← 7 indicateurs
+    faq.ts             ← FAQ globale
+    profils.ts         ← 10 profils utilisateur avec parcours
+    onboarding.ts      ← 4 parcours onboarding par rôle
+    nouveautes.ts      ← changelog client
+  lib/
+    motion.ts          ← tokens Framer Motion (TRANSITIONS, VARIANTS)
+    search.ts          ← index et algorithme de recherche
+  context/
+    SearchContext.tsx  ← index de recherche global
+    ProfilContext.tsx  ← profil actif + progress stockés dans localStorage
   components/
-    Layout.tsx       ← shell : sidebar sticky + header mobile
-    Sidebar.tsx      ← sommaire latéral desktop
-    MobileMenu.tsx   ← menu accordéon mobile
-    SearchBar.tsx    ← recherche client-side
-    Section.tsx      ← bloc de section réutilisable
-    CalloutBlock.tsx ← blocs Astuce/Attention/Exemple
-    Timeline.tsx     ← composant timeline pour cycle rotation
+    layout/
+      Layout.tsx
+      Sidebar.tsx
+      MobileHeader.tsx
+      MobileMenu.tsx
+    ui/
+      CalloutBlock.tsx
+      StepList.tsx
+      CheckList.tsx
+      Timeline.tsx
+      Badge.tsx
+      FormulaBlock.tsx
+      ArticleCard.tsx
+      SectionCard.tsx
+      ProfilCard.tsx
+      StaggerList.tsx
+      PageTransition.tsx
+    navigation/
+      Breadcrumb.tsx
+      PrevNext.tsx
+      TableOfContents.tsx
+      ArticlesConnexes.tsx
+    search/
+      SearchBar.tsx
+      SearchPalette.tsx
+    onboarding/
+      OnboardingChecklist.tsx
+      ProfilProgress.tsx
   pages/
     Home.tsx
-    Transport.tsx
-    Roles.tsx
-    Indicateurs.tsx
+    Profils.tsx              ← sélecteur de profil
+    profils/[id].tsx         ← parcours par profil
+    transport/
+      index.tsx
+      Pages.tsx / PageDetail.tsx
+      Guides.tsx / GuideDetail.tsx
+      Cycle.tsx
+      CasParticuliers.tsx
+    Roles.tsx / RoleDetail.tsx
+    Indicateurs.tsx / IndicateurDetail.tsx
     FAQ.tsx
+    Onboarding.tsx / OnboardingDetail.tsx
+    Nouveautes.tsx
+    Recherche.tsx
+    404.tsx
   App.tsx
   main.tsx
 ```
 
-**Règle d'architecture** : le contenu est dans `src/data/` sous forme de tableaux TypeScript (pas de JSX en dur dans les pages). Les pages itèrent sur ces tableaux. Cela permet d'ajouter facilement une section Vente, WhatsApp, Portail Propriétaire plus tard.
+**Règle d'architecture** : le contenu est dans `src/data/` sous forme de tableaux TypeScript (pas de JSX en dur dans les pages). Les pages itèrent sur ces tableaux.
 
 ## Règles de développement
 
 - `npx tsc --noEmit` doit passer sans erreur avant chaque commit.
-- Pas de bibliothèques inutiles — Tailwind + lucide-react suffisent.
-- Responsive : desktop (sidebar sticky) + mobile (menu accordéon).
+- Librairies autorisées : Tailwind + lucide-react + **framer-motion** + react-router-dom.
+- Responsive : desktop (sidebar sticky) + mobile (menu accordéon + swipe).
 - Pas de backend, pas d'auth, pas de Supabase.
 - Pas de vraies captures d'écran — utiliser des icônes lucide-react comme illustrations.
 - Langue : **français** partout.
+- Tout état persistant (profil actif, progression parcours, historique recherche) → **`localStorage`** uniquement.
+- `prefers-reduced-motion` : respecter via le hook `useReducedMotion()` de Framer Motion — désactiver les animations si activé.
+- Performance : lazy-loader toutes les pages avec `React.lazy()` + `Suspense`.
 
 ## Ce que Copilot NE doit PAS faire
 
@@ -88,6 +155,25 @@ src/
 - Installer Docusaurus, VitePress ou tout autre framework de doc
 - Utiliser du contenu inventé sur Datakö — s'appuyer uniquement sur `BRIEF.md`
 
+## Ce que Copilot NE doit PAS faire
+
+- Modifier le repo `datako-fleet-manager`
+- Créer un backend ou une base de données
+- Installer Docusaurus, VitePress ou tout autre framework de doc
+- Utiliser du contenu inventé sur Datakö — s'appuyer uniquement sur `BRIEF.md` et `docs/help-center/`
+- Omettre les animations Framer Motion — elles font partie des exigences produit
+- Implémenter les modules V2 (Vente, WhatsApp, Portail Propriétaire) avant que la V1 soit validée
+
 ## Voir aussi
 
-- `BRIEF.md` — contenu complet de chaque section, structure des données, critères d'acceptation
+- `BRIEF.md` — contenu complet (données TypeScript V1), critères d'acceptation
+- `docs/help-center/00-vision.md` — pourquoi ce produit existe, utilisateurs cibles
+- `docs/help-center/01-information-architecture.md` — arborescence, URLs, structure `src/data/`
+- `docs/help-center/02-design-system.md` — tokens, typographie, grille, responsive
+- `docs/help-center/03-pages.md` — maquettes textuelles de chaque page
+- `docs/help-center/04-navigation.md` — sidebar, breadcrumb, recherche, TOC, PrevNext
+- `docs/help-center/05-components.md` — inventaire complet des composants avec props TypeScript
+- `docs/help-center/06-search.md` — algorithme de scoring, SearchPalette, localStorage
+- `docs/help-center/07-roadmap.md` — phases de réalisation et critères de validation
+- `docs/help-center/08-profils.md` — **navigation par profil : 10 profils complets avec parcours**
+- `docs/help-center/09-ux-premium.md` — **animations Framer Motion, micro-interactions, expérience premium**
