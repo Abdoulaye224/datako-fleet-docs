@@ -454,14 +454,13 @@ Usage : `import { GUIDES } from '@/data/fleet/transport/guides'`
 
 ```
 Push sur master
-  → ubuntu-latest
-  → npm ci
-  → npm run build  (Vite → dist/)
-  → peaceiris/actions-gh-pages → branche gh-pages
-  → CNAME: fleet-docs.datako.app
+  → job "build" : npm ci → npm run build (Vite → dist/)
+               → actions/upload-pages-artifact (dist/)
+  → job "deploy" : actions/deploy-pages → GitHub Pages
 ```
 
-GitHub Pages sert le contenu de `gh-pages` sur `fleet-docs.datako.app`.
+Settings → Pages → Source : **GitHub Actions** (pas "Deploy from a branch").
+Le domaine custom `fleet-docs.datako.app` est configuré dans Settings → Pages → Custom domain.
 
 **Premier déploiement** : le workflow se déclenche automatiquement au premier push contenant un `package.json` et un script `build`.
 
