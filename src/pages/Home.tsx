@@ -1,9 +1,11 @@
-import { Truck, Users, BarChart3, HelpCircle, ArrowRight, Zap } from 'lucide-react'
+import { BarChart3, Compass, HelpCircle, Truck, Users, ArrowRight, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { SectionCard } from '@/components/ui/SectionCard'
 import { StaggerList } from '@/components/ui/StaggerList'
+import { Badge } from '@/components/ui/Badge'
+import { NOUVEAUTES } from '@/data/fleet'
 import { TRANSITIONS } from '@/lib/motion'
 
 const sections = [
@@ -41,28 +43,16 @@ const sections = [
   },
 ]
 
-const nouveautes = [
-  {
-    date: 'Juin 2025',
-    titre: 'Bilan propriétaire PDF amélioré',
-    description: 'Le bilan PDF inclut maintenant le détail de chaque rotation avec les charges déduites.',
-    type: 'amélioration',
-  },
-  {
-    date: 'Mai 2025',
-    titre: 'Validation WhatsApp conducteur',
-    description: 'Les conducteurs peuvent maintenant valider leur livraison directement via WhatsApp.',
-    type: 'nouveau',
-  },
-  {
-    date: 'Avril 2025',
-    titre: 'Simulations de scénarios',
-    description: "Nouvelle page Simulations pour tester l'impact d'ajout de camions ou de changements de tarif.",
-    type: 'nouveau',
-  },
-]
+const nouveauteMeta = {
+  nouveau: { label: 'Nouveau', color: 'blue' },
+  amelioration: { label: 'Amélioration', color: 'emerald' },
+  corrige: { label: 'Corrigé', color: 'amber' },
+  deprecated: { label: 'Déprécié', color: 'red' },
+} as const
 
 export function Home() {
+  const nouveautes = NOUVEAUTES.slice(0, 3)
+
   return (
     <PageTransition>
       <div className="space-y-12">
@@ -71,7 +61,7 @@ export function Home() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={TRANSITIONS.default}
-            className="text-3xl font-bold mb-3"
+            className="mb-3 text-3xl font-bold"
             style={{
               background: 'linear-gradient(135deg, #F1F5F9 60%, #94A3B8)',
               WebkitBackgroundClip: 'text',
@@ -85,17 +75,17 @@ export function Home() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...TRANSITIONS.default, delay: 0.05 }}
-            className="text-[#94A3B8] text-base leading-relaxed max-w-xl"
+            className="max-w-xl text-base leading-relaxed text-[#94A3B8]"
           >
             Dashboard BI pour PME transport et distribution en Guinée. Trouvez ici la réponse à toutes vos questions sur Fleet Manager.
           </motion.p>
         </div>
 
         <div>
-          <h2 className="text-base font-semibold text-[#94A3B8] mb-4">Explorer les sections</h2>
-          <StaggerList className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {sections.map(s => (
-              <SectionCard key={s.href} {...s} />
+          <h2 className="mb-4 text-base font-semibold text-[#94A3B8]">Explorer les sections</h2>
+          <StaggerList className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {sections.map(section => (
+              <SectionCard key={section.href} {...section} />
             ))}
           </StaggerList>
         </div>
@@ -103,20 +93,48 @@ export function Home() {
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ ...TRANSITIONS.default, delay: 0.15 }}
+          className="rounded-2xl border border-white/10 bg-surface-2 p-5"
+        >
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-start gap-3">
+              <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
+                <Compass size={18} />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[#F1F5F9]">Quel est votre profil ?</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#94A3B8]">
+                  Choisissez votre profil métier pour accéder à un parcours personnalisé et aux articles les plus utiles.
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/profils"
+              className="inline-flex items-center gap-2 self-start rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400 transition-colors hover:bg-blue-500/15 hover:text-blue-300"
+            >
+              Choisir mon profil
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ ...TRANSITIONS.default, delay: 0.2 }}
-          className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5 flex items-center justify-between gap-4"
+          className="flex items-center justify-between gap-4 rounded-xl border border-blue-500/20 bg-blue-500/5 p-5"
         >
           <div className="flex items-start gap-3">
-            <Zap size={20} className="text-blue-400 flex-shrink-0 mt-0.5" />
+            <Zap size={20} className="mt-0.5 flex-shrink-0 text-blue-400" />
             <div>
-              <p className="font-semibold text-[#F1F5F9] text-sm">Nouveau sur Fleet Manager ?</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Commencez par les guides pas-à-pas pour créer votre première rotation.</p>
+              <p className="text-sm font-semibold text-[#F1F5F9]">Nouveau sur Fleet Manager ?</p>
+              <p className="mt-0.5 text-xs text-[#64748B]">Commencez par les guides pas-à-pas pour créer votre première rotation.</p>
             </div>
           </div>
           <motion.div whileHover={{ x: 2 }} transition={TRANSITIONS.fast}>
             <Link
-              to="/transport/guides"
-              className="flex items-center gap-1 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors flex-shrink-0"
+              to="/onboarding"
+              className="flex flex-shrink-0 items-center gap-1 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
             >
               Démarrer <ArrowRight size={14} />
             </Link>
@@ -124,49 +142,45 @@ export function Home() {
         </motion.div>
 
         <div>
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4 flex items-center justify-between">
             <h2 className="text-base font-semibold text-[#94A3B8]">Dernières nouveautés</h2>
-            <Link to="/nouveautes" className="text-xs text-[#64748B] hover:text-[#94A3B8] transition-colors">
+            <Link to="/nouveautes" className="text-xs text-[#64748B] transition-colors hover:text-[#94A3B8]">
               Voir tout →
             </Link>
           </div>
           <div className="space-y-3">
-            {nouveautes.map((n, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...TRANSITIONS.default, delay: 0.1 + i * 0.05 }}
-                className="flex gap-3 p-3 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#181C27]"
-              >
-                <div className="flex flex-col items-center">
-                  <span className="text-xs text-[#64748B] whitespace-nowrap">{n.date}</span>
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <p className="text-sm font-medium text-[#F1F5F9]">{n.titre}</p>
-                    <span className={`text-xs px-1.5 py-0.5 rounded-full border font-medium ${
-                      n.type === 'nouveau'
-                        ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                        : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                    }`}>
-                      {n.type}
-                    </span>
+            {nouveautes.map((nouveaute, index) => {
+              const meta = nouveauteMeta[nouveaute.type]
+              return (
+                <motion.div
+                  key={nouveaute.id}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...TRANSITIONS.default, delay: 0.1 + index * 0.05 }}
+                  className="rounded-xl border border-white/10 bg-surface-2 p-4"
+                >
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-[#64748B]">
+                    <span>{nouveaute.mois}</span>
+                    <Badge label={meta.label} color={meta.color} />
+                    {nouveaute.module && (
+                      <span className="rounded-full border border-white/10 px-2 py-0.5">{nouveaute.module}</span>
+                    )}
                   </div>
-                  <p className="text-xs text-[#64748B]">{n.description}</p>
-                </div>
-              </motion.div>
-            ))}
+                  <p className="mt-3 text-sm font-medium text-[#F1F5F9]">{nouveaute.titre}</p>
+                  <p className="mt-1 text-xs text-[#64748B]">{nouveaute.description}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
 
-        <p className="text-xs text-[#64748B] text-center pb-4">
+        <p className="pb-4 text-center text-xs text-[#64748B]">
           Vous utilisez Datakö Fleet ?{' '}
           <a
             href="https://fleet.datako.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 transition-colors"
+            className="text-blue-400 transition-colors hover:text-blue-300"
           >
             Connectez-vous sur fleet.datako.app
           </a>

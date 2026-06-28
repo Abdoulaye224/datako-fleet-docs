@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Truck, BookOpen, Home, Users, BarChart3, HelpCircle } from 'lucide-react'
+import { ChevronDown, Truck, BookOpen, Home, Users, BarChart3, HelpCircle, Compass, Zap } from 'lucide-react'
 import { TRANSITIONS } from '@/lib/motion'
+import { useProfil } from '@/context/ProfilContext'
+import { PROFILS } from '@/data/fleet'
 
 const navItems = [
   { label: 'Accueil', href: '/', icon: Home },
+  { label: 'Profils', href: '/profils', icon: Compass },
+  { label: 'Onboarding', href: '/onboarding', icon: Zap },
   {
     label: 'Transport',
     icon: Truck,
@@ -19,28 +23,30 @@ const navItems = [
   { label: 'Les rôles', href: '/roles', icon: Users },
   { label: 'Indicateurs', href: '/indicateurs', icon: BarChart3 },
   { label: 'FAQ', href: '/faq', icon: HelpCircle },
-]
+] as const
 
 export function Sidebar() {
   const location = useLocation()
   const [openSections, setOpenSections] = useState<string[]>(['Transport'])
+  const { profilActif } = useProfil()
+  const profil = PROFILS.find(item => item.id === profilActif)
 
   const toggleSection = (label: string) => {
     setOpenSections(prev =>
-      prev.includes(label) ? prev.filter(s => s !== label) : [...prev, label]
+      prev.includes(label) ? prev.filter(section => section !== label) : [...prev, label],
     )
   }
 
   return (
     <nav
-      className="hidden lg:flex flex-col w-[260px] flex-shrink-0 border-r border-[rgba(255,255,255,0.08)] bg-[#181C27] h-screen sticky top-0 overflow-y-auto"
+      className="sticky top-0 hidden h-screen w-[260px] flex-shrink-0 flex-col overflow-y-auto border-r border-white/10 bg-surface-2 lg:flex"
       role="navigation"
       aria-label="Navigation principale"
     >
-      <div className="px-5 py-5 border-b border-[rgba(255,255,255,0.08)]">
+      <div className="border-b border-white/10 px-5 py-5">
         <Link to="/" className="flex items-center gap-2">
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white"
             style={{ background: 'linear-gradient(135deg, #2563EB, #7C3AED)' }}
           >
             D
@@ -50,30 +56,47 @@ export function Sidebar() {
             <p className="text-xs text-[#64748B]">Documentation</p>
           </div>
         </Link>
+
+        {profil && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={TRANSITIONS.default}
+            className="mt-4 rounded-xl border border-blue-500/20 bg-blue-500/5 p-3"
+          >
+            <div className="mb-2 flex items-center gap-2 text-xs font-medium text-blue-300">
+              <span className="h-2 w-2 rounded-full bg-blue-400" />
+              Profil actif
+            </div>
+            <Link to={`/profils/${profil.id}`} className="text-sm text-[#F1F5F9] transition-colors hover:text-blue-300">
+              {profil.emoji} {profil.nom}
+            </Link>
+          </motion.div>
+        )}
       </div>
 
-      <div className="flex-1 px-3 py-4 space-y-1">
+      <div className="flex-1 space-y-1 px-3 py-4">
         {navItems.map(item => {
-          if (!item.children) {
-            const isActive = location.pathname === item.href
+          if (!('children' in item)) {
+            const isActive = location.pathname === item.href || location.pathname.startsWith(`${item.href}/`)
             return (
               <div key={item.href} className="relative">
                 {isActive && (
                   <motion.div
                     layoutId="sidebar-active"
-                    className="absolute left-0 top-0 bottom-0 w-0.5 bg-blue-500 rounded-full"
+                    className="absolute bottom-0 left-0 top-0 w-0.5 rounded-full bg-blue-500"
                     transition={TRANSITIONS.springGentle}
                   />
                 )}
                 <Link
-                  to={item.href!}
-                  className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
+                  to={item.href}
+                  className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
                     isActive
                       ? 'bg-blue-500/10 text-blue-400'
-                      : 'text-[#94A3B8] hover:bg-[#1F2537] hover:text-[#F1F5F9]'
+                      : 'text-[#94A3B8] hover:bg-surface-3 hover:text-[#F1F5F9]'
                   }`}
                 >
-                  {item.icon && <item.icon size={16} />}
+                  <item.icon size={16} />
                   {item.label}
                 </Link>
               </div>
@@ -81,26 +104,24 @@ export function Sidebar() {
           }
 
           const isOpen = openSections.includes(item.label)
-          const isChildActive = item.children?.some(c => location.pathname.startsWith(c.href))
+          const isChildActive = item.children.some(child => location.pathname.startsWith(child.href))
 
           return (
             <div key={item.label}>
               <button
+                type="button"
                 onClick={() => toggleSection(item.label)}
-                className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
+                className={`flex w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
                   isChildActive
                     ? 'text-[#F1F5F9]'
-                    : 'text-[#94A3B8] hover:bg-[#1F2537] hover:text-[#F1F5F9]'
+                    : 'text-[#94A3B8] hover:bg-surface-3 hover:text-[#F1F5F9]'
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  {item.icon && <item.icon size={16} />}
+                  <item.icon size={16} />
                   {item.label}
                 </span>
-                <motion.div
-                  animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={TRANSITIONS.fast}
-                >
+                <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={TRANSITIONS.fast}>
                   <ChevronDown size={14} />
                 </motion.div>
               </button>
@@ -114,17 +135,17 @@ export function Sidebar() {
                     transition={TRANSITIONS.default}
                     className="overflow-hidden"
                   >
-                    <div className="ml-4 pl-3 border-l border-[rgba(255,255,255,0.08)] mt-1 space-y-0.5">
-                      {item.children?.map(child => {
-                        const isActive = location.pathname === child.href || location.pathname.startsWith(child.href + '/')
+                    <div className="ml-4 mt-1 space-y-0.5 border-l border-white/10 pl-3">
+                      {item.children.map(child => {
+                        const isActive = location.pathname === child.href || location.pathname.startsWith(`${child.href}/`)
                         return (
                           <Link
                             key={child.href}
                             to={child.href}
-                            className={`block px-3 py-1.5 rounded-lg text-xs transition-colors ${
+                            className={`block rounded-lg px-3 py-1.5 text-xs transition-colors ${
                               isActive
                                 ? 'bg-blue-500/10 text-blue-400'
-                                : 'text-[#94A3B8] hover:bg-[#1F2537] hover:text-[#F1F5F9]'
+                                : 'text-[#94A3B8] hover:bg-surface-3 hover:text-[#F1F5F9]'
                             }`}
                           >
                             {child.label}
@@ -140,12 +161,12 @@ export function Sidebar() {
         })}
       </div>
 
-      <div className="px-5 py-4 border-t border-[rgba(255,255,255,0.08)]">
+      <div className="border-t border-white/10 px-5 py-4">
         <a
           href="https://fleet.datako.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-xs text-[#64748B] hover:text-[#94A3B8] transition-colors"
+          className="flex items-center gap-2 text-xs text-[#64748B] transition-colors hover:text-[#94A3B8]"
         >
           <BookOpen size={12} />
           Ouvrir Fleet Manager

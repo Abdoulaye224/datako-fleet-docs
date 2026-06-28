@@ -4,21 +4,26 @@ import { PageTransition } from '@/components/ui/PageTransition'
 import { CalloutBlock } from '@/components/ui/CalloutBlock'
 import { appPages } from '@/data/fleet/transport/pages'
 
+const pageAliases: Record<string, string> = {
+  'profit-par-camion': 'profit-camion',
+}
+
 export function PageDetail() {
   const { id } = useParams<{ id: string }>()
-  const page = appPages.find(p => p.id === id)
+  const resolvedId = id ? pageAliases[id] ?? id : undefined
+  const page = appPages.find(p => p.id === resolvedId)
 
   if (!page) return <Navigate to="/transport/pages" replace />
 
-  const currentIndex = appPages.findIndex(p => p.id === id)
+  const currentIndex = appPages.findIndex(p => p.id === resolvedId)
   const prev = currentIndex > 0 ? appPages[currentIndex - 1] : null
   const next = currentIndex < appPages.length - 1 ? appPages[currentIndex + 1] : null
 
   return (
     <PageTransition>
-      <div className="space-y-8 max-w-3xl">
+      <div className="max-w-3xl space-y-8">
         <div className="flex items-center gap-2 text-xs text-[#64748B]">
-          <Link to="/transport/pages" className="hover:text-[#94A3B8] transition-colors flex items-center gap-1">
+          <Link to="/transport/pages" className="flex items-center gap-1 transition-colors hover:text-[#94A3B8]">
             <ArrowLeft size={12} />
             Comprendre les pages
           </Link>
@@ -27,10 +32,10 @@ export function PageDetail() {
         </div>
 
         <div>
-          <span className="text-xs text-[#64748B] font-medium bg-[#1F2537] px-2 py-0.5 rounded-full border border-[rgba(255,255,255,0.08)]">
+          <span className="rounded-full border border-white/10 bg-surface-3 px-2 py-0.5 text-xs font-medium text-[#64748B]">
             Onglet {page.onglet}
           </span>
-          <h1 className="text-2xl font-bold mt-3" style={{
+          <h1 className="mt-3 text-2xl font-bold" style={{
             background: 'linear-gradient(135deg, #F1F5F9 60%, #94A3B8)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -44,7 +49,7 @@ export function PageDetail() {
             <Eye size={16} />
             Ce que vous voyez
           </div>
-          <p className="text-sm text-[#94A3B8] leading-relaxed pl-6">{page.see}</p>
+          <p className="pl-6 text-sm leading-relaxed text-[#94A3B8]">{page.see}</p>
         </div>
 
         <div className="space-y-2">
@@ -52,30 +57,30 @@ export function PageDetail() {
             <Target size={16} />
             Pourquoi c'est utile
           </div>
-          <p className="text-sm text-[#94A3B8] leading-relaxed pl-6">{page.why}</p>
+          <p className="pl-6 text-sm leading-relaxed text-[#94A3B8]">{page.why}</p>
         </div>
 
         <CalloutBlock variant="astuce" title="Comment lire cette page">
           {page.read}
         </CalloutBlock>
 
-        <div className="flex gap-3 pt-4 border-t border-[rgba(255,255,255,0.08)]">
+        <div className="flex gap-3 border-t border-white/10 pt-4">
           {prev && (
             <Link
               to={`/transport/pages/${prev.id}`}
-              className="flex-1 p-3 rounded-lg border border-[rgba(255,255,255,0.08)] hover:border-blue-500/30 hover:bg-[#1F2537] transition-colors"
+              className="flex-1 rounded-lg border border-white/10 p-3 transition-colors hover:border-blue-500/30 hover:bg-surface-3"
             >
               <p className="text-xs text-[#64748B]">← Précédent</p>
-              <p className="text-sm font-medium text-[#F1F5F9] mt-0.5 truncate">{prev.name}</p>
+              <p className="mt-0.5 truncate text-sm font-medium text-[#F1F5F9]">{prev.name}</p>
             </Link>
           )}
           {next && (
             <Link
               to={`/transport/pages/${next.id}`}
-              className="flex-1 p-3 rounded-lg border border-[rgba(255,255,255,0.08)] hover:border-blue-500/30 hover:bg-[#1F2537] transition-colors text-right"
+              className="flex-1 rounded-lg border border-white/10 p-3 text-right transition-colors hover:border-blue-500/30 hover:bg-surface-3"
             >
               <p className="text-xs text-[#64748B]">Suivant →</p>
-              <p className="text-sm font-medium text-[#F1F5F9] mt-0.5 truncate">{next.name}</p>
+              <p className="mt-0.5 truncate text-sm font-medium text-[#F1F5F9]">{next.name}</p>
             </Link>
           )}
         </div>
