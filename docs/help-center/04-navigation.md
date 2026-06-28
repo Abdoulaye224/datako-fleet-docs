@@ -72,7 +72,7 @@ Bouton hamburger `☰` dans le header, en haut à gauche. `aria-label="Ouvrir le
 ### Header mobile
 ```
 ┌────────────────────────────────────────────┐
-│  ☰  [logo] Datakö Help Center    🔍        │
+│  ☰  [logo] Datakö Fleet Docs    🔍        │
 └────────────────────────────────────────────┘
 ```
 - `☰` → ouvre le drawer
@@ -161,7 +161,7 @@ Articles connexes
 → Comprendre le gain par rotation
 ```
 - 2 à 4 liens maximum
-- Définis manuellement dans `src/data/` (pas d'algorithme automatique en V1)
+- Définis manuellement dans `src/data/fleet/` (pas d'algorithme automatique en V1)
 - Prop `articlesConnexes: string[]` (IDs des articles)
 
 ### "Voir aussi" dans les indicateurs
@@ -169,7 +169,7 @@ Liens vers les pages de l'application qui affichent cet indicateur.
 
 ### "Guides pour ce rôle"
 Sur chaque page de rôle : liste des guides réalisables par ce rôle.
-Dérivé de la propriété `roles?: string[]` des guides dans `src/data/`.
+Dérivé de la propriété `roles?: string[]` des guides dans `src/data/fleet/`.
 
 ---
 
@@ -191,7 +191,7 @@ Dérivé de la propriété `roles?: string[]` des guides dans `src/data/`.
 
 - Gauche : Précédent (absent sur le premier article)
 - Droite : Suivant (absent sur le dernier article)
-- Séquence définie dans `src/data/` par un champ `suivant?: string` et `precedent?: string`
+- Séquence définie dans `src/data/fleet/` par un champ `suivant?: string` et `precedent?: string`
 
 ---
 

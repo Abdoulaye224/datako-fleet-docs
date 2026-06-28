@@ -24,7 +24,7 @@ Chaque phase produit une version déployable et utilisable, pas un work-in-progr
 - [ ] Configurer les CSS variables dans `index.css`
 - [ ] Vérifier : `npm run dev` fonctionne, `npx tsc --noEmit` passe
 - [ ] Configurer le router (`react-router-dom`)
-- [ ] Créer le fichier `src/data/index.ts` (barrel export)
+- [ ] Créer le fichier `src/data/fleet/index.ts` (barrel export)
 
 ### 1.2 — Shell de l'application
 - [ ] `Layout.tsx` — structure flex sidebar + contenu
@@ -35,11 +35,11 @@ Chaque phase produit une version déployable et utilisable, pas un work-in-progr
 
 **Critère de validation** : la sidebar s'affiche sur desktop, le menu hamburger fonctionne sur mobile.
 
-### 1.3 — Contenu Transport dans `src/data/`
-- [ ] `src/data/transport/pages.ts` — 10 pages de l'application
-- [ ] `src/data/transport/guides.ts` — 10 guides pas-à-pas
-- [ ] `src/data/transport/cycle.ts` — 6 étapes du cycle rotation
-- [ ] `src/data/transport/casParticuliers.ts` — 6 cas particuliers
+### 1.3 — Contenu Transport dans `src/data/fleet/`
+- [ ] `src/data/fleet/transport/pages.ts` — 10 pages de l'application
+- [ ] `src/data/fleet/transport/guides.ts` — 10 guides pas-à-pas
+- [ ] `src/data/fleet/transport/cycle.ts` — 6 étapes du cycle rotation
+- [ ] `src/data/fleet/transport/casParticuliers.ts` — 6 cas particuliers
 
 ### 1.4 — Pages Transport
 - [ ] `pages/transport/Pages.tsx` — liste des pages de l'application (cartes)
@@ -72,11 +72,11 @@ Chaque phase produit une version déployable et utilisable, pas un work-in-progr
 **Objectif** : toutes les sections V1 sont peuplées et navigables.
 
 ### 2.1 — Données complémentaires
-- [ ] `src/data/roles.ts` — 5 rôles
-- [ ] `src/data/indicateurs.ts` — 7 indicateurs
-- [ ] `src/data/faq.ts` — 10+ questions
-- [ ] `src/data/onboarding.ts` — 4 parcours par rôle
-- [ ] `src/data/nouveautes.ts` — entrées changelog
+- [ ] `src/data/fleet/roles.ts` — 5 rôles
+- [ ] `src/data/fleet/indicateurs.ts` — 7 indicateurs
+- [ ] `src/data/fleet/faq.ts` — 10+ questions
+- [ ] `src/data/fleet/onboarding.ts` — 4 parcours par rôle
+- [ ] `src/data/fleet/nouveautes.ts` — entrées changelog
 
 ### 2.2 — Pages Rôles
 - [ ] `pages/roles/RolesIndex.tsx` — vue d'ensemble + tableau comparatif (`RolePermissionGrid`)
@@ -114,7 +114,7 @@ Chaque phase produit une version déployable et utilisable, pas un work-in-progr
 **Objectif** : expérience utilisateur soignée — recherche, navigation entre articles, accessibilité.
 
 ### 3.1 — Recherche
-- [ ] `SearchContext.tsx` — index en mémoire depuis `src/data/`, disponible globalement
+- [ ] `SearchContext.tsx` — index en mémoire depuis `src/data/fleet/`, disponible globalement
 - [ ] `SearchPalette.tsx` — modale Cmd+K avec scoring, surlignage, historique
 - [ ] `SearchBar.tsx` — déclencheur dans sidebar et header mobile
 - [ ] `pages/Recherche.tsx` — page résultats `/recherche?q=`
@@ -150,16 +150,16 @@ Chaque phase produit une version déployable et utilisable, pas un work-in-progr
 Ces modules ne seront pas implémentés avant la validation complète des phases 1-3.
 
 ### 4.1 — Module Vente / Distribution
-- [ ] `src/data/vente/` — pages, guides, indicateurs vente
+- [ ] `src/data/fleet/vente/` — pages, guides, indicateurs vente
 - [ ] Section `/vente/` dans la sidebar et l'architecture
 - [ ] Intégration dans la recherche
 
 ### 4.2 — Module WhatsApp
-- [ ] `src/data/whatsapp/` — flux conducteur, DG, chef exploitation
+- [ ] `src/data/fleet/whatsapp/` — flux conducteur, DG, chef exploitation
 - [ ] Section `/whatsapp/`
 
 ### 4.3 — Portail Propriétaire
-- [ ] `src/data/portail/` — accès, bilan, PDF
+- [ ] `src/data/fleet/portail/` — accès, bilan, PDF
 - [ ] Section `/portail-proprietaire/`
 
 ### 4.4 — Deep-linking depuis Fleet Manager
@@ -177,7 +177,7 @@ Ces modules ne seront pas implémentés avant la validation complète des phases
 ## Définition of Done
 
 Un article est "terminé" quand :
-- [ ] Le contenu est dans `src/data/` (pas dans le JSX)
+- [ ] Le contenu est dans `src/data/fleet/` (pas dans le JSX)
 - [ ] La page s'affiche sans erreur console
 - [ ] Les liens connexes pointent vers des pages existantes
 - [ ] `npx tsc --noEmit` passe

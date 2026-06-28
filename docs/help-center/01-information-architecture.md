@@ -160,7 +160,7 @@ Un article est l'unité atomique de contenu. Il a :
 ## Organisation du contenu dans le code
 
 ```
-src/data/
+src/data/fleet/
   transport/
     pages.ts          ← 10 pages, chacune { name, see, why, read }
     guides.ts         ← 10 guides, chacun { title, objectif, prerequis, etapes, resultat, erreurs }
@@ -176,7 +176,7 @@ src/data/
 
 Voir `08-profils.md` pour les interfaces TypeScript complètes et les données de chaque profil.
 
-**Règle absolue** : zéro contenu en dur dans les composants JSX. Tout passe par `src/data/`. Les composants n'ont aucune connaissance du domaine métier.
+**Règle absolue** : zéro contenu en dur dans les composants JSX. Tout passe par `src/data/fleet/`. Les composants n'ont aucune connaissance du domaine métier.
 
 ---
 

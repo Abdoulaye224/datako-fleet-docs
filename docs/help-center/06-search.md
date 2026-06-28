@@ -13,7 +13,7 @@
 
 ### Index de recherche
 
-Généré au démarrage de l'application depuis les fichiers `src/data/`. Structure :
+Généré au démarrage de l'application depuis les fichiers `src/data/fleet/`. Structure :
 
 ```typescript
 interface SearchEntry {

@@ -60,4 +60,4 @@ Pas d'articles encyclopédiques de 10 pages. Chaque page répond à une question
 Le design reprend la charte Datakö (thème dark, bleu primaire) pour que l'utilisateur reconnaisse immédiatement l'écosystème. Pas de friction visuelle entre Fleet Manager et le Help Center.
 
 ### "Modulaire et durable"
-Le contenu est stocké dans des fichiers TypeScript (`src/data/`) séparés de la présentation. Ajouter un module (Vente, WhatsApp) = ajouter un fichier de données et une page. Pas de refactoring.
+Le contenu est stocké dans des fichiers TypeScript (`src/data/fleet/`) séparés de la présentation. Ajouter un module (Vente, WhatsApp) = ajouter un fichier de données et une page. Pas de refactoring.

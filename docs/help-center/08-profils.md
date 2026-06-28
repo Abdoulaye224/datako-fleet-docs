@@ -101,7 +101,7 @@ interface Profil {
 }
 ```
 
-### Fichier `src/data/profils.ts`
+### Fichier `src/data/fleet/profils.ts`
 
 ```typescript
 export const PROFILS: Profil[] = [

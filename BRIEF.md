@@ -1,4 +1,4 @@
-# Brief produit — Datakö Help Center
+# Brief produit — Datakö Fleet Docs
 
 ## Objectif
 
@@ -38,7 +38,7 @@ Contenu :
 
 ---
 
-## Section 2 — Transport (`src/data/transport.ts`)
+## Section 2 — Transport (`src/data/fleet/transport.ts`)
 
 ### 2a. Comprendre les pages
 
@@ -161,7 +161,7 @@ Cas à documenter :
 
 ---
 
-## Section 3 — Les rôles (`src/data/roles.ts`)
+## Section 3 — Les rôles (`src/data/fleet/roles.ts`)
 
 ```typescript
 interface Role {
@@ -283,7 +283,7 @@ Données :
 
 ---
 
-## Section 4 — Comprendre les indicateurs (`src/data/indicateurs.ts`)
+## Section 4 — Comprendre les indicateurs (`src/data/fleet/indicateurs.ts`)
 
 ```typescript
 interface Indicateur {
@@ -317,7 +317,7 @@ Indicateurs à documenter :
 
 ---
 
-## Section 5 — FAQ (`src/data/faq.ts`)
+## Section 5 — FAQ (`src/data/fleet/faq.ts`)
 
 ```typescript
 interface FAQItem {
@@ -393,7 +393,7 @@ Composant vertical avec étapes numérotées. Chaque étape : numéro + titre + 
 
 - [ ] Scaffold Vite + React + TS + Tailwind opérationnel (`npm run dev` fonctionne)
 - [ ] 4 sections créées : Accueil, Transport, Rôles, Indicateurs, FAQ
-- [ ] Contenu des sections issu de `src/data/` (pas de JSX en dur)
+- [ ] Contenu des sections issu de `src/data/fleet/` (pas de JSX en dur)
 - [ ] Timeline du cycle rotation visible et lisible
 - [ ] Guides pas-à-pas lisibles (10 guides)
 - [ ] Tous les rôles documentés (5 rôles)

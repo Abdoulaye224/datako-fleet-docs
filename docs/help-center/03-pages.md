@@ -9,7 +9,7 @@ Orienter rapidement l'utilisateur vers la section ou le guide dont il a besoin.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  [logo Datakö]   Datakö Help Center                     │
+│  [logo Datakö]   Datakö Fleet Docs                     │
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
 │  Bonjour. Comment pouvons-nous vous aider ?             │
