@@ -1,0 +1,1 @@
+import{d as e,n as t,r as n,t as r}from"./motion-BC4CGouX.js";var i=e();function a({children:e}){return(0,i.jsx)(n.div,{variants:t.slideUp,initial:`initial`,animate:`animate`,exit:`exit`,transition:r.default,children:e})}export{a as t};
