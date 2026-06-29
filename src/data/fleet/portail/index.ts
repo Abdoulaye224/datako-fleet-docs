@@ -41,15 +41,15 @@ export const PORTAIL_SECTIONS: PortailSection[] = [
   {
     id: 'bilan-mensuel',
     titre: 'Bilan mensuel',
-    description: 'Le récapitulatif mensuel qui calcule la part propriétaire à partir des rotations validées et des règles de répartition.',
+    description: 'Le récapitulatif mensuel qui calcule la part propriétaire à partir des rotations validées et des règles de répartition configurées pour chaque véhicule.',
     quoi: [
-      'Voir le total des rotations du mois',
-      'Comprendre comment la part propriétaire est calculée',
-      'Contrôler les montants avant validation ou paiement',
+      'Voir le total des rotations du mois et les montants bruts générés',
+      'Comprendre comment la part propriétaire est calculée (après déductions)',
+      'Distinguer camion propre (marge 100% org) et camion géré (résiduel propriétaire)',
     ],
-    comment: 'Depuis le menu “Mes bilans”, sélectionnez le mois voulu pour afficher le détail des gains, déductions éventuelles et part nette propriétaire.',
+    comment: 'Depuis le menu "Mes bilans", sélectionnez le mois voulu. Le bilan affiche : CA brut → déductions (carburant, péage, maintenance, charges fixes) → marge nette → application des règles de répartition → part propriétaire nette.',
     prerequis: ['Être connecté au portail', 'Les rotations du mois doivent être validées dans Fleet Manager'],
-    astuce: 'Si le total semble trop faible, vérifiez avec l’exploitant que toutes les livraisons du mois sont passées au statut livré.',
+    astuce: 'La part propriétaire est calculée selon les règles définies par l\'équipe Datakö pour votre véhicule : pourcentage sur CA, pourcentage sur marge, montant fixe par rotation ou mensuel. Ce que vous voyez dans le bilan est le montant résiduel après que l\'organisation a prélevé ses commissions.',
     href: '/portail-proprietaire/bilan-mensuel',
   },
   {
