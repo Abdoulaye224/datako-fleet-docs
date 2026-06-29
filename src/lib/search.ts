@@ -8,13 +8,18 @@ import type { FAQItem } from '@/data/fleet/faq'
 import type { Profil } from '@/data/fleet/profils'
 import type { OnboardingParcours } from '@/data/fleet/onboarding'
 import type { Nouveaute } from '@/data/fleet/nouveautes'
+import type { AppPage as VentePage } from '@/data/fleet/vente/pages'
+import type { Guide as VenteGuide } from '@/data/fleet/vente/guides'
+import type { Indicateur as VenteIndicateur } from '@/data/fleet/vente/indicateurs'
+import type { WhatsAppFlux } from '@/data/fleet/whatsapp'
+import type { PortailSection } from '@/data/fleet/portail'
 
 export interface SearchEntry {
   id: string
   titre: string
   chapeau: string
   contenu: string
-  section: 'transport' | 'roles' | 'indicateurs' | 'faq' | 'onboarding' | 'nouveautes' | 'profils'
+  section: 'transport' | 'roles' | 'indicateurs' | 'faq' | 'onboarding' | 'nouveautes' | 'profils' | 'vente' | 'whatsapp' | 'portail'
   categorie: string
   href: string
   tags: string[]
@@ -64,6 +69,11 @@ interface SearchData {
   profils: Profil[]
   onboarding: OnboardingParcours[]
   nouveautes: Nouveaute[]
+  ventePages?: VentePage[]
+  venteGuides?: VenteGuide[]
+  venteIndicateurs?: VenteIndicateur[]
+  whatsappFlux?: WhatsAppFlux[]
+  portailSections?: PortailSection[]
 }
 
 export function buildSearchIndex(data: SearchData): SearchEntry[] {
@@ -206,6 +216,71 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
     })
   })
 
+  data.ventePages?.forEach(page => {
+    entries.push({
+      id: `vente-page-${page.id}`,
+      titre: page.name,
+      chapeau: page.see,
+      contenu: `${page.see} ${page.why} ${page.read}`,
+      section: 'vente',
+      categorie: 'Pages Vente',
+      href: `/vente/pages/${page.id}`,
+      tags: ['vente', 'distribution', 'page'],
+    })
+  })
+
+  data.venteGuides?.forEach(guide => {
+    entries.push({
+      id: `vente-guide-${guide.id}`,
+      titre: guide.title,
+      chapeau: guide.objectif,
+      contenu: `${guide.objectif} ${guide.prerequis.join(' ')} ${guide.etapes.join(' ')} ${guide.resultat} ${guide.erreurs.join(' ')}`,
+      section: 'vente',
+      categorie: 'Guides Vente',
+      href: `/vente/guides/${guide.id}`,
+      tags: ['vente', 'guide', 'distribution'],
+    })
+  })
+
+  data.venteIndicateurs?.forEach(indicateur => {
+    entries.push({
+      id: `vente-indicateur-${indicateur.id}`,
+      titre: indicateur.nom,
+      chapeau: indicateur.definition,
+      contenu: `${indicateur.definition} ${indicateur.formule ?? ''} ${indicateur.exemple} ${indicateur.conseil}`,
+      section: 'vente',
+      categorie: 'Indicateurs Vente',
+      href: `/vente/indicateurs/${indicateur.id}`,
+      tags: ['vente', 'indicateur', 'KPI', indicateur.nom.toLowerCase()],
+    })
+  })
+
+  data.whatsappFlux?.forEach(flux => {
+    entries.push({
+      id: `whatsapp-${flux.id}`,
+      titre: flux.titre,
+      chapeau: flux.description,
+      contenu: `${flux.description} ${flux.quand} ${flux.exempleMessage} ${flux.activation}`,
+      section: 'whatsapp',
+      categorie: 'WhatsApp',
+      href: '/whatsapp',
+      tags: ['whatsapp', flux.profil, flux.messageType],
+    })
+  })
+
+  data.portailSections?.forEach(section => {
+    entries.push({
+      id: `portail-${section.id}`,
+      titre: section.titre,
+      chapeau: section.description,
+      contenu: `${section.description} ${section.quoi.join(' ')} ${section.comment} ${section.prerequis.join(' ')}`,
+      section: 'portail',
+      categorie: 'Portail Propriétaire',
+      href: `/portail-proprietaire`,
+      tags: ['portail', 'propriétaire', 'bilan'],
+    })
+  })
+
   return entries
 }
 
@@ -232,6 +307,9 @@ export function getSectionLabel(section: SearchEntry['section']) {
     onboarding: 'Onboarding',
     nouveautes: 'Nouveautés',
     profils: 'Profils',
+    vente: 'Vente / Distribution',
+    whatsapp: 'WhatsApp',
+    portail: 'Portail Propriétaire',
   }
 
   return labels[section]

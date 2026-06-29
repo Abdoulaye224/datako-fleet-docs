@@ -89,3 +89,72 @@ code {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ─── Mode impression ──────────────────────────────────────────── */
+@media print {
+  /* Reset dark theme */
+  :root {
+    --surface:   #ffffff;
+    --surface-2: #f9fafb;
+    --surface-3: #f3f4f6;
+    --border: #e5e7eb;
+    --text-primary:   #111827;
+    --text-secondary: #374151;
+    --text-muted:     #6b7280;
+    --datako-blue: #2563eb;
+  }
+
+  /* Masquer les éléments non-imprimables */
+  nav,
+  aside,
+  header,
+  [class*="Sidebar"],
+  [class*="TopBar"],
+  [class*="MobileHeader"],
+  [class*="SearchBar"],
+  [class*="SearchPalette"],
+  [class*="PrevNext"],
+  [class*="Breadcrumb"] ~ nav,
+  button:not([aria-label*="imprimer"]) {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Reset backgrounds */
+  body, div, section, article {
+    background: white !important;
+    border-color: #e5e7eb !important;
+    color: #111827 !important;
+  }
+
+  /* Gradient text → texte normal */
+  * {
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+  }
+
+  h1, h2, h3 {
+    color: #111827 !important;
+    background: none !important;
+  }
+
+  /* Éviter les sauts de page intempestifs */
+  section, .space-y-8 > div {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #2563eb !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #6b7280;
+  }
+}

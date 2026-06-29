@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, Sparkles, Truck, Users, Zap } from 'lucide-react'
+import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, MessageCircle, Package, Sparkles, Truck, Users, Zap } from 'lucide-react'
 import { SearchBar } from '@/components/search/SearchBar'
 import { ProfilProgress } from '@/components/ui/ProfilProgress'
 import { useProfil } from '@/context/ProfilContext'
@@ -22,6 +22,17 @@ const navItems = [
       { label: 'Cas particuliers', href: '/transport/cas-particuliers' },
     ],
   },
+  {
+    label: 'Vente / Distribution',
+    icon: Package,
+    children: [
+      { label: 'Comprendre les pages', href: '/vente/pages' },
+      { label: 'Guides pas-à-pas', href: '/vente/guides' },
+      { label: 'Indicateurs vente', href: '/vente/indicateurs' },
+    ],
+  },
+  { label: 'WhatsApp', href: '/whatsapp', icon: MessageCircle },
+  { label: 'Portail Propriétaire', href: '/portail-proprietaire', icon: BookOpen },
   { label: 'Les rôles', href: '/roles', icon: Users },
   { label: 'Indicateurs', href: '/indicateurs', icon: BarChart3 },
   { label: 'FAQ', href: '/faq', icon: HelpCircle },

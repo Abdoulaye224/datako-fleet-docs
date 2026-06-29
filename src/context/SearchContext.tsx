@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from 'react'
+import Fuse from 'fuse.js'
 import {
   FAQ_ITEMS,
   INDICATEURS,
@@ -11,7 +12,12 @@ import {
   cycleEtapes,
   guides,
 } from '@/data/fleet'
-import { buildSearchIndex, searchIndex as doSearch, type SearchEntry } from '@/lib/search'
+import { appPages as ventePages } from '@/data/fleet/vente/pages'
+import { guides as venteGuides } from '@/data/fleet/vente/guides'
+import { INDICATEURS as venteIndicateurs } from '@/data/fleet/vente/indicateurs'
+import { WHATSAPP_FLUX } from '@/data/fleet/whatsapp'
+import { PORTAIL_SECTIONS } from '@/data/fleet/portail'
+import { buildSearchIndex, scoreEntry, type SearchEntry } from '@/lib/search'
 
 interface SearchContextValue {
   isOpen: boolean
@@ -42,11 +48,52 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
         profils: PROFILS,
         onboarding: ONBOARDING_PARCOURS,
         nouveautes: NOUVEAUTES,
+        ventePages,
+        venteGuides,
+        venteIndicateurs,
+        whatsappFlux: WHATSAPP_FLUX,
+        portailSections: PORTAIL_SECTIONS,
       }),
     [],
   )
 
-  const results = useMemo(() => doSearch(query, searchEntries), [query, searchEntries])
+  const fuse = useMemo(
+    () =>
+      new Fuse(searchEntries, {
+        keys: [
+          { name: 'titre', weight: 0.5 },
+          { name: 'chapeau', weight: 0.3 },
+          { name: 'tags', weight: 0.2 },
+        ],
+        threshold: 0.4,
+        minMatchCharLength: 2,
+        includeScore: true,
+      }),
+    [searchEntries],
+  )
+
+  const results = useMemo(() => {
+    const trimmed = query.trim()
+    if (trimmed.length < 2) return []
+
+    // Scoring exact d'abord
+    const exactResults = searchEntries
+      .map(entry => ({ entry, score: scoreEntry(entry, trimmed) }))
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8)
+      .map(item => item.entry)
+
+    if (exactResults.length >= 3) return exactResults
+
+    // Compléter avec Fuse.js (fuzzy) si pas assez de résultats exacts
+    const fuseResults = fuse
+      .search(trimmed, { limit: 8 })
+      .map(result => result.item)
+      .filter(item => !exactResults.some(r => r.id === item.id))
+
+    return [...exactResults, ...fuseResults].slice(0, 8)
+  }, [query, searchEntries, fuse])
 
   const closeSearch = () => {
     setIsOpen(false)

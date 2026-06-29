@@ -1,4 +1,4 @@
-import { BarChart3, Compass, HelpCircle, Truck, Users, ArrowRight, Zap } from 'lucide-react'
+import { BarChart3, Compass, HelpCircle, MessageCircle, Package, Truck, Users, ArrowRight, Zap, BookOpen } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PageTransition } from '@/components/ui/PageTransition'
@@ -16,6 +16,30 @@ const sections = [
     icon: Truck,
     nbArticles: 30,
     color: '#3B82F6',
+  },
+  {
+    titre: 'Vente / Distribution',
+    description: 'Commandes, tournées, facturation et indicateurs du module distribution.',
+    href: '/vente',
+    icon: Package,
+    nbArticles: 18,
+    color: '#10B981',
+  },
+  {
+    titre: 'WhatsApp',
+    description: 'Flux automatiques WhatsApp pour conducteurs, chefs d\'exploitation et DG.',
+    href: '/whatsapp',
+    icon: MessageCircle,
+    nbArticles: 6,
+    color: '#22C55E',
+  },
+  {
+    titre: 'Portail Propriétaire',
+    description: 'Espace dédié aux propriétaires de véhicules gérés : bilans et exports PDF.',
+    href: '/portail-proprietaire',
+    icon: BookOpen,
+    nbArticles: 5,
+    color: '#F59E0B',
   },
   {
     titre: 'Les rôles',
@@ -83,7 +107,7 @@ export function Home() {
 
         <div>
           <h2 className="mb-4 text-base font-semibold text-[var(--text-secondary)]">Explorer les sections</h2>
-          <StaggerList className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <StaggerList className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {sections.map(section => (
               <SectionCard key={section.href} {...section} />
             ))}

@@ -28,6 +28,21 @@ const ProfilDetail = lazy(() => import('@/pages/ProfilDetail').then(m => ({ defa
 const Recherche = lazy(() => import('@/pages/Recherche').then(m => ({ default: m.Recherche })))
 const NotFound = lazy(() => import('@/pages/NotFound').then(m => ({ default: m.NotFound })))
 
+// V2 — Vente / Distribution
+const VenteIndex = lazy(() => import('@/pages/vente/index').then(m => ({ default: m.VenteIndex })))
+const VentePagesList = lazy(() => import('@/pages/vente/PagesList').then(m => ({ default: m.VentePagesList })))
+const VentePageDetail = lazy(() => import('@/pages/vente/PageDetail').then(m => ({ default: m.VentePageDetail })))
+const VenteGuidesList = lazy(() => import('@/pages/vente/GuidesList').then(m => ({ default: m.VenteGuidesList })))
+const VenteGuideDetail = lazy(() => import('@/pages/vente/GuideDetail').then(m => ({ default: m.VenteGuideDetail })))
+const VenteIndicateursList = lazy(() => import('@/pages/vente/IndicateursList').then(m => ({ default: m.VenteIndicateursList })))
+const VenteIndicateurDetail = lazy(() => import('@/pages/vente/IndicateurDetail').then(m => ({ default: m.VenteIndicateurDetail })))
+
+// V2 — WhatsApp
+const WhatsAppIndex = lazy(() => import('@/pages/whatsapp/index').then(m => ({ default: m.WhatsAppIndex })))
+
+// V2 — Portail Propriétaire
+const PortailProprietaireIndex = lazy(() => import('@/pages/portail-proprietaire/index').then(m => ({ default: m.PortailProprietaireIndex })))
+
 function AppRoutes() {
   const location = useLocation()
   const { openSearch } = useSearch()
@@ -69,6 +84,18 @@ function AppRoutes() {
           <Route path="profils" element={<Suspense fallback={suspenseFallback}><Profils /></Suspense>} />
           <Route path="profils/:id" element={<Suspense fallback={suspenseFallback}><ProfilDetail /></Suspense>} />
           <Route path="recherche" element={<Suspense fallback={suspenseFallback}><Recherche /></Suspense>} />
+          {/* V2 — Vente / Distribution */}
+          <Route path="vente" element={<Suspense fallback={suspenseFallback}><VenteIndex /></Suspense>} />
+          <Route path="vente/pages" element={<Suspense fallback={suspenseFallback}><VentePagesList /></Suspense>} />
+          <Route path="vente/pages/:id" element={<Suspense fallback={suspenseFallback}><VentePageDetail /></Suspense>} />
+          <Route path="vente/guides" element={<Suspense fallback={suspenseFallback}><VenteGuidesList /></Suspense>} />
+          <Route path="vente/guides/:id" element={<Suspense fallback={suspenseFallback}><VenteGuideDetail /></Suspense>} />
+          <Route path="vente/indicateurs" element={<Suspense fallback={suspenseFallback}><VenteIndicateursList /></Suspense>} />
+          <Route path="vente/indicateurs/:id" element={<Suspense fallback={suspenseFallback}><VenteIndicateurDetail /></Suspense>} />
+          {/* V2 — WhatsApp */}
+          <Route path="whatsapp" element={<Suspense fallback={suspenseFallback}><WhatsAppIndex /></Suspense>} />
+          {/* V2 — Portail Propriétaire */}
+          <Route path="portail-proprietaire" element={<Suspense fallback={suspenseFallback}><PortailProprietaireIndex /></Suspense>} />
           <Route path="*" element={<Suspense fallback={suspenseFallback}><NotFound /></Suspense>} />
         </Route>
       </Routes>
