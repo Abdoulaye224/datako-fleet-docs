@@ -68,4 +68,16 @@ export const FAQ_ITEMS: FAQItem[] = [
     question: 'Comment changer la période affichée sur tous les tableaux ?',
     reponse: 'Le sélecteur de période est en haut à droite de l\'application (lune/soleil à côté). Choisissez un mois, un trimestre ou une période personnalisée. Tous les tableaux se mettent à jour automatiquement.',
   },
+  {
+    id: 'generer-facture-transport',
+    categorie: 'finance',
+    question: 'Comment générer une facture pour un client ?',
+    reponse: 'Dans Livraisons, cliquez sur "Générer une facture" pour le client concerné. Sélectionnez les rotations livrées à inclure, choisissez si la TVA s\'applique (18%), définissez le délai de règlement, puis cliquez "Générer". Le PDF se télécharge immédiatement et les rotations sont marquées facturées. Seuls les rôles Administrateur, Directeur et Finance peuvent générer des factures.',
+  },
+  {
+    id: 'branding-entreprise',
+    categorie: 'technique',
+    question: 'Pourquoi l\'interface affiche le logo de mon entreprise et pas celui de Datakö ?',
+    reponse: 'Votre organisation a activé le mode White-Label. Fleet Manager affiche votre identité visuelle (logo, couleurs, nom) à la place de l\'identité Datakö. Cela s\'applique aussi aux PDFs générés (factures, bilans). Cette fonctionnalité est configurée par l\'équipe Datakö selon votre abonnement.',
+  },
 ]

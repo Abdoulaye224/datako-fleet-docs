@@ -12,6 +12,24 @@ export interface Nouveaute {
 
 export const NOUVEAUTES: Nouveaute[] = [
   {
+    id: 'v2-facturation-transport',
+    date: '2026-06-29',
+    mois: 'Juin 2026',
+    titre: 'Nouveau : Facturation transport PDF',
+    description: 'Générez une facture PDF directement depuis la page Livraisons. Sélectionnez les rotations d\'un client, choisissez TVA et délai de règlement — le PDF se télécharge et les rotations sont marquées facturées (FT-2026-001).',
+    type: 'nouveau',
+    module: 'Transport',
+  },
+  {
+    id: 'v2-white-label-branding',
+    date: '2026-06-29',
+    mois: 'Juin 2026',
+    titre: 'Nouveau : Branding white-label',
+    description: 'Les organisations avec la fonctionnalité White-Label voient Fleet Manager à leur image : logo, couleurs et nom dans la sidebar et dans tous les PDFs générés (factures, bilans propriétaires).',
+    type: 'nouveau',
+    module: 'Transport',
+  },
+  {
     id: 'v1-4-profit-camion',
     date: '2025-01-15',
     mois: 'Janvier 2025',

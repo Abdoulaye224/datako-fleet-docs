@@ -247,6 +247,7 @@ export const PROFILS: Profil[] = [
       { href: '/transport/pages/profit-par-camion', label: 'Profit par véhicule', priorite: 'importante' },
       { href: '/transport/pages/simulations', label: 'Simuler des scénarios d\'investissement', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains entre acteurs', priorite: 'utile' },
+      { href: '/transport/guides/generer-facture-transport', label: 'Générer une facture transport client', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Faire le point KPI du lundi matin en 5 minutes', guide: '/transport/pages/dashboard' },
@@ -275,6 +276,7 @@ export const PROFILS: Profil[] = [
     ],
     exports: [
       { nom: 'Dashboard PDF (snapshot KPI)', quand: 'Réunion conseil, rapport mensuel', comment: 'Dashboard > Imprimer / Exporter PDF' },
+      { nom: 'Factures transport PDF', quand: 'Pièces justificatives clients', comment: 'Livraisons > Générer une facture > PDF' },
       { nom: 'Export Excel complet', quand: 'Audit, reporting investisseurs', comment: 'Gains > Exporter' },
     ],
   },
@@ -290,6 +292,7 @@ export const PROFILS: Profil[] = [
     parcoursRecommande: [
       { href: '/transport/pages/livraisons', label: 'Page Livraisons — suivi des paiements', priorite: 'critique' },
       { href: '/transport/guides/confirmer-un-paiement', label: 'Confirmer un paiement', priorite: 'critique' },
+      { href: '/transport/guides/generer-facture-transport', label: 'Générer une facture transport PDF', priorite: 'critique' },
       { href: '/transport/guides/generer-releve-client-pdf', label: 'Générer un relevé client PDF', priorite: 'critique' },
       { href: '/transport/guides/exporter-excel', label: 'Exporter les données en Excel', priorite: 'critique' },
       { href: '/transport/cas-particuliers/charges-fixes-periode', label: 'Charges fixes sur période de gestion', priorite: 'importante' },
@@ -322,7 +325,7 @@ export const PROFILS: Profil[] = [
       { nom: 'Export Excel livraisons', quand: 'Journal des ventes mensuel', comment: 'Livraisons > Exporter' },
       { nom: 'Relevés clients PDF', quand: 'Envoi mensuel aux clients + archivage', comment: 'Clients > Relevé > PDF' },
       { nom: 'Export Excel gains', quand: 'Rapprochement gains/paiements', comment: 'Gains > Exporter' },
-      { nom: 'Factures transport PDF', quand: 'Pièces justificatives clients', comment: 'Livraisons > Facture > PDF' },
+      { nom: 'Factures transport PDF', quand: 'Pièces justificatives clients, archivage comptable', comment: 'Livraisons > Générer une facture > PDF' },
     ],
   },
   {
@@ -407,6 +410,11 @@ export const PROFILS: Profil[] = [
         situation: 'Essayer de supprimer une rotation incorrecte',
         consequence: 'Action impossible — l\'Opérateur n\'a pas ce droit',
         solution: 'Contacter l\'Administrateur pour la suppression. Expliquer l\'erreur et la rotation concernée.',
+      },
+      {
+        situation: 'Essayer de générer une facture client',
+        consequence: 'Bouton "Générer une facture" non visible pour l\'Opérateur',
+        solution: 'La facturation est réservée aux rôles Administrateur, Directeur et Finance. Les rotations facturées sont signalées par un badge "Facturée" dans la liste — l\'Opérateur peut les voir mais pas les créer.',
       },
     ],
     indicateurs: [
