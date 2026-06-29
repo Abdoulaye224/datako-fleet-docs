@@ -31,7 +31,7 @@ export function RolesList() {
             <motion.div key={role.id} whileHover={{ y: -2, transition: TRANSITIONS.spring }}>
               <Link
                 to={`/roles/${role.id}`}
-                className="group block h-full rounded-2xl border border-[var(--border)] bg-surface-2 p-5 transition-colors hover:border-blue-500/25 hover:bg-surface-3"
+                className="group block h-full rounded-2xl border border-[var(--border)] bg-surface-2 p-5 shadow-sm transition-all hover:border-blue-500/30 hover:shadow-md"
                 style={{ borderLeftWidth: '4px', borderLeftColor: roleColors[role.id] }}
               >
                 <div className="mb-4 flex items-start gap-3">

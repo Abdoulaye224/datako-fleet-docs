@@ -4,10 +4,10 @@
 @tailwind utilities;
 
 :root {
-  --surface: #F8FAFC;
+  --surface: #E8EDF5;
   --surface-2: #FFFFFF;
-  --surface-3: #F1F5F9;
-  --border: rgba(0, 0, 0, 0.08);
+  --surface-3: #F0F4FA;
+  --border: rgba(0, 0, 0, 0.10);
   --text-primary: #0F172A;
   --text-secondary: #475569;
   --text-muted: #94A3B8;

@@ -30,7 +30,7 @@ export function VenteIndicateursList() {
             <motion.div key={indicateur.id} whileHover={{ y: -2 }} transition={TRANSITIONS.fast}>
               <Link
                 to={`/vente/indicateurs/${indicateur.id}`}
-                className="group block h-full rounded-xl border border-[var(--border)] bg-surface-2 p-5 transition-colors hover:border-emerald-500/30 hover:bg-surface-3"
+                className="group block h-full rounded-xl border border-[var(--border)] bg-surface-2 p-5 shadow-sm transition-all hover:border-emerald-500/30 hover:shadow-md"
               >
                 <p className="font-semibold text-[var(--text-primary)] transition-colors group-hover:text-emerald-400">
                   {indicateur.nom}

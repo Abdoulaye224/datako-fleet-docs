@@ -21,7 +21,7 @@ export function OnboardingSelect() {
             <Link
               key={parcours.id}
               to={`/onboarding/${parcours.id}`}
-              className="group rounded-2xl border border-[var(--border)] bg-surface-2 p-5 transition-colors hover:border-blue-500/25 hover:bg-surface-3"
+              className="group rounded-2xl border border-[var(--border)] bg-surface-2 p-5 shadow-sm transition-all hover:border-blue-500/30 hover:shadow-md"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">

@@ -31,7 +31,7 @@ export function VenteGuidesList() {
             <motion.div key={guide.id} whileHover={{ x: 4 }} transition={TRANSITIONS.fast}>
               <Link
                 to={`/vente/guides/${guide.id}`}
-                className="group block rounded-xl border border-[var(--border)] bg-surface-2 p-5 transition-colors hover:border-emerald-500/30 hover:bg-surface-3"
+                className="group block rounded-xl border border-[var(--border)] bg-surface-2 p-5 shadow-sm transition-all hover:border-emerald-500/30 hover:shadow-md"
               >
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-medium text-[var(--text-primary)] transition-colors group-hover:text-emerald-400">
