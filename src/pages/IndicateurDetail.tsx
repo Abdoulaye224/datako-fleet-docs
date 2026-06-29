@@ -19,18 +19,18 @@ export function IndicateurDetail() {
   return (
     <PageTransition>
       <div className="max-w-3xl space-y-8">
-        <div className="flex items-center gap-2 text-xs text-[#64748B]">
-          <Link to="/indicateurs" className="flex items-center gap-1 transition-colors hover:text-[#94A3B8]">
+        <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+          <Link to="/indicateurs" className="flex items-center gap-1 transition-colors hover:text-[var(--text-secondary)]">
             <ArrowLeft size={12} />
             Indicateurs
           </Link>
           <span>›</span>
-          <span className="text-[#94A3B8]">{indicateur.nom}</span>
+          <span className="text-[var(--text-secondary)]">{indicateur.nom}</span>
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold text-[#F1F5F9]">{indicateur.nom}</h1>
-          <p className="mt-3 text-sm leading-relaxed text-[#94A3B8]">{indicateur.definition}</p>
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">{indicateur.nom}</h1>
+          <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">{indicateur.definition}</p>
         </div>
 
         {indicateur.formule && <FormulaBlock formule={indicateur.formule} exemple={indicateur.exemple} />}

@@ -1,39 +1,47 @@
-import { Menu, Search } from 'lucide-react'
+import { Menu, Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { SearchBar } from '@/components/search/SearchBar'
+import { useTheme } from '@/context/ThemeContext'
 
 interface MobileHeaderProps {
   onMenuOpen: () => void
-  onSearchOpen?: () => void
 }
 
-export function MobileHeader({ onMenuOpen, onSearchOpen }: MobileHeaderProps) {
+export function MobileHeader({ onMenuOpen }: MobileHeaderProps) {
+  const { theme, toggleTheme } = useTheme()
+
   return (
-    <header className="lg:hidden flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.08)] bg-[#181C27] sticky top-0 z-30">
+    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-[var(--border)] bg-surface-2 px-4 py-3 lg:hidden">
       <button
+        type="button"
         onClick={onMenuOpen}
-        className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-[#1F2537] transition-colors"
+        className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)] text-[var(--text-secondary)] transition-colors hover:bg-surface-3 hover:text-[var(--text-primary)]"
         aria-label="Ouvrir le menu"
       >
-        <Menu size={20} className="text-[#94A3B8]" />
+        <Menu size={20} />
       </button>
 
       <Link to="/" className="flex items-center gap-2">
         <div
-          className="w-7 h-7 rounded-lg flex items-center justify-center text-white font-bold text-xs"
-          style={{ background: 'linear-gradient(135deg, #2563EB, #7C3AED)' }}
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold text-white"
+          style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))' }}
         >
           D
         </div>
-        <span className="text-sm font-semibold text-[#F1F5F9]">Datakö Fleet</span>
+        <span className="text-sm font-semibold text-[var(--text-primary)]">Datakö Fleet</span>
       </Link>
 
-      <button
-        onClick={onSearchOpen}
-        className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-[#1F2537] transition-colors"
-        aria-label="Rechercher"
-      >
-        <Search size={20} className="text-[#94A3B8]" />
-      </button>
+      <div className="flex items-center gap-2">
+        <SearchBar variant="icon" />
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)] text-[var(--text-secondary)] transition-colors hover:bg-surface-3 hover:text-[var(--text-primary)]"
+          aria-label={theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+      </div>
     </header>
   )
 }

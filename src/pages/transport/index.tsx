@@ -42,13 +42,13 @@ export function TransportIndex() {
       <div className="space-y-8">
         <div>
           <h1 className="text-2xl font-bold" style={{
-            background: 'linear-gradient(135deg, #F1F5F9 60%, #94A3B8)',
+            background: 'linear-gradient(135deg, var(--text-primary) 60%, var(--text-secondary))',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
             Transport
           </h1>
-          <p className="text-[#94A3B8] mt-2 text-sm leading-relaxed">
+          <p className="text-[var(--text-secondary)] mt-2 text-sm leading-relaxed">
             Le module principal de Fleet Manager : rotations, livraisons, flotte, gains.
           </p>
         </div>
@@ -58,19 +58,19 @@ export function TransportIndex() {
             <motion.div key={s.href} whileHover={{ x: 4 }} transition={TRANSITIONS.fast}>
               <Link
                 to={s.href}
-                className="flex items-center gap-4 p-5 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#181C27] hover:border-blue-500/30 hover:bg-[#1F2537] transition-colors group"
+                className="flex items-center gap-4 p-5 rounded-xl border border-[var(--border)] bg-surface-2 hover:border-blue-500/30 hover:bg-surface-3 transition-colors group"
               >
                 <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                   <s.icon size={18} className="text-blue-400" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-[#F1F5F9] group-hover:text-blue-400 transition-colors">
+                  <p className="font-medium text-[var(--text-primary)] group-hover:text-blue-400 transition-colors">
                     {s.titre}
                   </p>
-                  <p className="text-sm text-[#64748B] mt-0.5">{s.description}</p>
-                  <p className="text-xs text-[#64748B] mt-1">{s.count} articles</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-0.5">{s.description}</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-1">{s.count} articles</p>
                 </div>
-                <ChevronRight size={16} className="text-[#64748B] group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                <ChevronRight size={16} className="text-[var(--text-muted)] group-hover:text-blue-400 transition-colors flex-shrink-0" />
               </Link>
             </motion.div>
           ))}

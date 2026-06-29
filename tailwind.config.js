@@ -1,14 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        'datako-blue': '#3B82F6',
-        'datako-navy': '#1E3A5F',
-        surface: '#0F1117',
-        'surface-2': '#181C27',
-        'surface-3': '#1F2537',
+        'datako-blue': 'var(--datako-blue)',
+        'datako-navy': 'var(--datako-navy)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
+        'surface-3': 'var(--surface-3)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

@@ -31,8 +31,8 @@ export function ProfilCard({ profil, onSelect, isActive = false }: ProfilCardPro
       <Link
         to={`/profils/${profil.id}`}
         onClick={() => onSelect(profil.id)}
-        className={`group relative block h-full overflow-hidden rounded-2xl border bg-surface-2 p-5 transition-colors ${
-          isActive ? 'border-blue-500/40' : 'border-white/10 hover:border-blue-500/25'
+        className={`group relative block h-full overflow-hidden rounded-2xl border bg-[var(--surface-2)] p-5 transition-colors ${
+          isActive ? 'border-blue-500/40' : 'border-[var(--border)] hover:border-blue-500/25'
         }`}
       >
         <motion.div
@@ -50,27 +50,27 @@ export function ProfilCard({ profil, onSelect, isActive = false }: ProfilCardPro
         )}
 
         <div className="relative z-10 flex h-full flex-col">
-          <div className="mb-4 flex items-start gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-2xl" style={{ backgroundColor: `${profil.color}22` }}>
+          <div className="mb-3 flex items-start gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-xl" style={{ backgroundColor: `${profil.color}22` }}>
               {profil.emoji}
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-semibold text-[#F1F5F9] transition-colors group-hover:text-blue-400">
+              <h3 className="text-sm font-semibold leading-tight text-[var(--text-primary)] transition-colors group-hover:text-blue-400">
                 {profil.nom}
               </h3>
-              <p className="mt-1 text-sm text-[#94A3B8]">{profil.sousTitre}</p>
+              <p className="mt-0.5 text-xs text-[var(--text-muted)]">{profil.sousTitre}</p>
             </div>
           </div>
 
-          <p className="line-clamp-3 text-sm leading-relaxed text-[#94A3B8]">{profil.description}</p>
+          <p className="line-clamp-2 text-xs leading-relaxed text-[var(--text-secondary)]">{profil.description}</p>
 
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {profil.modules.map(module => (
               <Badge key={module} label={moduleLabels[module]} color={moduleColors[module]} />
             ))}
           </div>
 
-          <div className="mt-auto flex items-center gap-2 pt-5 text-sm font-medium text-blue-400">
+          <div className="mt-auto flex items-center gap-1.5 pt-4 text-xs font-medium text-blue-400">
             Voir mon parcours
             <motion.span className="inline-flex" whileHover={{ x: 4 }} transition={TRANSITIONS.fast}>
               <ArrowRight size={16} />

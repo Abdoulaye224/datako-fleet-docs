@@ -1,15 +1,16 @@
-import { Circle, CheckCircle2, XCircle } from 'lucide-react'
+import { CheckCircle2, Circle, XCircle } from 'lucide-react'
 
 interface CheckListProps {
   items: string[]
   variant: 'prerequis' | 'resultat' | 'erreur'
+  showLabel?: boolean
 }
 
-export function CheckList({ items, variant }: CheckListProps) {
+export function CheckList({ items, variant, showLabel = true }: CheckListProps) {
   const config = {
     prerequis: {
       icon: Circle,
-      color: 'text-[#94A3B8]',
+      color: 'text-[var(--text-secondary)]',
       label: 'Prérequis',
     },
     resultat: {
@@ -28,12 +29,12 @@ export function CheckList({ items, variant }: CheckListProps) {
 
   return (
     <div>
-      <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-2">{label}</p>
+      {showLabel && <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">{label}</p>}
       <ul className="space-y-2">
-        {items.map((item, i) => (
-          <li key={i} className="flex gap-2 items-start">
-            <Icon size={16} className={`flex-shrink-0 mt-0.5 ${color}`} />
-            <span className="text-sm text-[#94A3B8]">{item}</span>
+        {items.map((item, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <Icon size={16} className={`mt-0.5 flex-shrink-0 ${color}`} />
+            <span className="text-sm text-[var(--text-secondary)]">{item}</span>
           </li>
         ))}
       </ul>

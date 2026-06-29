@@ -20,7 +20,7 @@ export function SectionCard({ titre, description, href, icon: Icon, nbArticles, 
     >
       <Link
         to={href}
-        className="relative overflow-hidden rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#181C27] p-6 cursor-pointer group block h-full"
+        className="relative overflow-hidden rounded-xl border border-[var(--border)] bg-surface-2 p-6 cursor-pointer group block h-full"
       >
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -34,12 +34,12 @@ export function SectionCard({ titre, description, href, icon: Icon, nbArticles, 
         >
           <Icon size={24} style={{ color }} />
         </motion.div>
-        <h3 className="font-semibold text-[#F1F5F9] group-hover:text-blue-400 transition-colors relative z-10">
+        <h3 className="font-semibold text-[var(--text-primary)] group-hover:text-blue-400 transition-colors relative z-10">
           {titre}
         </h3>
-        <p className="text-sm text-[#64748B] mt-1 relative z-10">{description}</p>
+        <p className="text-sm text-[var(--text-muted)] mt-1 relative z-10">{description}</p>
         {nbArticles !== undefined && (
-          <span className="text-xs text-[#64748B] mt-3 block relative z-10">{nbArticles} articles</span>
+          <span className="text-xs text-[var(--text-muted)] mt-3 block relative z-10">{nbArticles} articles</span>
         )}
         <div className="absolute right-4 bottom-4 opacity-0 group-hover:opacity-100 transition-opacity">
           <ArrowRight size={16} className="text-blue-400" />

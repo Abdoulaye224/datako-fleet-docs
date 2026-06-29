@@ -27,14 +27,14 @@ export const ROLE_PERMISSIONS: Permission[] = [
 ]
 
 function renderPermission(value: boolean): ReactNode {
-  return value ? <span className="text-emerald-400">✅</span> : <span className="text-[#64748B]">—</span>
+  return value ? <span className="text-emerald-400">✅</span> : <span className="text-[var(--text-muted)]">—</span>
 }
 
 export function RolePermissionGrid({ permissions }: RolePermissionGridProps) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-white/10">
+    <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
       <table className="min-w-full text-sm">
-        <thead className="bg-surface text-left text-[#94A3B8]">
+        <thead className="bg-surface text-left text-[var(--text-secondary)]">
           <tr>
             <th className="px-4 py-3 font-semibold">Action</th>
             <th className="px-4 py-3 font-semibold">Admin 🏢</th>
@@ -46,8 +46,8 @@ export function RolePermissionGrid({ permissions }: RolePermissionGridProps) {
         </thead>
         <tbody>
           {permissions.map((permission, index) => (
-            <tr key={permission.action} className={index % 2 === 0 ? 'bg-surface-2' : 'bg-surface-3'}>
-              <td className="px-4 py-3 font-medium text-[#F1F5F9]">{permission.action}</td>
+            <tr key={permission.action} className={index % 2 === 0 ? 'bg-[var(--surface-2)]' : 'bg-[var(--surface-3)]'}>
+              <td className="px-4 py-3 font-medium text-[var(--text-primary)]">{permission.action}</td>
               <td className="px-4 py-3">{renderPermission(permission.admin)}</td>
               <td className="px-4 py-3">{renderPermission(permission.operator)}</td>
               <td className="px-4 py-3">{renderPermission(permission.finance)}</td>

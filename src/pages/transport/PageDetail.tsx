@@ -22,21 +22,21 @@ export function PageDetail() {
   return (
     <PageTransition>
       <div className="max-w-3xl space-y-8">
-        <div className="flex items-center gap-2 text-xs text-[#64748B]">
-          <Link to="/transport/pages" className="flex items-center gap-1 transition-colors hover:text-[#94A3B8]">
+        <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+          <Link to="/transport/pages" className="flex items-center gap-1 transition-colors hover:text-[var(--text-secondary)]">
             <ArrowLeft size={12} />
             Comprendre les pages
           </Link>
           <span>›</span>
-          <span className="text-[#94A3B8]">{page.name}</span>
+          <span className="text-[var(--text-secondary)]">{page.name}</span>
         </div>
 
         <div>
-          <span className="rounded-full border border-white/10 bg-surface-3 px-2 py-0.5 text-xs font-medium text-[#64748B]">
+          <span className="rounded-full border border-[var(--border)] bg-surface-3 px-2 py-0.5 text-xs font-medium text-[var(--text-muted)]">
             Onglet {page.onglet}
           </span>
           <h1 className="mt-3 text-2xl font-bold" style={{
-            background: 'linear-gradient(135deg, #F1F5F9 60%, #94A3B8)',
+            background: 'linear-gradient(135deg, var(--text-primary) 60%, var(--text-secondary))',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
@@ -45,42 +45,42 @@ export function PageDetail() {
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm font-semibold text-[#94A3B8]">
+          <div className="flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)]">
             <Eye size={16} />
             Ce que vous voyez
           </div>
-          <p className="pl-6 text-sm leading-relaxed text-[#94A3B8]">{page.see}</p>
+          <p className="pl-6 text-sm leading-relaxed text-[var(--text-secondary)]">{page.see}</p>
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm font-semibold text-[#94A3B8]">
+          <div className="flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)]">
             <Target size={16} />
             Pourquoi c'est utile
           </div>
-          <p className="pl-6 text-sm leading-relaxed text-[#94A3B8]">{page.why}</p>
+          <p className="pl-6 text-sm leading-relaxed text-[var(--text-secondary)]">{page.why}</p>
         </div>
 
         <CalloutBlock variant="astuce" title="Comment lire cette page">
           {page.read}
         </CalloutBlock>
 
-        <div className="flex gap-3 border-t border-white/10 pt-4">
+        <div className="flex gap-3 border-t border-[var(--border)] pt-4">
           {prev && (
             <Link
               to={`/transport/pages/${prev.id}`}
-              className="flex-1 rounded-lg border border-white/10 p-3 transition-colors hover:border-blue-500/30 hover:bg-surface-3"
+              className="flex-1 rounded-lg border border-[var(--border)] p-3 transition-colors hover:border-blue-500/30 hover:bg-surface-3"
             >
-              <p className="text-xs text-[#64748B]">← Précédent</p>
-              <p className="mt-0.5 truncate text-sm font-medium text-[#F1F5F9]">{prev.name}</p>
+              <p className="text-xs text-[var(--text-muted)]">← Précédent</p>
+              <p className="mt-0.5 truncate text-sm font-medium text-[var(--text-primary)]">{prev.name}</p>
             </Link>
           )}
           {next && (
             <Link
               to={`/transport/pages/${next.id}`}
-              className="flex-1 rounded-lg border border-white/10 p-3 text-right transition-colors hover:border-blue-500/30 hover:bg-surface-3"
+              className="flex-1 rounded-lg border border-[var(--border)] p-3 text-right transition-colors hover:border-blue-500/30 hover:bg-surface-3"
             >
-              <p className="text-xs text-[#64748B]">Suivant →</p>
-              <p className="mt-0.5 truncate text-sm font-medium text-[#F1F5F9]">{next.name}</p>
+              <p className="text-xs text-[var(--text-muted)]">Suivant →</p>
+              <p className="mt-0.5 truncate text-sm font-medium text-[var(--text-primary)]">{next.name}</p>
             </Link>
           )}
         </div>

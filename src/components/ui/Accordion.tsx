@@ -24,7 +24,7 @@ export function Accordion({ items }: AccordionProps) {
           <div
             key={item.id}
             className={`overflow-hidden rounded-xl border transition-colors ${
-              isOpen ? 'border-blue-500/30 bg-surface-2' : 'border-white/10 bg-surface-2'
+              isOpen ? 'border-blue-500/30 bg-surface-2' : 'border-[var(--border)] bg-surface-2'
             }`}
           >
             <button
@@ -33,12 +33,12 @@ export function Accordion({ items }: AccordionProps) {
               className="flex w-full items-center justify-between gap-3 p-4 text-left"
               aria-expanded={isOpen}
             >
-              <span className={`text-sm font-medium ${isOpen ? 'text-blue-400' : 'text-[#F1F5F9]'}`}>
+              <span className={`text-sm font-medium ${isOpen ? 'text-blue-400' : 'text-[var(--text-primary)]'}`}>
                 {item.question}
               </span>
               <ChevronDown
                 size={16}
-                className={`flex-shrink-0 text-[#64748B] transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                className={`flex-shrink-0 text-[var(--text-muted)] transition-transform ${isOpen ? 'rotate-180' : ''}`}
               />
             </button>
 
@@ -51,7 +51,7 @@ export function Accordion({ items }: AccordionProps) {
                   transition={TRANSITIONS.default}
                   className="overflow-hidden"
                 >
-                  <div className="border-t border-white/10 px-4 pb-4 pt-3 text-sm leading-relaxed text-[#94A3B8]">
+                  <div className="border-t border-[var(--border)] px-4 pb-4 pt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {item.reponse}
                   </div>
                 </motion.div>

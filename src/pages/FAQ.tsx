@@ -29,9 +29,9 @@ export function FAQ() {
     <PageTransition>
       <div className="max-w-3xl space-y-8">
         <div>
-          <p className="mb-1 text-xs text-[#64748B]">Aide</p>
-          <h1 className="text-2xl font-bold text-[#F1F5F9]">Questions fréquentes</h1>
-          <p className="mt-2 text-sm leading-relaxed text-[#94A3B8]">
+          <p className="mb-1 text-xs text-[var(--text-muted)]">Aide</p>
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Questions fréquentes</h1>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
             Réponses rapides aux questions les plus courantes sur les opérations, la finance, la technique et les droits d'accès.
           </p>
         </div>

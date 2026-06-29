@@ -1,10 +1,10 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { X, Home, Truck, Users, BarChart3, HelpCircle, BookOpen, ChevronDown, Compass, Zap } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, Sparkles, Truck, Users, X, Zap } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
-import { TRANSITIONS } from '@/lib/motion'
 import { useProfil } from '@/context/ProfilContext'
 import { PROFILS } from '@/data/fleet'
+import { TRANSITIONS } from '@/lib/motion'
 
 const navItems = [
   { label: 'Accueil', href: '/', icon: Home },
@@ -23,6 +23,7 @@ const navItems = [
   { label: 'Les rôles', href: '/roles', icon: Users },
   { label: 'Indicateurs', href: '/indicateurs', icon: BarChart3 },
   { label: 'FAQ', href: '/faq', icon: HelpCircle },
+  { label: 'Nouveautés', href: '/nouveautes', icon: Sparkles },
 ] as const
 
 interface MobileMenuProps {
@@ -36,10 +37,19 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { profilActif } = useProfil()
   const profil = PROFILS.find(item => item.id === profilActif)
 
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose])
+
   const toggleSection = (label: string) => {
-    setOpenSections(prev =>
-      prev.includes(label) ? prev.filter(section => section !== label) : [...prev, label],
-    )
+    setOpenSections(prev => (prev.includes(label) ? prev.filter(section => section !== label) : [...prev, label]))
   }
 
   return (
@@ -55,7 +65,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             onClick={onClose}
           />
 
-          <motion.div
+          <motion.nav
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
@@ -66,39 +76,40 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             onDragEnd={(_: unknown, info: { offset: { x: number } }) => {
               if (info.offset.x < -80) onClose()
             }}
-            className="fixed bottom-0 left-0 top-0 z-50 w-72 overflow-y-auto border-r border-white/10 bg-surface-2 lg:hidden"
+            className="fixed inset-y-0 left-0 z-50 w-72 overflow-y-auto border-r border-[var(--border)] bg-surface-2 lg:hidden"
+            aria-label="Navigation mobile"
           >
-            <div className="border-b border-white/10 px-5 py-4">
+            <div className="border-b border-[var(--border)] px-5 py-4">
               <div className="flex items-center justify-between">
                 <Link to="/" onClick={onClose} className="flex items-center gap-2">
                   <div
                     className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white"
-                    style={{ background: 'linear-gradient(135deg, #2563EB, #7C3AED)' }}
+                    style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))' }}
                   >
                     D
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#F1F5F9]">Datakö Fleet</p>
-                    <p className="text-xs text-[#64748B]">Documentation</p>
+                    <p className="text-sm font-semibold text-[var(--text-primary)]">Datakö Fleet</p>
+                    <p className="text-xs text-[var(--text-muted)]">Documentation</p>
                   </div>
                 </Link>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg transition-colors hover:bg-surface-3"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-[var(--text-secondary)] transition-colors hover:bg-surface-3 hover:text-[var(--text-primary)]"
                   aria-label="Fermer le menu"
                 >
-                  <X size={18} className="text-[#94A3B8]" />
+                  <X size={18} />
                 </button>
               </div>
 
               {profil && (
                 <div className="mt-4 rounded-xl border border-blue-500/20 bg-blue-500/5 p-3">
-                  <p className="text-xs font-medium text-blue-300">Profil actif</p>
+                  <p className="text-xs font-medium text-blue-400">Profil actif</p>
                   <Link
                     to={`/profils/${profil.id}`}
                     onClick={onClose}
-                    className="mt-1 block text-sm text-[#F1F5F9] transition-colors hover:text-blue-300"
+                    className="mt-1 block text-sm text-[var(--text-primary)] transition-colors hover:text-blue-400"
                   >
                     {profil.emoji} {profil.nom}
                   </Link>
@@ -109,7 +120,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <div className="space-y-1 px-3 py-4">
               {navItems.map(item => {
                 if (!('children' in item)) {
-                  const isActive = location.pathname === item.href || location.pathname.startsWith(`${item.href}/`)
+                  const isActive = item.href === '/'
+                    ? location.pathname === '/'
+                    : location.pathname === item.href || location.pathname.startsWith(`${item.href}/`)
+
                   return (
                     <Link
                       key={item.href}
@@ -118,7 +132,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       className={`flex min-h-[44px] items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm transition-colors ${
                         isActive
                           ? 'bg-blue-500/10 text-blue-400'
-                          : 'text-[#94A3B8] hover:bg-surface-3 hover:text-[#F1F5F9]'
+                          : 'text-[var(--text-secondary)] hover:bg-surface-3 hover:text-[var(--text-primary)]'
                       }`}
                     >
                       <item.icon size={16} />
@@ -134,7 +148,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <button
                       type="button"
                       onClick={() => toggleSection(item.label)}
-                      className="flex min-h-[44px] w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2.5 text-sm text-[#94A3B8] transition-colors hover:bg-surface-3 hover:text-[#F1F5F9]"
+                      className="flex min-h-[44px] w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2.5 text-sm text-[var(--text-secondary)] transition-colors hover:bg-surface-3 hover:text-[var(--text-primary)]"
                     >
                       <span className="flex items-center gap-2.5">
                         <item.icon size={16} />
@@ -154,7 +168,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           transition={TRANSITIONS.default}
                           className="overflow-hidden"
                         >
-                          <div className="ml-4 mt-1 space-y-0.5 border-l border-white/10 pl-3">
+                          <div className="ml-4 mt-1 space-y-0.5 border-l border-[var(--border)] pl-3">
                             {item.children.map(child => {
                               const isActive = location.pathname === child.href || location.pathname.startsWith(`${child.href}/`)
                               return (
@@ -165,7 +179,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                   className={`flex min-h-[40px] items-center rounded-lg px-3 py-2 text-sm transition-colors ${
                                     isActive
                                       ? 'bg-blue-500/10 text-blue-400'
-                                      : 'text-[#94A3B8] hover:bg-surface-3 hover:text-[#F1F5F9]'
+                                      : 'text-[var(--text-secondary)] hover:bg-surface-3 hover:text-[var(--text-primary)]'
                                   }`}
                                 >
                                   {child.label}
@@ -181,18 +195,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               })}
             </div>
 
-            <div className="border-t border-white/10 px-5 py-4">
+            <div className="border-t border-[var(--border)] px-5 py-4">
               <a
                 href="https://fleet.datako.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs text-[#64748B] transition-colors hover:text-[#94A3B8]"
+                className="flex items-center gap-2 text-xs text-[var(--text-muted)] transition-colors hover:text-[var(--text-secondary)]"
               >
                 <BookOpen size={12} />
                 Ouvrir Fleet Manager
               </a>
             </div>
-          </motion.div>
+          </motion.nav>
         </>
       )}
     </AnimatePresence>

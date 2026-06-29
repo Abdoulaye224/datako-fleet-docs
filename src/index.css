@@ -4,10 +4,28 @@
 @tailwind utilities;
 
 :root {
+  --surface: #F8FAFC;
+  --surface-2: #FFFFFF;
+  --surface-3: #F1F5F9;
+  --border: rgba(0, 0, 0, 0.08);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --datako-blue: #2563EB;
+  --datako-navy: #1E3A5F;
+  --gradient-start: #2563EB;
+  --gradient-end: #7C3AED;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --info: #3B82F6;
+}
+
+html.dark {
   --surface: #0F1117;
   --surface-2: #181C27;
   --surface-3: #1F2537;
-  --border: rgba(255,255,255,0.08);
+  --border: rgba(255, 255, 255, 0.08);
   --text-primary: #F1F5F9;
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
@@ -21,26 +39,53 @@
   --info: #3B82F6;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  background-color: #0F1117;
-  color: #F1F5F9;
-  font-family: 'Inter', system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
+* {
+  box-sizing: border-box;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0F1117; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
 
 code {
   background: rgba(59, 130, 246, 0.08);
   border: 1px solid rgba(59, 130, 246, 0.15);
-  color: #93C5FD;
+  color: var(--datako-blue);
   border-radius: 4px;
   padding: 1px 6px;
   font-size: 0.875em;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--datako-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

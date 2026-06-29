@@ -6,18 +6,21 @@ export interface Guide {
   etapes: string[]
   resultat: string
   erreurs: string[]
+  precedent?: { href: string; titre: string }
+  suivant?: { href: string; titre: string }
+  articlesConnexes?: Array<{ href: string; titre: string; section: string }>
 }
 
 export const guides: Guide[] = [
   {
     id: 'ajouter-camion',
     title: 'Ajouter un camion',
-    objectif: 'Enregistrer un nouveau véhicule dans la flotte pour pouvoir l\'utiliser dans les rotations.',
-    prerequis: ['Avoir le rôle Administrateur', 'Connaître l\'immatriculation et la capacité du véhicule'],
+    objectif: "Enregistrer un nouveau véhicule dans la flotte pour pouvoir l'utiliser dans les rotations.",
+    prerequis: ['Avoir le rôle Administrateur', "Connaître l'immatriculation et la capacité du véhicule"],
     etapes: [
       'Allez dans la section Flotte depuis le menu principal.',
       'Cliquez sur le bouton "+ Ajouter un véhicule" en haut à droite.',
-      'Renseignez l\'immatriculation, la capacité en litres et le type de véhicule.',
+      "Renseignez l'immatriculation, la capacité en litres et le type de véhicule.",
       'Indiquez si le véhicule est "Propre" (appartient à l\'organisation) ou "Géré" (propriétaire externe).',
       'Si géré, sélectionnez ou créez le propriétaire et renseignez le pourcentage de répartition.',
       'Ajoutez les documents obligatoires : assurance, vignette, visite technique.',
@@ -28,6 +31,7 @@ export const guides: Guide[] = [
       'Si le camion n\'apparaît pas dans Nouvelle Rotation, vérifiez que son statut est "Actif".',
       'Un camion sans assurance valide affichera un badge rouge dans le formulaire.',
     ],
+    suivant: { href: '/transport/guides/ajouter-client', titre: 'Ajouter un client' },
   },
   {
     id: 'ajouter-client',
@@ -37,14 +41,14 @@ export const guides: Guide[] = [
     etapes: [
       'Allez dans la section Clients.',
       'Cliquez sur "+ Nouveau client".',
-      'Renseignez le nom, le contact et l\'adresse.',
+      "Renseignez le nom, le contact et l'adresse.",
       'Ajoutez un tarif contractuel si ce client bénéficie d\'un tarif différent du tarif national.',
       'Cliquez sur "Enregistrer".',
     ],
     resultat: 'Le client est disponible dans le menu déroulant du formulaire Nouvelle Rotation.',
-    erreurs: [
-      'Si le client n\'apparaît pas dans Nouvelle Rotation, rechargez la page.',
-    ],
+    erreurs: ['Si le client n\'apparaît pas dans Nouvelle Rotation, rechargez la page.'],
+    precedent: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
+    suivant: { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation' },
   },
   {
     id: 'creer-rotation',
@@ -56,7 +60,7 @@ export const guides: Guide[] = [
       'Sélectionnez le camion. Les paramètres de route (carburant, prime, péage) se remplissent automatiquement.',
       'Choisissez le dépôt de chargement et la destination.',
       'Sélectionnez le produit (Gasoil, Essence, HFO) et saisissez le volume chargé en litres.',
-      'Sélectionnez le client. Le tarif contractuel s\'applique automatiquement si configuré.',
+      "Sélectionnez le client. Le tarif contractuel s'applique automatiquement si configuré.",
       'Sélectionnez le conducteur.',
       'Vérifiez le gain calculé automatiquement.',
       'Cliquez sur "Enregistrer la rotation".',
@@ -66,11 +70,17 @@ export const guides: Guide[] = [
       'Si le gain est négatif, la rotation coûte plus qu\'elle ne rapporte. Vérifiez le tarif et le volume.',
       'Si le camion n\'est pas disponible, vérifiez son statut dans Flotte.',
     ],
+    precedent: { href: '/transport/guides/ajouter-client', titre: 'Ajouter un client' },
+    suivant: { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison' },
+    articlesConnexes: [
+      { href: '/transport/cycle', titre: "Cycle d'une rotation", section: 'Transport' },
+      { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume manquant', section: 'Cas particuliers' },
+    ],
   },
   {
     id: 'valider-livraison',
     title: 'Valider une livraison',
-    objectif: 'Confirmer qu\'une livraison a bien eu lieu pour qu\'elle entre dans les indicateurs financiers.',
+    objectif: "Confirmer qu'une livraison a bien eu lieu pour qu'elle entre dans les indicateurs financiers.",
     prerequis: ['Avoir le rôle Administrateur ou Opérateur', 'La rotation doit être en statut "En cours"'],
     etapes: [
       'Allez dans la page Livraisons.',
@@ -88,11 +98,16 @@ export const guides: Guide[] = [
       'Une livraison non validée ne compte pas dans les Gains ni dans le Dashboard financier.',
       'Si le volume livré est inférieur au volume chargé, l\'écart est automatiquement comptabilisé comme "manquant".',
     ],
+    precedent: { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation' },
+    suivant: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
+    articlesConnexes: [
+      { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
+    ],
   },
   {
     id: 'confirmer-paiement',
     title: 'Confirmer un paiement',
-    objectif: 'Enregistrer qu\'un client a payé sa facture pour mettre à jour le suivi des créances.',
+    objectif: "Enregistrer qu'un client a payé sa facture pour mettre à jour le suivi des créances.",
     prerequis: ['Avoir le rôle Administrateur, Opérateur ou Finance', 'La livraison doit être validée (statut Livré)'],
     etapes: [
       'Allez dans la page Livraisons.',
@@ -102,14 +117,14 @@ export const guides: Guide[] = [
       'Confirmez.',
     ],
     resultat: 'Le badge passe au vert "Payé". La créance est soldée dans les indicateurs financiers.',
-    erreurs: [
-      'Si le badge n\'est pas cliquable, vérifiez votre rôle (Observateur ne peut pas modifier).',
-    ],
+    erreurs: ['Si le badge n\'est pas cliquable, vérifiez votre rôle (Observateur ne peut pas modifier).'],
+    precedent: { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison' },
+    suivant: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
   },
   {
     id: 'ajouter-charge-fixe',
     title: 'Ajouter une charge fixe',
-    objectif: 'Enregistrer une charge récurrente sur un véhicule (assurance, vignette, visite technique, patente) pour qu\'elle soit prise en compte dans le calcul de profit.',
+    objectif: "Enregistrer une charge récurrente sur un véhicule (assurance, vignette, visite technique, patente) pour qu'elle soit prise en compte dans le calcul de profit.",
     prerequis: ['Avoir le rôle Administrateur'],
     etapes: [
       'Allez dans la section Flotte.',
@@ -124,32 +139,37 @@ export const guides: Guide[] = [
     resultat: 'La charge est prise en compte dans le calcul de Profit par Camion et dans les indicateurs de Cashflow.',
     erreurs: [
       'Une charge sans date de fin sera comptabilisée indéfiniment. Vérifiez les dates.',
-      'Les charges fixes s\'accumulent même les mois sans rotation.',
+      "Les charges fixes s'accumulent même les mois sans rotation.",
+    ],
+    precedent: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
+    suivant: { href: '/transport/guides/ajouter-maintenance', titre: 'Ajouter une maintenance' },
+    articlesConnexes: [
+      { href: '/indicateurs/charges-fixes-vehicule', titre: 'Charges fixes véhicule', section: 'Indicateurs' },
     ],
   },
   {
     id: 'ajouter-maintenance',
     title: 'Ajouter une maintenance',
-    objectif: 'Enregistrer une dépense de maintenance sur un véhicule pour qu\'elle apparaisse dans les coûts d\'exploitation.',
+    objectif: "Enregistrer une dépense de maintenance sur un véhicule pour qu'elle apparaisse dans les coûts d'exploitation.",
     prerequis: ['Avoir le rôle Administrateur ou Opérateur'],
     etapes: [
       'Allez dans la section Flotte.',
       'Cliquez sur le véhicule concerné.',
       'Ouvrez l\'onglet "Maintenances".',
       'Cliquez sur "+ Ajouter une maintenance".',
-      'Décrivez l\'intervention et saisissez le montant.',
+      "Décrivez l'intervention et saisissez le montant.",
       'Indiquez la date.',
       'Enregistrez.',
     ],
     resultat: 'La maintenance est incluse dans les coûts d\'exploitation du véhicule sur la période concernée.',
-    erreurs: [
-      'La maintenance n\'apparaît dans les KPIs que sur la période correspondant à sa date.',
-    ],
+    erreurs: ['La maintenance n\'apparaît dans les KPIs que sur la période correspondant à sa date.'],
+    precedent: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
+    suivant: { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF' },
   },
   {
     id: 'releve-client-pdf',
     title: 'Générer un relevé client PDF',
-    objectif: 'Produire un document récapitulatif des livraisons et du solde d\'un client sur une période.',
+    objectif: "Produire un document récapitulatif des livraisons et du solde d'un client sur une période.",
     prerequis: ['Avoir le rôle Administrateur ou Finance'],
     etapes: [
       'Allez dans la section Clients.',
@@ -159,14 +179,14 @@ export const guides: Guide[] = [
       'Cliquez sur "Télécharger PDF".',
     ],
     resultat: 'Un PDF est généré avec le logo Datakö, les livraisons de la période, les montants et le solde.',
-    erreurs: [
-      'Si le PDF est vide, vérifiez qu\'il y a des livraisons validées sur la période sélectionnée.',
-    ],
+    erreurs: ['Si le PDF est vide, vérifiez qu\'il y a des livraisons validées sur la période sélectionnée.'],
+    precedent: { href: '/transport/guides/ajouter-maintenance', titre: 'Ajouter une maintenance' },
+    suivant: { href: '/transport/guides/bilan-proprietaire-pdf', titre: 'Générer un bilan propriétaire PDF' },
   },
   {
     id: 'bilan-proprietaire-pdf',
     title: 'Générer un bilan propriétaire PDF',
-    objectif: 'Produire le bilan mensuel d\'un propriétaire de véhicule géré pour lui communiquer sa part.',
+    objectif: "Produire le bilan mensuel d'un propriétaire de véhicule géré pour lui communiquer sa part.",
     prerequis: ['Avoir le rôle Administrateur, ou être connecté en tant que Propriétaire'],
     etapes: [
       'Administrateur : allez dans Répartition Acteurs > sélectionnez le propriétaire > Bilan PDF.',
@@ -175,8 +195,12 @@ export const guides: Guide[] = [
       'Cliquez sur "Télécharger PDF".',
     ],
     resultat: 'Le propriétaire reçoit un PDF avec ses véhicules, les rotations effectuées et sa part de gain.',
-    erreurs: [
-      'Si le bilan affiche 0 GNF, vérifiez que les livraisons du mois sont bien validées.',
+    erreurs: ['Si le bilan affiche 0 GNF, vérifiez que les livraisons du mois sont bien validées.'],
+    precedent: { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF' },
+    suivant: { href: '/transport/guides/exporter-excel', titre: 'Exporter les données Excel' },
+    articlesConnexes: [
+      { href: '/roles/owner', titre: 'Rôle Propriétaire', section: 'Rôles' },
+      { href: '/indicateurs/part-proprietaire', titre: 'Part propriétaire', section: 'Indicateurs' },
     ],
   },
   {
@@ -191,8 +215,7 @@ export const guides: Guide[] = [
       'Le fichier Excel est téléchargé automatiquement.',
     ],
     resultat: 'Un fichier .xlsx est téléchargé avec toutes les colonnes de la période sélectionnée.',
-    erreurs: [
-      'Si le bouton Exporter n\'est pas visible, vérifiez votre rôle (Observateur ne peut pas exporter).',
-    ],
+    erreurs: ['Si le bouton Exporter n\'est pas visible, vérifiez votre rôle (Observateur ne peut pas exporter).'],
+    precedent: { href: '/transport/guides/bilan-proprietaire-pdf', titre: 'Générer un bilan propriétaire PDF' },
   },
 ]

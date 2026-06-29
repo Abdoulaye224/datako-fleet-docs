@@ -1,9 +1,9 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
-import { PageTransition } from '@/components/ui/PageTransition'
-import { CheckList } from '@/components/ui/CheckList'
-import { CalloutBlock } from '@/components/ui/CalloutBlock'
 import { ArticleCard } from '@/components/ui/ArticleCard'
+import { CalloutBlock } from '@/components/ui/CalloutBlock'
+import { CheckList } from '@/components/ui/CheckList'
+import { Breadcrumb } from '@/components/navigation/Breadcrumb'
+import { PageTransition } from '@/components/ui/PageTransition'
 import { ROLES, guides } from '@/data/fleet'
 
 const roleAliases: Record<string, string> = {
@@ -20,6 +20,14 @@ const roleKeywords: Record<string, string[]> = {
   owner: ['Propriétaire'],
 }
 
+const roleColors: Record<string, string> = {
+  org_admin: '#3B82F6',
+  operator: '#10B981',
+  finance: '#F59E0B',
+  viewer: '#94A3B8',
+  owner: '#A78BFA',
+}
+
 export function RoleDetail() {
   const { id } = useParams<{ id: string }>()
   const resolvedId = id ? roleAliases[id] ?? id : undefined
@@ -29,45 +37,79 @@ export function RoleDetail() {
 
   const relatedGuides = guides.filter(guide =>
     roleKeywords[role.id]?.some(keyword =>
-      [...guide.prerequis, guide.objectif, ...guide.erreurs].some(content => content.includes(keyword)),
+      [guide.objectif, ...guide.prerequis, ...guide.erreurs].some(content => content.includes(keyword)),
     ),
   )
 
   return (
     <PageTransition>
-      <div className="max-w-3xl space-y-8">
-        <div className="flex items-center gap-2 text-xs text-[#64748B]">
-          <Link to="/roles" className="flex items-center gap-1 transition-colors hover:text-[#94A3B8]">
-            <ArrowLeft size={12} />
-            Les rôles
-          </Link>
-          <span>›</span>
-          <span className="text-[#94A3B8]">{role.nom}</span>
-        </div>
+      <div className="space-y-8">
+        <Breadcrumb
+          items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'Les rôles', href: '/roles' },
+            { label: role.nom },
+          ]}
+        />
 
-        <div>
-          <div className="mb-3 flex items-center gap-3">
-            <span className="text-4xl">{role.emoji}</span>
-            <div>
-              <h1 className="text-2xl font-bold text-[#F1F5F9]">{role.nom}</h1>
-              <p className="text-sm text-[#94A3B8]">{role.mission}</p>
+        <section className="overflow-hidden rounded-3xl border border-[var(--border)] bg-surface-2">
+          <div
+            className="h-1.5"
+            style={{ background: `linear-gradient(135deg, ${roleColors[role.id]}, var(--gradient-end))` }}
+          />
+          <div className="p-6">
+            <div className="flex flex-wrap items-start gap-4">
+              <div
+                className="flex h-16 w-16 items-center justify-center rounded-3xl text-4xl"
+                style={{ backgroundColor: `${roleColors[role.id]}22`, color: roleColors[role.id] }}
+              >
+                {role.emoji}
+              </div>
+              <div className="min-w-0 flex-1">
+                <h1 className="text-2xl font-bold text-[var(--text-primary)]">{role.nom}</h1>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{role.mission}</p>
+              </div>
             </div>
           </div>
-          <p className="text-sm leading-relaxed text-[#94A3B8]">
-            <span className="font-semibold text-[#F1F5F9]">Utilisateurs concernés :</span> {role.utilisateurs}
-          </p>
-        </div>
+        </section>
 
-        <CheckList items={role.peutFaire} variant="resultat" />
-        <CheckList items={role.nePeutPasFaire} variant="erreur" />
+        <CalloutBlock variant="astuce" title="Utilisateurs concernés">
+          {role.utilisateurs}
+        </CalloutBlock>
 
-        <CalloutBlock variant="exemple">{role.exemple}</CalloutBlock>
+        <section className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h2 className="text-base font-semibold text-emerald-400">Ce que vous pouvez faire</h2>
+              <span className="rounded-full border border-emerald-500/20 px-2 py-1 text-xs text-emerald-300">
+                {role.peutFaire.length} actions
+              </span>
+            </div>
+            <CheckList items={role.peutFaire} variant="resultat" showLabel={false} />
+          </div>
+
+          <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h2 className="text-base font-semibold text-red-400">Ce que vous ne pouvez pas faire</h2>
+              <span className="rounded-full border border-red-500/20 px-2 py-1 text-xs text-red-300">
+                {role.nePeutPasFaire.length} limites
+              </span>
+            </div>
+            <CheckList items={role.nePeutPasFaire} variant="erreur" showLabel={false} />
+          </div>
+        </section>
+
+        <CalloutBlock variant="exemple" title="Exemple concret">
+          {role.exemple}
+        </CalloutBlock>
 
         {relatedGuides.length > 0 && (
           <section className="space-y-4">
             <div>
-              <h2 className="text-lg font-semibold text-[#F1F5F9]">Guides liés</h2>
-              <p className="mt-1 text-sm text-[#94A3B8]">Les articles les plus utiles pour ce rôle.</p>
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Guides recommandés pour ce rôle</h2>
+              <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                Les articles les plus utiles pour ce profil dans les opérations quotidiennes.
+              </p>
             </div>
             <div className="space-y-3">
               {relatedGuides.map(guide => (
@@ -76,11 +118,20 @@ export function RoleDetail() {
                   titre={guide.title}
                   chapeau={guide.objectif}
                   href={`/transport/guides/${guide.id}`}
+                  section="Transport"
+                  badge="Guide pas-à-pas"
                 />
               ))}
             </div>
           </section>
         )}
+
+        <Link
+          to="/roles"
+          className="inline-flex items-center text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
+        >
+          ← Retour aux rôles
+        </Link>
       </div>
     </PageTransition>
   )

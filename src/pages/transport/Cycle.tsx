@@ -8,15 +8,15 @@ export function Cycle() {
     <PageTransition>
       <div className="space-y-8 max-w-3xl">
         <div>
-          <p className="text-xs text-[#64748B] mb-1">Transport</p>
+          <p className="text-xs text-[var(--text-muted)] mb-1">Transport</p>
           <h1 className="text-2xl font-bold" style={{
-            background: 'linear-gradient(135deg, #F1F5F9 60%, #94A3B8)',
+            background: 'linear-gradient(135deg, var(--text-primary) 60%, var(--text-secondary))',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
             Cycle d'une rotation
           </h1>
-          <p className="text-[#94A3B8] mt-2 text-sm leading-relaxed">
+          <p className="text-[var(--text-secondary)] mt-2 text-sm leading-relaxed">
             De la création à l'impact sur les tableaux de bord — les 6 étapes du cycle complet d'une livraison.
           </p>
         </div>

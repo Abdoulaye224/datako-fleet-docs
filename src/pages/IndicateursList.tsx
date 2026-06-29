@@ -8,9 +8,9 @@ export function IndicateursList() {
     <PageTransition>
       <div className="space-y-8">
         <div>
-          <p className="mb-1 text-xs text-[#64748B]">Finance</p>
-          <h1 className="text-2xl font-bold text-[#F1F5F9]">Comprendre les indicateurs</h1>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#94A3B8]">
+          <p className="mb-1 text-xs text-[var(--text-muted)]">Finance</p>
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Comprendre les indicateurs</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
             Définitions simples, formules et conseils de lecture pour interpréter les chiffres clés de Fleet Manager.
           </p>
         </div>

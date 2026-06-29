@@ -20,7 +20,7 @@ export function CategoryFilter({ categories, active, onChange }: CategoryFilterP
             className={`relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-colors ${
               isActive
                 ? 'text-white'
-                : 'bg-surface-3 text-[#64748B] hover:bg-surface-3/80 hover:text-[#F1F5F9]'
+                : 'bg-surface-3 text-[var(--text-muted)] hover:bg-surface-3/80 hover:text-[var(--text-primary)]'
             }`}
           >
             {isActive && (

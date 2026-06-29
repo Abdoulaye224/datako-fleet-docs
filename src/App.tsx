@@ -1,8 +1,10 @@
-import { Suspense, lazy } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Suspense, lazy, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
 import { ProfilProvider } from '@/context/ProfilContext'
+import { SearchProvider, useSearch } from '@/context/SearchContext'
+import { ThemeProvider } from '@/context/ThemeContext'
 
 const Home = lazy(() => import('@/pages/Home').then(m => ({ default: m.Home })))
 const TransportIndex = lazy(() => import('@/pages/transport/index').then(m => ({ default: m.TransportIndex })))
@@ -23,11 +25,25 @@ const OnboardingSelect = lazy(() => import('@/pages/OnboardingSelect').then(m =>
 const OnboardingDetail = lazy(() => import('@/pages/OnboardingDetail').then(m => ({ default: m.OnboardingDetail })))
 const Profils = lazy(() => import('@/pages/Profils').then(m => ({ default: m.Profils })))
 const ProfilDetail = lazy(() => import('@/pages/ProfilDetail').then(m => ({ default: m.ProfilDetail })))
+const Recherche = lazy(() => import('@/pages/Recherche').then(m => ({ default: m.Recherche })))
 const NotFound = lazy(() => import('@/pages/NotFound').then(m => ({ default: m.NotFound })))
 
 function AppRoutes() {
   const location = useLocation()
+  const { openSearch } = useSearch()
   const suspenseFallback = <div />
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        openSearch()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [openSearch])
 
   return (
     <AnimatePresence mode="wait">
@@ -52,6 +68,7 @@ function AppRoutes() {
           <Route path="onboarding/:id" element={<Suspense fallback={suspenseFallback}><OnboardingDetail /></Suspense>} />
           <Route path="profils" element={<Suspense fallback={suspenseFallback}><Profils /></Suspense>} />
           <Route path="profils/:id" element={<Suspense fallback={suspenseFallback}><ProfilDetail /></Suspense>} />
+          <Route path="recherche" element={<Suspense fallback={suspenseFallback}><Recherche /></Suspense>} />
           <Route path="*" element={<Suspense fallback={suspenseFallback}><NotFound /></Suspense>} />
         </Route>
       </Routes>
@@ -61,10 +78,14 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <ProfilProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </ProfilProvider>
+    <ThemeProvider>
+      <SearchProvider>
+        <ProfilProvider>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </ProfilProvider>
+      </SearchProvider>
+    </ThemeProvider>
   )
 }

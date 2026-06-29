@@ -50,16 +50,16 @@ export function OnboardingChecklist({ roleId, steps }: OnboardingChecklistProps)
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-surface-2 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--border)] bg-surface-2 p-4">
         <div>
-          <p className="text-sm font-semibold text-[#F1F5F9]">Progression</p>
-          <p className="text-sm text-[#94A3B8]">{progressLabel}</p>
+          <p className="text-sm font-semibold text-[var(--text-primary)]">Progression</p>
+          <p className="text-sm text-[var(--text-secondary)]">{progressLabel}</p>
         </div>
         {hasChecked && (
           <button
             type="button"
             onClick={() => setChecked(new Set<number>())}
-            className="text-sm text-[#64748B] transition-colors hover:text-[#F1F5F9]"
+            className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
           >
             Tout réinitialiser
           </button>
@@ -82,7 +82,7 @@ export function OnboardingChecklist({ roleId, steps }: OnboardingChecklistProps)
                 }
               }}
               className={`rounded-xl border p-4 transition-colors ${
-                isChecked ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-white/10 bg-surface-2 hover:border-blue-500/20'
+                isChecked ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-[var(--border)] bg-surface-2 hover:border-blue-500/20'
               }`}
             >
               <div className="flex items-start gap-3">
@@ -106,7 +106,7 @@ export function OnboardingChecklist({ roleId, steps }: OnboardingChecklistProps)
                         exit={{ opacity: 0 }}
                         transition={TRANSITIONS.fast}
                       >
-                        <Circle size={20} className="text-[#64748B]" />
+                        <Circle size={20} className="text-[var(--text-muted)]" />
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -114,10 +114,10 @@ export function OnboardingChecklist({ roleId, steps }: OnboardingChecklistProps)
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <p className={`text-sm font-medium ${isChecked ? 'text-emerald-300' : 'text-[#F1F5F9]'}`}>
+                      <p className={`text-sm font-medium ${isChecked ? 'text-emerald-300' : 'text-[var(--text-primary)]'}`}>
                         {step.titre}
                       </p>
-                      <p className="mt-1 text-sm leading-relaxed text-[#94A3B8]">{step.description}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{step.description}</p>
                     </div>
                     <Link
                       to={step.href}
