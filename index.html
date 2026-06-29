@@ -8,6 +8,9 @@
       (function () {
         var theme = localStorage.getItem('hc-theme') || 'dark'
         if (theme === 'dark') document.documentElement.classList.add('dark')
+        // GitHub Pages SPA redirect — restore path from ?p= set by 404.html
+        var p = new URLSearchParams(window.location.search).get('p')
+        if (p) window.history.replaceState(null, '', p)
       })()
     </script>
     <title>Datakö Fleet Docs</title>
