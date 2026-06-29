@@ -5,6 +5,7 @@ export interface AppPage {
   why: string
   read: string
   href: string
+  guideAssocie?: { href: string; titre: string }
   precedent?: { href: string; titre: string }
   suivant?: { href: string; titre: string }
   articlesConnexes?: Array<{ href: string; titre: string; section: string }>
@@ -18,6 +19,7 @@ export const appPages: AppPage[] = [
     why: 'C’est le point de départ pour suivre ce qui a été vendu, ce qui reste à préparer et ce qui doit partir en tournée.',
     read: 'Surveillez en priorité les commandes “À préparer” et “En retard”. Une commande saisie tôt dans la journée aide l’équipe à mieux organiser les départs depuis Conakry.',
     href: '/vente/pages/commandes',
+    guideAssocie: { href: '/vente/guides/creer-commande-client', titre: 'Créer une commande client' },
     suivant: { href: '/vente/pages/tournees', titre: 'Tournées' },
     articlesConnexes: [
       { href: '/vente/guides/creer-commande-client', titre: 'Créer une commande client', section: 'Guides Vente' },
@@ -31,6 +33,7 @@ export const appPages: AppPage[] = [
     why: 'Cette page permet d’optimiser les trajets, de limiter les retards et de confirmer que chaque commande est bien affectée à une tournée.',
     read: 'Regroupez les commandes par commune ou par axe routier (Matoto, Ratoma, Sonfonia, Coyah) pour réduire les kilomètres à vide et les frais de carburant.',
     href: '/vente/pages/tournees',
+    guideAssocie: { href: '/vente/guides/planifier-tournee-livraison', titre: 'Planifier une tournée de livraison' },
     precedent: { href: '/vente/pages/commandes', titre: 'Commandes' },
     suivant: { href: '/vente/pages/facturation', titre: 'Facturation' },
     articlesConnexes: [
@@ -45,6 +48,7 @@ export const appPages: AppPage[] = [
     why: 'Elle aide l’équipe finance à transformer rapidement les livraisons validées en factures puis en encaissements.',
     read: 'Une facture non générée après la livraison retarde le recouvrement. Filtrez par “À facturer” chaque soir pour éviter les oublis.',
     href: '/vente/pages/facturation',
+    guideAssocie: { href: '/vente/guides/facturer-client', titre: 'Facturer un client' },
     precedent: { href: '/vente/pages/tournees', titre: 'Tournées' },
     suivant: { href: '/vente/pages/clients-distribution', titre: 'Clients distribution' },
     articlesConnexes: [
@@ -59,6 +63,7 @@ export const appPages: AppPage[] = [
     why: 'Vous identifiez vos meilleurs clients, les habitudes d’achat et les comptes qui nécessitent un suivi commercial ou financier.',
     read: 'Consultez l’historique avant d’accorder un délai de paiement ou une remise. Un gros volume avec des retards récurrents doit être revu avant la prochaine commande.',
     href: '/vente/pages/clients-distribution',
+    guideAssocie: { href: '/vente/guides/appliquer-remise-promotion', titre: 'Appliquer une remise / promotion' },
     precedent: { href: '/vente/pages/facturation', titre: 'Facturation' },
     suivant: { href: '/vente/pages/rapport-vente', titre: 'Rapport vente' },
     articlesConnexes: [
@@ -73,6 +78,7 @@ export const appPages: AppPage[] = [
     why: 'C’est la page de pilotage pour savoir si le module distribution gagne réellement de l’argent et quels segments performent le mieux.',
     read: 'Comparez les périodes semaine/mois pour distinguer une hausse durable d’un pic ponctuel lié à une forte commande de gaz ou d’eau minérale.',
     href: '/vente/pages/rapport-vente',
+    guideAssocie: { href: '/vente/guides/exporter-rapport-vente', titre: 'Exporter le rapport de vente' },
     precedent: { href: '/vente/pages/clients-distribution', titre: 'Clients distribution' },
     suivant: { href: '/vente/pages/stocks', titre: 'Stocks' },
     articlesConnexes: [
@@ -87,6 +93,7 @@ export const appPages: AppPage[] = [
     why: 'Elle évite les ruptures au moment de préparer les livraisons et permet de vérifier que le stock physique correspond au stock système.',
     read: 'Surveillez surtout les produits à rotation rapide. Une baisse brutale du stock sans commande associée doit déclencher une vérification immédiate.',
     href: '/vente/pages/stocks',
+    guideAssocie: { href: '/vente/guides/gerer-stock', titre: 'Gérer mon stock' },
     precedent: { href: '/vente/pages/rapport-vente', titre: 'Rapport vente' },
     suivant: { href: '/vente/pages/promotions', titre: 'Promotions' },
     articlesConnexes: [
@@ -101,6 +108,7 @@ export const appPages: AppPage[] = [
     why: 'Cette page sécurise les conditions de vente accordées sur le terrain et évite les écarts entre le prix annoncé et le prix facturé.',
     read: 'Limitez les promotions dans le temps et mesurez leur impact sur la marge. Une remise utile doit augmenter le volume sans dégrader durablement le bénéfice.',
     href: '/vente/pages/promotions',
+    guideAssocie: { href: '/vente/guides/appliquer-remise-promotion', titre: 'Appliquer une remise / promotion' },
     precedent: { href: '/vente/pages/stocks', titre: 'Stocks' },
     articlesConnexes: [
       { href: '/vente/guides/appliquer-remise-promotion', titre: 'Appliquer une remise / promotion', section: 'Guides Vente' },

@@ -5,6 +5,7 @@ export interface AppPage {
   see: string
   why: string
   read: string
+  guideAssocie?: { href: string; titre: string }
 }
 
 export const appPages: AppPage[] = [
@@ -23,6 +24,7 @@ export const appPages: AppPage[] = [
     see: 'Le formulaire pour enregistrer un trajet : camion, client, destination, volume transporté. Le gain est calculé automatiquement.',
     why: 'Chaque rotation enregistrée alimente tous les tableaux de bord. Sans saisie, pas de suivi.',
     read: 'Le gain affiché est votre part réelle après commissions. Si le gain est négatif, la rotation coûte plus qu\'elle ne rapporte.',
+    guideAssocie: { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation' },
   },
   {
     id: 'livraisons',
@@ -31,6 +33,7 @@ export const appPages: AppPage[] = [
     see: 'L\'historique complet des livraisons avec statut de paiement (payé, en attente, impayé).',
     why: 'Suivre les impayés et vérifier que chaque rotation a bien été facturée et encaissée.',
     read: 'Cliquez sur le badge de paiement pour changer le statut. Les livraisons impayées impactent votre trésorerie réelle.',
+    guideAssocie: { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison' },
   },
   {
     id: 'flotte',
@@ -39,6 +42,7 @@ export const appPages: AppPage[] = [
     see: 'La performance de chaque camion : CA généré, coûts d\'exploitation, marge.',
     why: 'Identifier les camions rentables et ceux qui coûtent de l\'argent.',
     read: 'Un camion "Rentable" (>5% de marge) rapporte. "Déficitaire" (<0%) : il faut analyser pourquoi (maintenance, peu de rotations, charges élevées).',
+    guideAssocie: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
   },
   {
     id: 'clients',
@@ -47,6 +51,7 @@ export const appPages: AppPage[] = [
     see: 'Le classement des clients par CA, nombre de livraisons et impayés.',
     why: 'Connaître vos meilleurs clients et ceux qui posent un risque de recouvrement.',
     read: 'Un client avec beaucoup de CA mais beaucoup d\'impayés est un signal d\'alerte.',
+    guideAssocie: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
   },
   {
     id: 'gains',
@@ -55,6 +60,7 @@ export const appPages: AppPage[] = [
     see: 'Vos gains nets, rotation par rotation. Combien votre organisation a réellement gagné sur la période.',
     why: 'Savoir précisément ce qui entre dans la caisse, après commissions et répartitions.',
     read: 'Le gain par rotation tient compte des commissions versées aux partenaires. Un gain de 0 signifie que vous couvrez juste vos coûts.',
+    guideAssocie: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
   },
   {
     id: 'profit-camion',
@@ -63,6 +69,7 @@ export const appPages: AppPage[] = [
     see: 'Le classement des véhicules par profit réel : marge des rotations moins les charges fixes.',
     why: 'Comparer objectivement chaque véhicule et décider où concentrer l\'activité.',
     read: 'Un camion peu actif peut quand même être déficitaire à cause de ses charges fixes (assurance, vignette). La période compte.',
+    guideAssocie: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
   },
   {
     id: 'cashflow',
