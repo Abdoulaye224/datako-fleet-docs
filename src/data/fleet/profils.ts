@@ -201,11 +201,14 @@ export const PROFILS: Profil[] = [
     parcoursRecommande: [
       { href: '/roles/proprietaire', label: 'Comprendre votre rôle et vos accès', priorite: 'critique' },
       { href: '/indicateurs/part-proprietaire', label: 'Comment est calculée ma part', priorite: 'importante' },
+      { href: '/portail-proprietaire', label: 'Comprendre le détail d\'une rotation (volumes, coûts, trajet, historique)', priorite: 'importante' },
       { href: '/transport/guides/generer-bilan-proprietaire-pdf', label: 'Télécharger mon bilan PDF', priorite: 'utile' },
+      { href: '/transport/guides/recalculer-couts-variables', label: 'Comprendre le badge "Coûts recalculés" sur une livraison', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Vérifier les rotations effectuées ce mois par mes camions', guide: '/roles/proprietaire' },
       { titre: 'Calculer ma part de gains sur le mois', guide: '/indicateurs/part-proprietaire' },
+      { titre: 'Vérifier le détail des coûts d\'une livraison précise', guide: '/portail-proprietaire' },
       { titre: 'Télécharger mon bilan PDF pour validation', guide: '/transport/guides/generer-bilan-proprietaire-pdf' },
     ],
     erreursFréquentes: [
@@ -220,10 +223,17 @@ export const PROFILS: Profil[] = [
         solution: 'Lire "Comment est calculée ma part" pour comprendre la formule. Le gestionnaire peut vous fournir le détail.',
         articleLie: '/indicateurs/part-proprietaire',
       },
+      {
+        situation: 'Ne pas comprendre pourquoi le carburant déduit sur une rotation a changé après coup',
+        consequence: 'Sentiment d\'un montant incohérent ou non expliqué',
+        solution: 'Ouvrez le détail de la rotation dans "Historique rotations" : le badge "🔄 Coûts recalculés" indique la date, la source et le motif de la correction.',
+        articleLie: '/portail-proprietaire',
+      },
     ],
     indicateurs: [
       { nom: 'Part propriétaire par rotation', pourquoi: 'Ce que vous gagnez sur chaque trajet', href: '/indicateurs/part-proprietaire' },
       { nom: 'Charges fixes de mes véhicules', pourquoi: 'Ce qui est déduit avant votre part', href: '/indicateurs/charges-fixes-vehicule' },
+      { nom: 'Coûts variables par rotation', pourquoi: 'Le détail carburant / prime / péages déduit sur chaque livraison', href: '/indicateurs/couts-variables-rotation' },
     ],
     exports: [
       { nom: 'Bilan propriétaire PDF', quand: 'Chaque mois pour archivage ou signature', comment: 'Mon Bilan > Télécharger PDF' },

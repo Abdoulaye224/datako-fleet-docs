@@ -61,4 +61,12 @@ export const INDICATEURS: Indicateur[] = [
     exemple: 'Assurance 900 000 GNF/an → 75 000 GNF/mois × 6 mois = 450 000 GNF sur le semestre',
     conseil: 'Un camion inactif continue d\'accumuler ses charges fixes. C\'est pourquoi même un camion sans rotation peut être déficitaire.',
   },
+  {
+    id: 'couts-variables-rotation',
+    nom: 'Coûts variables par rotation',
+    definition: 'Le détail des coûts qui varient à chaque livraison, calculés à partir des paramètres de la route utilisée : carburant, prime chauffeur et péages.',
+    formule: 'Carburant + Prime chauffeur + Péages = Total coûts variables ; Marge de la livraison = CA Transport − Total coûts variables',
+    exemple: 'Route Conakry → Kankan : Carburant 850 000 GNF + Prime chauffeur 150 000 GNF + Péages 40 000 GNF = 1 040 000 GNF de coûts variables',
+    conseil: 'Ce détail est visible aussi bien côté administrateur (page Livraisons) que côté propriétaire (Historique rotations du Portail Propriétaire), avec la mention "Paramètre de route" comme source de chaque montant. Si une route est mal paramétrée, ces montants sont faux sur toutes les rotations qui l\'utilisent jusqu\'à correction et recalcul.',
+  },
 ]

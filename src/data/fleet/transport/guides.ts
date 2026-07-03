@@ -297,6 +297,7 @@ export const guides: Guide[] = [
       'Marge : recalculée',
       'Répartition propriétaire (commissions + résiduel) : mise à jour automatiquement',
       'Cashflow, Profit par camion, Gains par rotation : mis à jour automatiquement dès le prochain chargement de la page, sans action supplémentaire',
+      'Portail Propriétaire : le propriétaire du véhicule voit désormais un badge "🔄 Coûts recalculés" sur la livraison concernée, avec le détail avant → après et le motif si renseigné — le recalcul n\'est donc pas une correction silencieuse',
     ],
     attention: [
       "Corrigez toujours la route AVANT de lancer un recalcul — l'outil applique les paramètres de route ACTUELS, pas une valeur saisie dans l'outil lui-même.",
@@ -308,6 +309,7 @@ export const guides: Guide[] = [
     articlesConnexes: [
       { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
       { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
+      { href: '/portail-proprietaire', titre: 'Historique rotations (vue propriétaire)', section: 'Portail Propriétaire' },
     ],
   },
 ]

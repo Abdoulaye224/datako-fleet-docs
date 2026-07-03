@@ -39,6 +39,36 @@ export const FAQ_ITEMS: FAQItem[] = [
     reponse: 'Dans la section Répartition Acteurs, sélectionnez le propriétaire et la période. La part propriétaire est calculée automatiquement. Vous pouvez générer un Bilan PDF à lui envoyer.',
   },
   {
+    id: 'badge-couts-recalcules',
+    categorie: 'finance',
+    question: 'C\'est quoi le badge "Coûts recalculés" que je vois sur une livraison ?',
+    reponse: 'Ce badge signifie qu\'un administrateur a corrigé a posteriori le carburant, la prime chauffeur ou les péages de cette livraison, après avoir détecté une erreur de paramétrage sur la route. Cliquez sur le badge dans le détail de la rotation (Portail Propriétaire) pour voir la date, la source et le motif du recalcul.',
+  },
+  {
+    id: 'carburant-deduit-vs-reel',
+    categorie: 'finance',
+    question: 'Pourquoi le carburant déduit ne correspond pas au plein réel du camion ?',
+    reponse: 'Le montant déduit est une estimation calculée à partir du paramètre de consommation défini pour la route parcourue, pas le plein réel du camion. Si ce paramètre est mal configuré pour une route, signalez-le à l\'administrateur : il peut le corriger puis recalculer les livraisons concernées.',
+  },
+  {
+    id: 'verifier-trajet-rotation',
+    categorie: 'operations',
+    question: 'Comment vérifier le trajet exact d\'une rotation ?',
+    reponse: 'Ouvrez le détail de la rotation depuis "Historique rotations" dans le Portail Propriétaire. Le bloc "Trajet" affiche le dépôt de départ, la destination, et le site de livraison précis s\'il diffère de la destination.',
+  },
+  {
+    id: 'part-changee-cloture',
+    categorie: 'finance',
+    question: 'Ma part a changé après la clôture du mois — pourquoi ?',
+    reponse: 'Le montant peut évoluer si une rotation a été corrigée après coup (volume livré, coûts variables recalculés) ou si une règle de répartition a été modifiée. Ouvrez le détail de la rotation concernée dans "Historique rotations" : un badge ou un événement de l\'historique indique la correction et son impact.',
+  },
+  {
+    id: 'contester-montant-proprietaire',
+    categorie: 'roles',
+    question: 'À qui je m\'adresse si je conteste un montant ?',
+    reponse: 'Adressez-vous à l\'administrateur de votre organisation partenaire. Le détail complet de chaque rotation (volumes, coûts, trajet, historique) est visible dans votre Portail Propriétaire pour appuyer l\'échange.',
+  },
+  {
     id: 'statut-paiement',
     categorie: 'operations',
     question: 'Comment voir si une livraison est payée ?',

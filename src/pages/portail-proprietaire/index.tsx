@@ -14,7 +14,6 @@ export function PortailProprietaireIndex() {
     <PageTransition>
       <div className="space-y-8">
         <div>
-          <p className="mb-1 text-xs text-[var(--text-muted)]">Module V2</p>
           <h1
             className="text-2xl font-bold"
             style={{
@@ -103,6 +102,25 @@ export function PortailProprietaireIndex() {
                       <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Comment y accéder</p>
                       <p className="mt-1 text-sm text-[var(--text-secondary)]">{section.comment}</p>
                     </div>
+
+                    {section.sousSections && section.sousSections.length > 0 && (
+                      <div className="space-y-3 rounded-xl border border-[var(--border)] bg-surface-3 p-4">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Détail du panneau</p>
+                        {section.sousSections.map((sous, i) => (
+                          <div key={i}>
+                            <p className="text-sm font-medium text-[var(--text-primary)]">{sous.titre}</p>
+                            <ul className="mt-1.5 space-y-1">
+                              {sous.points.map((point, j) => (
+                                <li key={j} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+                                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400" />
+                                  {point}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     {section.astuce && (
                       <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 px-4 py-3 text-sm text-[var(--text-secondary)]">
