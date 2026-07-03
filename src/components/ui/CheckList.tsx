@@ -1,8 +1,8 @@
-import { CheckCircle2, Circle, XCircle } from 'lucide-react'
+import { CheckCircle2, Circle, Info, XCircle } from 'lucide-react'
 
 interface CheckListProps {
   items: string[]
-  variant: 'prerequis' | 'resultat' | 'erreur'
+  variant: 'prerequis' | 'resultat' | 'erreur' | 'impact'
   showLabel?: boolean
 }
 
@@ -22,6 +22,11 @@ export function CheckList({ items, variant, showLabel = true }: CheckListProps) 
       icon: XCircle,
       color: 'text-red-400',
       label: 'Erreurs fréquentes',
+    },
+    impact: {
+      icon: Info,
+      color: 'text-blue-400',
+      label: 'Impacts financiers',
     },
   }
 

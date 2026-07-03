@@ -9,6 +9,10 @@ export interface Guide {
   precedent?: { href: string; titre: string }
   suivant?: { href: string; titre: string }
   articlesConnexes?: Array<{ href: string; titre: string; section: string }>
+  exempleConcret?: string
+  avantApres?: { titre?: string; lignes: Array<{ ligne: string; avant: string; apres: string }> }
+  impacts?: string[]
+  attention?: string[]
 }
 
 export const guides: Guide[] = [
@@ -247,10 +251,63 @@ export const guides: Guide[] = [
       'Si le branding white-label est actif sur votre organisation, l\'en-tête du PDF affichera le logo et les couleurs de votre entreprise plutôt que l\'identité Datakö.',
     ],
     precedent: { href: '/transport/guides/exporter-excel', titre: 'Exporter les données Excel' },
+    suivant: { href: '/transport/guides/recalculer-couts-variables', titre: 'Recalculer les coûts variables' },
     articlesConnexes: [
       { href: '/transport/pages/livraisons', titre: 'Page Livraisons', section: 'Transport' },
       { href: '/transport/guides/generer-releve-client-pdf', titre: 'Générer un relevé client PDF', section: 'Guides' },
       { href: '/roles/finance', titre: 'Rôle Finance', section: 'Rôles' },
+    ],
+  },
+  {
+    id: 'recalculer-couts-variables',
+    title: 'Recalculer les coûts variables',
+    objectif:
+      "Corriger le carburant et la prime chauffeur déjà enregistrés sur des livraisons passées, après avoir détecté une erreur de paramétrage sur une route — sans réimporter tout l'historique.",
+    prerequis: [
+      'Avoir le rôle Administrateur',
+      "Avoir déjà corrigé la route concernée dans Tarifs de transport (nouvelle consommation carburant ou nouvelle prime)",
+    ],
+    etapes: [
+      "Corrigez d'abord la route concernée dans Tarifs de transport : mettez à jour la consommation carburant ou la prime chauffeur.",
+      'Allez dans Paramètres → onglet Transport → Outils de maintenance.',
+      'Ouvrez "Recalcul des coûts variables".',
+      'Choisissez la période, le véhicule (ou "Tous les véhicules") et la route (ou "Toutes les routes") concernés par l\'erreur.',
+      'Cliquez sur "Prévisualiser" — cette étape est obligatoire, aucune donnée n\'est modifiée à ce stade.',
+      "Vérifiez l'aperçu : la liste des livraisons concernées, l'ancien montant et le nouveau montant pour le carburant et la prime, ainsi que l'impact sur la marge.",
+      'Si tout est correct, cliquez sur "Confirmer le recalcul". C\'est uniquement à ce moment que les données sont mises à jour.',
+    ],
+    resultat:
+      "Les livraisons du périmètre choisi sont mises à jour avec les coûts variables corrects. La marge, la répartition propriétaire, le Cashflow, le Profit par camion et les Gains par rotation reflètent la correction dès le prochain chargement de la page.",
+    erreurs: [
+      'Si l\'aperçu ne montre aucune livraison, vérifiez que la période, le véhicule ou la route sélectionnés correspondent bien aux rotations concernées.',
+      "Si les montants de l'aperçu n'ont pas changé, la route n'a probablement pas encore été corrigée dans Tarifs de transport.",
+    ],
+    exempleConcret:
+      "Sur la route Conakry → Kankan, la prime chauffeur avait été saisie à tort à 500 000 GNF au lieu de 150 000 GNF lors de l'onboarding. 3 rotations ont été enregistrées avec cette erreur. Après correction de la route (150 000 GNF) puis recalcul, les 3 rotations sont mises à jour et la marge du véhicule sur la page Profit par camion reflète immédiatement la correction.",
+    avantApres: {
+      titre: 'Route Conakry → Kankan — 3 rotations concernées',
+      lignes: [
+        { ligne: 'Prime chauffeur (par rotation)', avant: '500 000 GNF', apres: '150 000 GNF' },
+        { ligne: 'Impact sur la marge (par rotation)', avant: '—', apres: '+350 000 GNF' },
+      ],
+    },
+    impacts: [
+      'CA transport : inchangé',
+      'Coûts variables : mis à jour',
+      'Marge : recalculée',
+      'Répartition propriétaire (commissions + résiduel) : mise à jour automatiquement',
+      'Cashflow, Profit par camion, Gains par rotation : mis à jour automatiquement dès le prochain chargement de la page, sans action supplémentaire',
+    ],
+    attention: [
+      "Corrigez toujours la route AVANT de lancer un recalcul — l'outil applique les paramètres de route ACTUELS, pas une valeur saisie dans l'outil lui-même.",
+      "Vérifiez toujours l'aperçu avant de confirmer — l'action n'est pas réversible automatiquement (il faudrait relancer un recalcul en sens inverse).",
+      'Outil réservé aux Administrateurs — ce n\'est pas un geste opérationnel quotidien.',
+      "Ne modifie jamais le CA ni les livraisons futures — seulement les coûts variables des livraisons déjà enregistrées, sur le périmètre choisi.",
+    ],
+    precedent: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
+    articlesConnexes: [
+      { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
+      { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
     ],
   },
 ]

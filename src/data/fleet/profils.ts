@@ -248,6 +248,7 @@ export const PROFILS: Profil[] = [
       { href: '/transport/pages/simulations', label: 'Simuler des scénarios d\'investissement', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains entre acteurs', priorite: 'utile' },
       { href: '/transport/guides/generer-facture-transport', label: 'Générer une facture transport client', priorite: 'utile' },
+      { href: '/transport/guides/recalculer-couts-variables', label: 'Recalculer les coûts variables après une erreur de paramétrage', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Faire le point KPI du lundi matin en 5 minutes', guide: '/transport/pages/dashboard' },
@@ -346,6 +347,7 @@ export const PROFILS: Profil[] = [
       { href: '/transport/pages/clients', label: 'Clients — encours et impayés', priorite: 'importante' },
       { href: '/indicateurs/ca-transport', label: 'CA Transport — structure', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains', priorite: 'utile' },
+      { href: '/transport/guides/recalculer-couts-variables', label: 'Recalculer les coûts variables après une erreur de paramétrage', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Analyser la capacité de remboursement du crédit-bail', guide: '/transport/pages/cashflow' },
