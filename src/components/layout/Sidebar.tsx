@@ -32,7 +32,17 @@ const navItems = [
     ],
   },
   { label: 'WhatsApp', href: '/whatsapp', icon: MessageCircle },
-  { label: 'Portail Propriétaire', href: '/portail-proprietaire', icon: BookOpen },
+  {
+    label: 'Portail Propriétaire',
+    icon: BookOpen,
+    children: [
+      { label: 'Connexion au portail', href: '/portail-proprietaire/connexion-portail' },
+      { label: 'Tableau de bord', href: '/portail-proprietaire/tableau-bord-proprietaire' },
+      { label: 'Mes véhicules & Bilans', href: '/portail-proprietaire/mes-vehicules-bilans' },
+      { label: 'Historique rotations', href: '/portail-proprietaire/historique-rotations' },
+      { label: 'Charges & Maintenances', href: '/portail-proprietaire/charges-maintenances' },
+    ],
+  },
   { label: 'Les rôles', href: '/roles', icon: Users },
   { label: 'Indicateurs', href: '/indicateurs', icon: BarChart3 },
   { label: 'FAQ', href: '/faq', icon: HelpCircle },

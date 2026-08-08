@@ -269,14 +269,18 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
   })
 
   data.portailSections?.forEach(section => {
+    const sousSectionsTexte = section.sousSections
+      ?.map(sous => `${sous.titre} ${sous.points.join(' ')}`)
+      .join(' ') ?? ''
+
     entries.push({
       id: `portail-${section.id}`,
       titre: section.titre,
       chapeau: section.description,
-      contenu: `${section.description} ${section.quoi.join(' ')} ${section.comment} ${section.prerequis.join(' ')}`,
+      contenu: `${section.description} ${section.quoi.join(' ')} ${section.comment} ${section.prerequis.join(' ')} ${sousSectionsTexte}`,
       section: 'portail',
       categorie: 'Portail Propriétaire',
-      href: `/portail-proprietaire`,
+      href: section.href,
       tags: ['portail', 'propriétaire', 'bilan'],
     })
   })

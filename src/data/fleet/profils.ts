@@ -201,14 +201,14 @@ export const PROFILS: Profil[] = [
     parcoursRecommande: [
       { href: '/roles/proprietaire', label: 'Comprendre votre rôle et vos accès', priorite: 'critique' },
       { href: '/indicateurs/part-proprietaire', label: 'Comment est calculée ma part', priorite: 'importante' },
-      { href: '/portail-proprietaire', label: 'Comprendre le détail d\'une rotation (volumes, coûts, trajet, historique)', priorite: 'importante' },
+      { href: '/portail-proprietaire/historique-rotations', label: 'Comprendre le détail d\'une rotation (volumes, coûts, trajet, historique)', priorite: 'importante' },
       { href: '/transport/guides/generer-bilan-proprietaire-pdf', label: 'Télécharger mon bilan PDF', priorite: 'utile' },
       { href: '/transport/guides/recalculer-couts-variables', label: 'Comprendre le badge "Coûts recalculés" sur une livraison', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Vérifier les rotations effectuées ce mois par mes camions', guide: '/roles/proprietaire' },
       { titre: 'Calculer ma part de gains sur le mois', guide: '/indicateurs/part-proprietaire' },
-      { titre: 'Vérifier le détail des coûts d\'une livraison précise', guide: '/portail-proprietaire' },
+      { titre: 'Vérifier le détail des coûts d\'une livraison précise', guide: '/portail-proprietaire/historique-rotations' },
       { titre: 'Télécharger mon bilan PDF pour validation', guide: '/transport/guides/generer-bilan-proprietaire-pdf' },
     ],
     erreursFréquentes: [
@@ -227,7 +227,7 @@ export const PROFILS: Profil[] = [
         situation: 'Ne pas comprendre pourquoi le carburant déduit sur une rotation a changé après coup',
         consequence: 'Sentiment d\'un montant incohérent ou non expliqué',
         solution: 'Ouvrez le détail de la rotation dans "Historique rotations" : le badge "🔄 Coûts recalculés" indique la date, la source et le motif de la correction.',
-        articleLie: '/portail-proprietaire',
+        articleLie: '/portail-proprietaire/historique-rotations',
       },
     ],
     indicateurs: [

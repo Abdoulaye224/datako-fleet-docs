@@ -42,6 +42,7 @@ const WhatsAppIndex = lazy(() => import('@/pages/whatsapp/index').then(m => ({ d
 
 // V2 — Portail Propriétaire
 const PortailProprietaireIndex = lazy(() => import('@/pages/portail-proprietaire/index').then(m => ({ default: m.PortailProprietaireIndex })))
+const PortailSectionDetail = lazy(() => import('@/pages/portail-proprietaire/SectionDetail').then(m => ({ default: m.PortailSectionDetail })))
 
 function AppRoutes() {
   const location = useLocation()
@@ -96,6 +97,7 @@ function AppRoutes() {
           <Route path="whatsapp" element={<Suspense fallback={suspenseFallback}><WhatsAppIndex /></Suspense>} />
           {/* V2 — Portail Propriétaire */}
           <Route path="portail-proprietaire" element={<Suspense fallback={suspenseFallback}><PortailProprietaireIndex /></Suspense>} />
+          <Route path="portail-proprietaire/:id" element={<Suspense fallback={suspenseFallback}><PortailSectionDetail /></Suspense>} />
           <Route path="*" element={<Suspense fallback={suspenseFallback}><NotFound /></Suspense>} />
         </Route>
       </Routes>

@@ -309,7 +309,7 @@ export const guides: Guide[] = [
     articlesConnexes: [
       { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
       { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
-      { href: '/portail-proprietaire', titre: 'Historique rotations (vue propriétaire)', section: 'Portail Propriétaire' },
+      { href: '/portail-proprietaire/historique-rotations', titre: 'Historique rotations (vue propriétaire)', section: 'Portail Propriétaire' },
     ],
   },
 ]

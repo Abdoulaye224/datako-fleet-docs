@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Outlet, matchPath, useLocation } from 'react-router-dom'
 import { SearchPalette } from '@/components/search/SearchPalette'
 import { PageMeta } from '@/components/ui/PageMeta'
-import { FAQ_ITEMS, INDICATEURS, ONBOARDING_PARCOURS, PROFILS, ROLES, appPages, casParticuliers, guides } from '@/data/fleet'
+import { FAQ_ITEMS, INDICATEURS, ONBOARDING_PARCOURS, PROFILS, PORTAIL_SECTIONS, ROLES, appPages, casParticuliers, guides } from '@/data/fleet'
 import { appPages as ventePages } from '@/data/fleet/vente/pages'
 import { guides as venteGuides } from '@/data/fleet/vente/guides'
 import { INDICATEURS as venteIndicateurs } from '@/data/fleet/vente/indicateurs'
@@ -120,6 +120,12 @@ function RouteMeta() {
     if (venteIndicateurMatch?.params.id) {
       const indicateur = venteIndicateurs.find(item => item.id === venteIndicateurMatch.params.id)
       if (indicateur) return { title: indicateur.nom, description: indicateur.definition }
+    }
+
+    const portailMatch = matchPath('/portail-proprietaire/:id', pathname)
+    if (portailMatch?.params.id) {
+      const section = PORTAIL_SECTIONS.find(item => item.id === portailMatch.params.id)
+      if (section) return { title: section.titre, description: section.description }
     }
 
     return {
