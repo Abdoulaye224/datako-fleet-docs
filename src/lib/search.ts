@@ -291,11 +291,11 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       id: `whatsapp-${flux.id}`,
       titre: flux.titre,
       chapeau: flux.description,
-      contenu: `${flux.description} ${flux.quand} ${flux.exempleMessage} ${flux.activation}`,
+      contenu: `${flux.description} ${flux.etapes.join(' ')} ${flux.resultat ?? ''} ${flux.exempleMessage ?? ''} ${flux.acces}`,
       section: 'whatsapp',
       categorie: 'WhatsApp',
       href: '/whatsapp',
-      tags: ['whatsapp', flux.profil, flux.messageType],
+      tags: ['whatsapp', flux.bloc, flux.acteur],
     })
   })
 

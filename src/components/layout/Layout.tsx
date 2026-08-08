@@ -43,7 +43,7 @@ function RouteMeta() {
     if (pathname === '/vente/pages') return { title: 'Pages Marketeur', description: 'Description de chaque écran du module Marketeur.' }
     if (pathname === '/vente/guides') return { title: 'Guides Marketeur', description: 'Guides pas-à-pas pour maîtriser votre activité de distribution.' }
     if (pathname === '/vente/indicateurs') return { title: 'Indicateurs Marketeur', description: 'Marge nette, CA facturé, position TVA, créances clients — définitions et formules.' }
-    if (pathname === '/whatsapp') return { title: 'Module WhatsApp', description: 'Flux automatiques WhatsApp pour conducteurs, chefs d\'exploitation et DG.' }
+    if (pathname === '/whatsapp') return { title: 'WhatsApp avec Datakö Fleet', description: 'Piloter son activité, agir depuis le terrain et faire confirmer ses livraisons via WhatsApp.' }
     if (pathname === '/portail-proprietaire') return { title: 'Portail Propriétaire', description: 'Espace dédié aux propriétaires de véhicules gérés : bilans et exports PDF.' }
     if (pathname === '/parcours-complet') return { title: 'Transport & Marketeur', description: 'Les deux parcours côte à côte et les points où les deux activités se rejoignent.' }
     if (pathname === '/confirmation-livraison') return { title: GUIDE_CONFIRMATION_DESTINATAIRE.titre, description: GUIDE_CONFIRMATION_DESTINATAIRE.accroche }
