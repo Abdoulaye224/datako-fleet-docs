@@ -21,12 +21,13 @@ const navItems = [
     ],
   },
   {
-    label: 'Vente / Distribution',
+    label: 'Marketeur',
     icon: Package,
     children: [
+      { label: 'Le cycle Marketeur', href: '/vente/cycle' },
       { label: 'Comprendre les pages', href: '/vente/pages' },
       { label: 'Guides pas-à-pas', href: '/vente/guides' },
-      { label: 'Indicateurs vente', href: '/vente/indicateurs' },
+      { label: 'Indicateurs Marketeur', href: '/vente/indicateurs' },
     ],
   },
   { label: 'WhatsApp', href: '/whatsapp', icon: MessageCircle },
@@ -54,7 +55,7 @@ interface MobileMenuProps {
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const location = useLocation()
-  const [openSections, setOpenSections] = useState<string[]>(['Transport'])
+  const [sectionOverrides, setSectionOverrides] = useState<Record<string, boolean>>({})
   const { profilActif } = useProfil()
   const profil = PROFILS.find(item => item.id === profilActif)
 
@@ -69,8 +70,21 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, onClose])
 
-  const toggleSection = (label: string) => {
-    setOpenSections(prev => (prev.includes(label) ? prev.filter(section => section !== label) : [...prev, label]))
+  useEffect(() => {
+    const activeSection = navItems.find(
+      item => 'children' in item && item.children.some(child => location.pathname.startsWith(child.href)),
+    )
+    if (!activeSection) return
+    setSectionOverrides(prev => {
+      if (!(activeSection.label in prev)) return prev
+      const next = { ...prev }
+      delete next[activeSection.label]
+      return next
+    })
+  }, [location.pathname])
+
+  const toggleSection = (label: string, currentlyOpen: boolean) => {
+    setSectionOverrides(prev => ({ ...prev, [label]: !currentlyOpen }))
   }
 
   return (
@@ -162,13 +176,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   )
                 }
 
-                const isOpenSection = openSections.includes(item.label)
+                const isChildActive = item.children.some(child => location.pathname.startsWith(child.href))
+                const isOpenSection = sectionOverrides[item.label] ?? isChildActive
 
                 return (
                   <div key={item.label}>
                     <button
                       type="button"
-                      onClick={() => toggleSection(item.label)}
+                      onClick={() => toggleSection(item.label, isOpenSection)}
+                      aria-expanded={isOpenSection}
                       className="flex min-h-[44px] w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2.5 text-sm text-[var(--text-secondary)] transition-colors hover:bg-surface-3 hover:text-[var(--text-primary)]"
                     >
                       <span className="flex items-center gap-2.5">

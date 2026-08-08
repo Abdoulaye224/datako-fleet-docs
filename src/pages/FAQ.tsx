@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { CategoryFilter } from '@/components/ui/CategoryFilter'
 import { Accordion } from '@/components/ui/Accordion'
@@ -7,6 +8,8 @@ import { FAQ_ITEMS } from '@/data/fleet'
 const categories = [
   { id: 'all', label: 'Tout' },
   { id: 'operations', label: 'Opérations' },
+  { id: 'transport', label: 'Transport' },
+  { id: 'marketeur', label: 'Marketeur' },
   { id: 'finance', label: 'Finance' },
   { id: 'technique', label: 'Technique' },
   { id: 'roles', label: 'Rôles' },
@@ -32,7 +35,14 @@ export function FAQ() {
           <p className="mb-1 text-xs text-[var(--text-muted)]">Aide</p>
           <h1 className="text-2xl font-bold text-[var(--text-primary)]">Questions fréquentes</h1>
           <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-            Réponses rapides aux questions les plus courantes sur les opérations, la finance, la technique et les droits d'accès.
+            Réponses rapides aux questions les plus courantes sur le transport, la distribution, la finance, la technique et les droits d'accès.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+            Vous avez reçu un lien pour confirmer une réception et vous n'utilisez pas Fleet Manager ?{' '}
+            <Link to="/confirmation-livraison" className="text-[var(--info)] underline-offset-2 hover:underline">
+              Consultez le guide destinataire
+            </Link>
+            .
           </p>
         </div>
 

@@ -12,6 +12,24 @@ export interface Nouveaute {
 
 export const NOUVEAUTES: Nouveaute[] = [
   {
+    id: 'double-validation-livraison',
+    date: '2026-08-08',
+    mois: 'Août 2026',
+    titre: 'Nouveau : confirmation de réception par le destinataire',
+    description: 'Vous pouvez désormais demander au destinataire de confirmer lui-même la quantité reçue. Le réglage se fait client par client dans sa fiche, bloc "Validation des livraisons". Le destinataire reçoit un lien, sans compte ni installation, et déclare ce qu\'il a reçu ; si son chiffre diffère du vôtre, la livraison passe en écart signalé et attend un arbitrage. Par défaut, rien ne change : tous les clients restent en "Opérateur uniquement".',
+    type: 'nouveau',
+    module: 'Transport',
+  },
+  {
+    id: 'dossier-livraison-documents',
+    date: '2026-08-08',
+    mois: 'Août 2026',
+    titre: 'Nouveau : dossier documentaire de la livraison',
+    description: 'Chaque livraison peut porter jusqu\'à cinq pièces au format PDF : bon de livraison, bon de commande, facture, chèque, preuve de réception. Un indicateur "Dossier complet" ou "Dossier incomplet" signale les rotations dont le numéro de bon de livraison ou les pièces manquent, avec un filtre dédié et une colonne dans l\'export. Les fichiers volumineux sont optimisés automatiquement à l\'ajout.',
+    type: 'nouveau',
+    module: 'Transport',
+  },
+  {
     id: 'v2-facturation-transport',
     date: '2026-06-29',
     mois: 'Juin 2026',

@@ -31,9 +31,9 @@ export const cycleEtapes: CycleEtape[] = [
   {
     numero: 4,
     titre: 'Validation',
-    description: 'Le dispatcheur valide la livraison : volume réel livré, numéro BL, date. Le CA est calculé sur le volume livré réel.',
-    action: 'Marquer comme Livré',
-    statut: 'Livré',
+    description: 'Le dispatcheur déclare la fin du déchargement : volume réel livré, numéro de bon de livraison, date. Pour la plupart des clients, cette déclaration finalise immédiatement la livraison et le CA est calculé sur le volume livré réel. Pour les clients soumis à la double validation, elle ouvre une attente : le destinataire doit confirmer de son côté avant que la livraison ne soit finalisée.',
+    action: 'Marquer comme Livré, ou Déclarer le déchargement',
+    statut: 'Livré, ou En attente de confirmation',
   },
   {
     numero: 5,

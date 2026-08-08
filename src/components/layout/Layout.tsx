@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react'
-import { Outlet, matchPath, useLocation } from 'react-router-dom'
+import { matchPath, useLocation, useOutlet } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import { SearchPalette } from '@/components/search/SearchPalette'
 import { PageMeta } from '@/components/ui/PageMeta'
 import { FAQ_ITEMS, INDICATEURS, ONBOARDING_PARCOURS, PROFILS, PORTAIL_SECTIONS, ROLES, appPages, casParticuliers, guides } from '@/data/fleet'
 import { appPages as ventePages } from '@/data/fleet/vente/pages'
 import { guides as venteGuides } from '@/data/fleet/vente/guides'
 import { INDICATEURS as venteIndicateurs } from '@/data/fleet/vente/indicateurs'
+import { GUIDE_CONFIRMATION_DESTINATAIRE } from '@/data/fleet/transport/confirmationDestinataire'
 import { MobileHeader } from './MobileHeader'
 import { MobileMenu } from './MobileMenu'
 import { Sidebar } from './Sidebar'
@@ -36,12 +38,15 @@ function RouteMeta() {
     if (pathname === '/transport/cas-particuliers') return { title: 'Cas particuliers', description: 'Les situations complexes expliquées clairement.' }
     if (pathname === '/nouveautes') return { title: 'Nouveautés', description: 'Suivez les derniers ajouts et améliorations de Fleet Manager.' }
     if (pathname === '/recherche') return { title: 'Recherche', description: 'Recherchez dans toute la documentation Datakö Fleet.' }
-    if (pathname === '/vente') return { title: 'Vente / Distribution', description: 'Le module Vente : commandes, tournées, facturation et indicateurs distribution.' }
-    if (pathname === '/vente/pages') return { title: 'Pages Vente', description: 'Description de chaque écran du module Vente / Distribution.' }
-    if (pathname === '/vente/guides') return { title: 'Guides Vente', description: 'Guides pas-à-pas pour maîtriser le module Vente.' }
-    if (pathname === '/vente/indicateurs') return { title: 'Indicateurs Vente', description: 'CA Vente, Marge brute, Taux de livraison — définitions et formules.' }
+    if (pathname === '/vente') return { title: 'Marketeur', description: 'Achat SONAP, stock, ventes, facturation et obligations réglementaires.' }
+    if (pathname === '/vente/cycle') return { title: 'Le cycle Marketeur', description: "De l'achat à la SONAP jusqu'au pilotage de votre résultat." }
+    if (pathname === '/vente/pages') return { title: 'Pages Marketeur', description: 'Description de chaque écran du module Marketeur.' }
+    if (pathname === '/vente/guides') return { title: 'Guides Marketeur', description: 'Guides pas-à-pas pour maîtriser votre activité de distribution.' }
+    if (pathname === '/vente/indicateurs') return { title: 'Indicateurs Marketeur', description: 'Marge nette, CA facturé, position TVA, créances clients — définitions et formules.' }
     if (pathname === '/whatsapp') return { title: 'Module WhatsApp', description: 'Flux automatiques WhatsApp pour conducteurs, chefs d\'exploitation et DG.' }
     if (pathname === '/portail-proprietaire') return { title: 'Portail Propriétaire', description: 'Espace dédié aux propriétaires de véhicules gérés : bilans et exports PDF.' }
+    if (pathname === '/parcours-complet') return { title: 'Transport & Marketeur', description: 'Les deux parcours côte à côte et les points où les deux activités se rejoignent.' }
+    if (pathname === '/confirmation-livraison') return { title: GUIDE_CONFIRMATION_DESTINATAIRE.titre, description: GUIDE_CONFIRMATION_DESTINATAIRE.accroche }
 
     const roleAliases: Record<string, string> = { administrateur: 'org_admin', operateur: 'operator', proprietaire: 'owner' }
     const roleMatch = matchPath('/roles/:id', pathname)
@@ -139,6 +144,8 @@ function RouteMeta() {
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
+  const outlet = useOutlet()
 
   return (
     <div className="flex min-h-screen bg-[var(--surface)]">
@@ -150,7 +157,9 @@ export function Layout() {
         <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
         <main className="flex-1 px-6 py-8 lg:px-10 lg:py-10" role="main">
           <div className="w-full max-w-5xl">
-            <Outlet />
+            <AnimatePresence mode="wait">
+              <div key={location.pathname}>{outlet}</div>
+            </AnimatePresence>
           </div>
         </main>
       </div>

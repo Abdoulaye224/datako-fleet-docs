@@ -23,7 +23,7 @@ export function VentePageDetail() {
         <Breadcrumb
           items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Vente / Distribution', href: '/vente' },
+            { label: 'Marketeur', href: '/vente' },
             { label: 'Comprendre les pages', href: '/vente/pages' },
             { label: page.name },
           ]}

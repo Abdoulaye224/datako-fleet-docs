@@ -14,13 +14,13 @@ export function VenteGuidesList() {
         <Breadcrumb
           items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Vente / Distribution', href: '/vente' },
+            { label: 'Marketeur', href: '/vente' },
             { label: 'Guides pas-à-pas' },
           ]}
         />
 
         <div>
-          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Guides Vente / Distribution</h1>
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Guides Marketeur</h1>
           <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
             Procédures étape par étape pour maîtriser le module Vente.
           </p>

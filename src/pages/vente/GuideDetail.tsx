@@ -29,7 +29,7 @@ export function VenteGuideDetail() {
         <Breadcrumb
           items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Vente / Distribution', href: '/vente' },
+            { label: 'Marketeur', href: '/vente' },
             { label: 'Guides pas-à-pas', href: '/vente/guides' },
             { label: guide.title },
           ]}

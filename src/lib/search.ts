@@ -11,6 +11,8 @@ import type { Nouveaute } from '@/data/fleet/nouveautes'
 import type { AppPage as VentePage } from '@/data/fleet/vente/pages'
 import type { Guide as VenteGuide } from '@/data/fleet/vente/guides'
 import type { Indicateur as VenteIndicateur } from '@/data/fleet/vente/indicateurs'
+import type { CycleEtape as VenteCycleEtape } from '@/data/fleet/vente/cycle'
+import type { GuideConfirmationDestinataire } from '@/data/fleet/transport/confirmationDestinataire'
 import type { WhatsAppFlux } from '@/data/fleet/whatsapp'
 import type { PortailSection } from '@/data/fleet/portail'
 
@@ -72,6 +74,8 @@ interface SearchData {
   ventePages?: VentePage[]
   venteGuides?: VenteGuide[]
   venteIndicateurs?: VenteIndicateur[]
+  venteCycle?: VenteCycleEtape[]
+  guideDestinataire?: GuideConfirmationDestinataire
   whatsappFlux?: WhatsAppFlux[]
   portailSections?: PortailSection[]
 }
@@ -223,9 +227,9 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       chapeau: page.see,
       contenu: `${page.see} ${page.why} ${page.read}`,
       section: 'vente',
-      categorie: 'Pages Vente',
+      categorie: 'Pages Marketeur',
       href: `/vente/pages/${page.id}`,
-      tags: ['vente', 'distribution', 'page'],
+      tags: ['marketeur', 'vente', 'distribution', 'page'],
     })
   })
 
@@ -236,9 +240,9 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       chapeau: guide.objectif,
       contenu: `${guide.objectif} ${guide.prerequis.join(' ')} ${guide.etapes.join(' ')} ${guide.resultat} ${guide.erreurs.join(' ')}`,
       section: 'vente',
-      categorie: 'Guides Vente',
+      categorie: 'Guides Marketeur',
       href: `/vente/guides/${guide.id}`,
-      tags: ['vente', 'guide', 'distribution'],
+      tags: ['marketeur', 'vente', 'guide', 'distribution'],
     })
   })
 
@@ -249,11 +253,38 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       chapeau: indicateur.definition,
       contenu: `${indicateur.definition} ${indicateur.formule ?? ''} ${indicateur.exemple} ${indicateur.conseil}`,
       section: 'vente',
-      categorie: 'Indicateurs Vente',
+      categorie: 'Indicateurs Marketeur',
       href: `/vente/indicateurs/${indicateur.id}`,
-      tags: ['vente', 'indicateur', 'KPI', indicateur.nom.toLowerCase()],
+      tags: ['marketeur', 'vente', 'indicateur', 'KPI', indicateur.nom.toLowerCase()],
     })
   })
+
+  data.venteCycle?.forEach(step => {
+    entries.push({
+      id: `vente-cycle-${step.numero}`,
+      titre: step.titre,
+      chapeau: step.description,
+      contenu: `${step.description} ${step.action} ${step.statut}`,
+      section: 'vente',
+      categorie: 'Cycle Marketeur',
+      href: '/vente/cycle',
+      tags: ['marketeur', 'vente', 'cycle', step.statut],
+    })
+  })
+
+  if (data.guideDestinataire) {
+    const guide = data.guideDestinataire
+    entries.push({
+      id: 'confirmation-destinataire',
+      titre: guide.titre,
+      chapeau: guide.accroche,
+      contenu: `${guide.accroche} ${guide.pourquoiCeMessage} ${guide.cequonVousDemande} ${guide.etapes.map(etape => `${etape.titre} ${etape.description}`).join(' ')} ${guide.aRetenir.join(' ')} ${guide.questions.map(item => `${item.question} ${item.reponse}`).join(' ')}`,
+      section: 'transport',
+      categorie: 'Guide destinataire',
+      href: '/confirmation-livraison',
+      tags: ['destinataire', 'confirmation', 'réception', 'livraison', 'lien'],
+    })
+  }
 
   data.whatsappFlux?.forEach(flux => {
     entries.push({
@@ -311,7 +342,7 @@ export function getSectionLabel(section: SearchEntry['section']) {
     onboarding: 'Onboarding',
     nouveautes: 'Nouveautés',
     profils: 'Profils',
-    vente: 'Vente / Distribution',
+    vente: 'Marketeur',
     whatsapp: 'WhatsApp',
     portail: 'Portail Propriétaire',
   }

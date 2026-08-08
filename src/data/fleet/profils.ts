@@ -28,8 +28,36 @@ export interface ProfilExport {
   comment: string
 }
 
+export type ProfilCategorie = 'direction' | 'operations' | 'acces' | 'interne'
+
+export interface ProfilCategorieMeta {
+  id: ProfilCategorie
+  label: string
+  description: string
+}
+
+export const PROFIL_CATEGORIES: ProfilCategorieMeta[] = [
+  {
+    id: 'direction',
+    label: 'Direction & Finance',
+    description: 'Vous pilotez les chiffres : rentabilité, trésorerie, facturation, obligations réglementaires.',
+  },
+  {
+    id: 'operations',
+    label: 'Opérations',
+    description: 'Vous êtes sur le terrain : rotations, livraisons, stock, flotte et disponibilité des véhicules.',
+  },
+  {
+    id: 'acces',
+    label: 'Accès spécifiques',
+    description: 'Vous êtes extérieur à l’équipe qui utilise Datakö Fleet au quotidien, avec un accès limité à ce qui vous concerne.',
+  },
+]
+
 export interface Profil {
   id: string
+  categorie: ProfilCategorie
+  phrase: string
   nom: string
   emoji: string
   sousTitre: string
@@ -46,156 +74,14 @@ export interface Profil {
 
 export const PROFILS: Profil[] = [
   {
-    id: 'transporteur',
-    nom: 'Transporteur',
-    emoji: '🚛',
-    sousTitre: 'Entreprise de transport de marchandises',
-    description: 'Vous gérez une flotte de camions et effectuez des livraisons pour des clients. Vous utilisez Fleet Manager pour suivre vos rotations, vos gains et la performance de votre flotte.',
-    modules: ['transport'],
-    rolesFleetManager: ['org_admin', 'operator'],
-    color: '#3B82F6',
-    parcoursRecommande: [
-      { href: '/transport/cycle', label: 'Comprendre le cycle d\'une rotation', priorite: 'critique' },
-      { href: '/transport/guides/creer-une-rotation', label: 'Créer une rotation', priorite: 'critique' },
-      { href: '/transport/guides/valider-une-livraison', label: 'Valider une livraison', priorite: 'critique' },
-      { href: '/transport/pages/dashboard', label: 'Lire le tableau de bord', priorite: 'critique' },
-      { href: '/transport/pages/gains', label: 'Comprendre les gains', priorite: 'importante' },
-      { href: '/transport/pages/flotte', label: 'Suivre la performance de la flotte', priorite: 'importante' },
-      { href: '/transport/pages/profit-par-camion', label: 'Profit par camion', priorite: 'importante' },
-      { href: '/transport/guides/ajouter-une-charge-fixe', label: 'Ajouter les charges fixes', priorite: 'importante' },
-      { href: '/transport/pages/cashflow', label: 'Comprendre le cashflow', priorite: 'utile' },
-      { href: '/transport/cas-particuliers/vehicule-gere-vs-propre', label: 'Véhicule propre vs géré', priorite: 'utile' },
-    ],
-    actionsTupiques: [
-      { titre: 'Enregistrer une livraison Conakry → Siguiri', guide: '/transport/guides/creer-une-rotation' },
-      { titre: 'Valider que les 38 000 litres ont bien été livrés', guide: '/transport/guides/valider-une-livraison' },
-      { titre: 'Vérifier la rentabilité de chaque camion ce mois', guide: '/transport/pages/profit-par-camion' },
-    ],
-    erreursFréquentes: [
-      {
-        situation: 'Saisir le volume chargé au lieu du volume livré lors de la validation',
-        consequence: 'Le CA est surestimé, les gains sont faux',
-        solution: 'Toujours saisir le volume réellement livré à destination. Si inférieur, c\'est un manquant.',
-        articleLie: '/transport/cas-particuliers/volume-manquant',
-      },
-      {
-        situation: 'Ne pas enregistrer les charges fixes du camion',
-        consequence: 'Le profit affiché est surévalué — les charges ne sont pas déduites',
-        solution: 'Ajouter assurance, vignette, visite technique dans Flotte > Charges fixes.',
-        articleLie: '/transport/guides/ajouter-une-charge-fixe',
-      },
-      {
-        situation: 'Marquer une livraison "Payé" avant encaissement réel',
-        consequence: 'Le cashflow paraît sain alors qu\'il y a des impayés',
-        solution: 'Ne confirmer le paiement qu\'à réception effective des fonds.',
-      },
-    ],
-    indicateurs: [
-      { nom: 'Gain par rotation', pourquoi: 'Savoir si chaque trajet est rentable', href: '/indicateurs/gain-par-rotation' },
-      { nom: 'Marge d\'exploitation', pourquoi: 'Santé globale de l\'activité transport', href: '/indicateurs/marge-exploitation' },
-      { nom: 'Profit par camion', pourquoi: 'Identifier les véhicules déficitaires', href: '/indicateurs/profit-par-camion' },
-      { nom: 'Cashflow net', pourquoi: 'Trésorerie réelle après crédit-bail', href: '/indicateurs/cashflow-net' },
-    ],
-    exports: [
-      { nom: 'Export Excel des livraisons', quand: 'En fin de mois pour la comptabilité', comment: 'Livraisons > Exporter' },
-      { nom: 'Relevé client PDF', quand: 'Pour facturer ou relancer un client', comment: 'Clients > sélectionner > Relevé' },
-      { nom: 'Bilan propriétaire PDF', quand: 'Pour reverser la part des camions gérés', comment: 'Répartition Acteurs > Propriétaire > Bilan PDF' },
-    ],
-  },
-  {
-    id: 'marketeur',
-    nom: 'Marketeur / Distribution',
-    emoji: '🏪',
-    sousTitre: 'Société de distribution de produits pétroliers',
-    description: 'Vous achetez des produits à SONAP et les revendez à vos clients (stations-service, industriels). Fleet Manager suit vos stocks, ventes, factures et encaissements.',
-    modules: ['vente'],
-    rolesFleetManager: ['org_admin', 'operator', 'finance'],
-    color: '#10B981',
-    parcoursRecommande: [
-      { href: '/vente/pages/dashboard-vente', label: 'Tableau de bord Distribution', priorite: 'critique' },
-      { href: '/vente/pages/stock', label: 'Comprendre le stock (chambres, navires)', priorite: 'critique' },
-      { href: '/vente/guides/enregistrer-une-vente', label: 'Enregistrer une vente', priorite: 'critique' },
-      { href: '/vente/guides/facturer-un-client', label: 'Facturer un client', priorite: 'critique' },
-      { href: '/vente/pages/encaissements', label: 'Suivre les encaissements', priorite: 'importante' },
-      { href: '/vente/pages/perequation', label: 'Comprendre la péréquation', priorite: 'importante' },
-      { href: '/vente/guides/commande-sonap', label: 'Enregistrer une commande SONAP', priorite: 'importante' },
-      { href: '/vente/pages/clients-vente', label: 'Gérer les clients Distribution', priorite: 'utile' },
-    ],
-    actionsTupiques: [
-      { titre: 'Enregistrer la réception d\'un navire SONAP', guide: '/vente/guides/commande-sonap' },
-      { titre: 'Facturer un client pour sa commande de Gasoil', guide: '/vente/guides/facturer-un-client' },
-      { titre: 'Suivre le solde de stock par produit et par chambre', guide: '/vente/pages/stock' },
-    ],
-    erreursFréquentes: [
-      {
-        situation: 'Confondre CA facturé et CA encaissé',
-        consequence: 'Surestimation de la trésorerie disponible',
-        solution: 'Distinguer "Facturé" (droit) et "Encaissé" (trésorerie réelle). Seul l\'encaissé compte pour le cashflow.',
-      },
-      {
-        situation: 'Ne pas renseigner les paiements SONAP au moment du versement',
-        consequence: 'Les charges de stock sont sous-évaluées',
-        solution: 'Enregistrer chaque paiement SONAP à la date effective de décaissement.',
-      },
-    ],
-    indicateurs: [
-      { nom: 'CA Distribution (facturé vs encaissé)', pourquoi: 'Différencier le chiffre d\'affaires réel de la facturation', href: '/indicateurs/ca-distribution' },
-      { nom: 'Marge par produit', pourquoi: 'Rentabilité par type de carburant', href: '/indicateurs/marge-produit-distribution' },
-      { nom: 'Stock disponible', pourquoi: 'Ne jamais se retrouver en rupture', href: '/indicateurs/stock' },
-      { nom: 'Encours clients', pourquoi: 'Impayés et délais de règlement', href: '/indicateurs/encours-clients' },
-    ],
-    exports: [
-      { nom: 'Factures PDF', quand: 'À envoyer au client après chaque commande', comment: 'Vente > Factures > Télécharger PDF' },
-      { nom: 'Relevé client Distribution', quand: 'Réconciliation mensuelle avec le client', comment: 'Clients > Relevé Distribution' },
-      { nom: 'Export Excel encaissements', quand: 'Pour le rapprochement bancaire', comment: 'Encaissements > Exporter' },
-    ],
-  },
-  {
-    id: 'mixte',
-    nom: 'Transport + Distribution',
-    emoji: '🚛',
-    sousTitre: 'Activité combinée transport et distribution',
-    description: 'Votre organisation fait à la fois du transport pour compte d\'autrui et de la distribution de produits. Fleet Manager couvre les deux modules en parallèle.',
-    modules: ['transport', 'vente'],
-    rolesFleetManager: ['org_admin'],
-    color: '#8B5CF6',
-    parcoursRecommande: [
-      { href: '/transport/cycle', label: 'Cycle d\'une rotation transport', priorite: 'critique' },
-      { href: '/vente/pages/dashboard-vente', label: 'Dashboard Distribution', priorite: 'critique' },
-      { href: '/transport/pages/dashboard', label: 'Dashboard Transport', priorite: 'critique' },
-      { href: '/transport/guides/creer-une-rotation', label: 'Créer une rotation', priorite: 'critique' },
-      { href: '/vente/guides/enregistrer-une-vente', label: 'Enregistrer une vente', priorite: 'critique' },
-      { href: '/indicateurs/marge-exploitation', label: 'Lire la marge d\'exploitation', priorite: 'importante' },
-      { href: '/indicateurs/cashflow-net', label: 'Comprendre le cashflow consolidé', priorite: 'importante' },
-    ],
-    actionsTupiques: [
-      { titre: 'Suivre les performances des deux activités en parallèle', guide: '/transport/pages/dashboard' },
-      { titre: 'Comprendre comment les deux modules impactent le cashflow global', guide: '/indicateurs/cashflow-net' },
-      { titre: 'Gérer les camions utilisés à la fois pour transport et distribution', guide: '/transport/cas-particuliers/vehicule-gere-vs-propre' },
-    ],
-    erreursFréquentes: [
-      {
-        situation: 'Additionner manuellement les chiffres Transport et Distribution',
-        consequence: 'Double comptage possible, erreurs de calcul',
-        solution: 'Le Dashboard consolidé agrège automatiquement les deux modules. Ne pas recalculer.',
-      },
-    ],
-    indicateurs: [
-      { nom: 'CA consolidé', pourquoi: 'Vue globale des deux activités', href: '/indicateurs/ca-transport' },
-      { nom: 'Cashflow consolidé', pourquoi: 'Trésorerie réelle toutes activités', href: '/indicateurs/cashflow-net' },
-      { nom: 'Marge par activité', pourquoi: 'Comparer la rentabilité Transport vs Distribution', href: '/indicateurs/marge-exploitation' },
-    ],
-    exports: [
-      { nom: 'Export consolidé Excel', quand: 'Reporting mensuel direction', comment: 'Dashboard > Exporter' },
-    ],
-  },
-  {
     id: 'proprietaire',
+    categorie: 'acces',
+    phrase: 'Vous avez confié vos camions à une entreprise qui les opère : suivez leurs rotations et votre part, sans accéder au reste de son activité.',
     nom: 'Propriétaire de flotte',
     emoji: '🔑',
     sousTitre: 'Propriétaire de camions gérés par une entreprise partenaire',
     description: 'Vous avez confié vos camions à une entreprise qui les opère. Fleet Manager vous donne une visibilité sur leurs performances et vos gains sans accès aux données de l\'entreprise.',
-    modules: ['proprietaire'],
+    modules: ['transport', 'proprietaire'],
     rolesFleetManager: ['owner'],
     color: '#F59E0B',
     parcoursRecommande: [
@@ -241,6 +127,8 @@ export const PROFILS: Profil[] = [
   },
   {
     id: 'dg',
+    categorie: 'direction',
+    phrase: 'Vous pilotez l’entreprise et avez besoin de chiffres fiables : rentabilité, trésorerie, clients à risque, performance de chaque activité.',
     nom: 'DG / Direction générale',
     emoji: '🏢',
     sousTitre: 'Direction générale, vision globale et décisions stratégiques',
@@ -258,10 +146,17 @@ export const PROFILS: Profil[] = [
       { href: '/transport/pages/simulations', label: 'Simuler des scénarios d\'investissement', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains entre acteurs', priorite: 'utile' },
       { href: '/transport/guides/generer-facture-transport', label: 'Générer une facture transport client', priorite: 'utile' },
+      { href: '/vente/pages/vue-ensemble', label: 'Lire la vue d\'ensemble Marketeur', priorite: 'critique' },
+      { href: '/vente/indicateurs/marge-nette-marketeur', label: 'Comprendre la marge nette de la distribution', priorite: 'critique' },
+      { href: '/vente/pages/cashflow', label: 'Cashflow Marketeur — trésorerie de la distribution', priorite: 'critique' },
+      { href: '/vente/indicateurs/creances-clients', label: 'Surveiller les créances clients de la distribution', priorite: 'importante' },
+      { href: '/vente/cycle', label: 'Le cycle Marketeur, de l\'achat SONAP au résultat', priorite: 'importante' },
+      { href: '/vente/indicateurs/position-tva', label: 'Ce que vous devez encore reverser à l\'État', priorite: 'importante' },
       { href: '/transport/guides/recalculer-couts-variables', label: 'Recalculer les coûts variables après une erreur de paramétrage', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Faire le point KPI du lundi matin en 5 minutes', guide: '/transport/pages/dashboard' },
+      { titre: 'Comparer la rentabilité du transport et de la distribution', guide: '/vente/pages/vue-ensemble' },
       { titre: 'Identifier les camions qui coûtent de l\'argent', guide: '/transport/pages/profit-par-camion' },
       { titre: 'Simuler l\'impact d\'un nouveau camion sur le cashflow', guide: '/transport/pages/simulations' },
     ],
@@ -284,6 +179,8 @@ export const PROFILS: Profil[] = [
       { nom: 'CA Transport', pourquoi: 'Volume d\'activité global', href: '/indicateurs/ca-transport' },
       { nom: 'Impayés clients', pourquoi: 'Risque de recouvrement', href: '/transport/pages/clients' },
       { nom: 'Profit par camion', pourquoi: 'Rentabilité granulaire', href: '/indicateurs/profit-par-camion' },
+      { nom: 'Marge nette Marketeur', pourquoi: 'Rentabilité réelle de la distribution, charges comprises', href: '/vente/indicateurs/marge-nette-marketeur' },
+      { nom: 'Position TVA', pourquoi: 'Ce que la trésorerie affichée ne vous appartient pas encore', href: '/vente/indicateurs/position-tva' },
     ],
     exports: [
       { nom: 'Dashboard PDF (snapshot KPI)', quand: 'Réunion conseil, rapport mensuel', comment: 'Dashboard > Imprimer / Exporter PDF' },
@@ -293,6 +190,8 @@ export const PROFILS: Profil[] = [
   },
   {
     id: 'comptable',
+    categorie: 'direction',
+    phrase: 'Vous rapprochez Datakö Fleet de votre comptabilité : paiements, factures, encaissements, relevés et exports.',
     nom: 'Comptable',
     emoji: '📋',
     sousTitre: 'Comptabilité, rapprochement et archivage des pièces justificatives',
@@ -308,12 +207,18 @@ export const PROFILS: Profil[] = [
       { href: '/transport/guides/exporter-excel', label: 'Exporter les données en Excel', priorite: 'critique' },
       { href: '/transport/cas-particuliers/charges-fixes-periode', label: 'Charges fixes sur période de gestion', priorite: 'importante' },
       { href: '/indicateurs/cashflow-net', label: 'Comprendre le cashflow', priorite: 'importante' },
+      { href: '/vente/guides/enregistrer-vente-facturer', label: 'Enregistrer une vente et générer sa facture', priorite: 'critique' },
+      { href: '/vente/guides/suivre-vente-reglement', label: 'Enregistrer l\'encaissement d\'une vente', priorite: 'critique' },
+      { href: '/vente/pages/activite-distribution', label: 'Activité distribution — suivi des factures et des règlements', priorite: 'critique' },
+      { href: '/vente/indicateurs/creances-clients', label: 'Retrouver ce qui reste dû par vos clients', priorite: 'importante' },
+      { href: '/vente/pages/charges-exploitation', label: 'Saisir les charges d\'exploitation de la distribution', priorite: 'importante' },
       { href: '/roles/finance', label: 'Votre rôle Finance dans l\'application', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Rapprocher les paiements reçus avec les livraisons', guide: '/transport/pages/livraisons' },
       { titre: 'Générer les relevés clients de fin de mois', guide: '/transport/guides/generer-releve-client-pdf' },
       { titre: 'Exporter toutes les livraisons en Excel pour le journal comptable', guide: '/transport/guides/exporter-excel' },
+      { titre: 'Pointer les ventes restées au statut « Émise » en fin de mois', guide: '/vente/guides/suivre-vente-reglement' },
     ],
     erreursFréquentes: [
       {
@@ -331,6 +236,8 @@ export const PROFILS: Profil[] = [
       { nom: 'Livraisons impayées', pourquoi: 'Créances à recouvrer', href: '/transport/pages/livraisons' },
       { nom: 'CA encaissé vs facturé', pourquoi: 'Différence trésorerie / facturation', href: '/indicateurs/ca-transport' },
       { nom: 'Charges fixes par véhicule', pourquoi: 'Vérifier l\'exhaustivité des charges', href: '/indicateurs/charges-fixes-vehicule' },
+      { nom: 'Créances clients', pourquoi: 'Ventes facturées mais pas encore encaissées', href: '/vente/indicateurs/creances-clients' },
+      { nom: 'CA facturé', pourquoi: 'Base du journal des ventes de la distribution', href: '/vente/indicateurs/ca-facture' },
     ],
     exports: [
       { nom: 'Export Excel livraisons', quand: 'Journal des ventes mensuel', comment: 'Livraisons > Exporter' },
@@ -341,6 +248,8 @@ export const PROFILS: Profil[] = [
   },
   {
     id: 'daf',
+    categorie: 'direction',
+    phrase: 'Vous analysez la performance financière au-delà de la saisie : marges, cashflow, positions réglementaires et capacité de remboursement.',
     nom: 'DAF / Finance',
     emoji: '📊',
     sousTitre: 'Direction Administrative et Financière, analyse et pilotage financier',
@@ -357,10 +266,17 @@ export const PROFILS: Profil[] = [
       { href: '/transport/pages/clients', label: 'Clients — encours et impayés', priorite: 'importante' },
       { href: '/indicateurs/ca-transport', label: 'CA Transport — structure', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains', priorite: 'utile' },
+      { href: '/vente/pages/balances', label: 'Balances réglementaires — TVA, péréquation, fonds', priorite: 'critique' },
+      { href: '/vente/indicateurs/position-tva', label: 'Position TVA — ce qu\'il reste à reverser', priorite: 'critique' },
+      { href: '/vente/indicateurs/perequation', label: 'Péréquation — créance ou dette selon la route', priorite: 'critique' },
+      { href: '/vente/indicateurs/marge-marketeur', label: 'Comment se construit la marge sur une vente', priorite: 'importante' },
+      { href: '/vente/pages/cautions', label: 'Cautions douanières — engagements et disponible', priorite: 'importante' },
+      { href: '/vente/guides/lire-position-tva-perequation', label: 'Lire vos positions réglementaires sans se tromper', priorite: 'importante' },
       { href: '/transport/guides/recalculer-couts-variables', label: 'Recalculer les coûts variables après une erreur de paramétrage', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Analyser la capacité de remboursement du crédit-bail', guide: '/transport/pages/cashflow' },
+      { titre: 'Vérifier ce qui reste à reverser à l\'État avant d\'engager la trésorerie', guide: '/vente/guides/lire-position-tva-perequation' },
       { titre: 'Simuler l\'impact d\'une variation de tarif ou de volume', guide: '/transport/pages/simulations' },
       { titre: 'Identifier les clients à risque par niveau d\'impayé', guide: '/transport/pages/clients' },
     ],
@@ -377,6 +293,9 @@ export const PROFILS: Profil[] = [
       { nom: 'Marge d\'exploitation (%)', pourquoi: 'Rentabilité structurelle', href: '/indicateurs/marge-exploitation' },
       { nom: 'Gain par rotation', pourquoi: 'Rentabilité unitaire', href: '/indicateurs/gain-par-rotation' },
       { nom: 'Part propriétaire', pourquoi: 'Charge de répartition sur les véhicules gérés', href: '/indicateurs/part-proprietaire' },
+      { nom: 'Marge nette Marketeur', pourquoi: 'Rentabilité de la distribution après charges', href: '/vente/indicateurs/marge-nette-marketeur' },
+      { nom: 'Position TVA', pourquoi: 'Dette ou créance réglementaire à provisionner', href: '/vente/indicateurs/position-tva' },
+      { nom: 'Péréquation', pourquoi: 'Créance sur l\'État selon les routes desservies', href: '/vente/indicateurs/perequation' },
     ],
     exports: [
       { nom: 'Export Excel Cashflow', quand: 'Rapport mensuel banque', comment: 'Cashflow > Exporter' },
@@ -386,6 +305,8 @@ export const PROFILS: Profil[] = [
   },
   {
     id: 'operateur',
+    categorie: 'operations',
+    phrase: 'Vous êtes en première ligne : chaque rotation que vous enregistrez alimente tous les tableaux de bord de l’entreprise.',
     nom: 'Opérateur',
     emoji: '🔧',
     sousTitre: 'Chef d\'exploitation, dispatcher — opérations terrain quotidiennes',
@@ -399,12 +320,18 @@ export const PROFILS: Profil[] = [
       { href: '/transport/guides/valider-une-livraison', label: 'Valider une livraison', priorite: 'critique' },
       { href: '/transport/guides/confirmer-un-paiement', label: 'Confirmer un paiement', priorite: 'critique' },
       { href: '/transport/cas-particuliers/volume-manquant', label: 'Que faire si le volume livré est inférieur', priorite: 'critique' },
+      { href: '/transport/cas-particuliers/ecart-vs-manquant', label: 'Écart signalé ou manquant : ne pas confondre', priorite: 'critique' },
+      { href: '/transport/cas-particuliers/destinataire-sans-reponse', label: 'Le destinataire ne répond pas', priorite: 'importante' },
       { href: '/transport/pages/livraisons', label: 'Page Livraisons — vue d\'ensemble', priorite: 'importante' },
+      { href: '/transport/cas-particuliers/dossier-livraison-complet', label: 'Compléter le dossier documentaire d\'une livraison', priorite: 'importante' },
+      { href: '/confirmation-livraison', label: 'Ce que voit le destinataire quand il reçoit le lien', priorite: 'utile' },
       { href: '/transport/guides/ajouter-une-maintenance', label: 'Signaler une maintenance', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Enregistrer le départ du camion le matin', guide: '/transport/guides/creer-une-rotation' },
       { titre: 'Saisir le volume livré à l\'arrivée et valider', guide: '/transport/guides/valider-une-livraison' },
+      { titre: 'Envoyer au destinataire le lien de confirmation de réception', guide: '/transport/guides/valider-une-livraison' },
+      { titre: 'Joindre le bon de livraison scanné au dossier de la rotation', guide: '/transport/cas-particuliers/dossier-livraison-complet' },
       { titre: 'Gérer un volume manquant (différence chargé / livré)', guide: '/transport/cas-particuliers/volume-manquant' },
     ],
     erreursFréquentes: [
@@ -428,6 +355,18 @@ export const PROFILS: Profil[] = [
         consequence: 'Bouton "Générer une facture" non visible pour l\'Opérateur',
         solution: 'La facturation est réservée aux rôles Administrateur, Directeur et Finance. Les rotations facturées sont signalées par un badge "Facturée" dans la liste — l\'Opérateur peut les voir mais pas les créer.',
       },
+      {
+        situation: 'Croire qu\'une livraison est bloquée parce qu\'elle reste "en cours" après la déclaration du volume',
+        consequence: 'Perte de temps à chercher un dysfonctionnement, ou tentatives répétées de validation',
+        solution: 'Sur un client en double validation, votre déclaration ne finalise pas la livraison : elle attend la réponse du destinataire. C\'est le fonctionnement prévu, pas une anomalie.',
+        articleLie: '/transport/guides/configurer-double-validation',
+      },
+      {
+        situation: 'Vouloir clore soi-même une livraison dont le destinataire ne répond pas',
+        consequence: 'L\'option n\'apparaît pas : elle est réservée à un administrateur de votre organisation, et seulement si la fiche du client l\'autorise',
+        solution: 'Renvoyer d\'abord un lien au destinataire, puis solliciter un administrateur si le silence persiste.',
+        articleLie: '/transport/cas-particuliers/destinataire-sans-reponse',
+      },
     ],
     indicateurs: [
       { nom: 'Livraisons du jour', pourquoi: 'Suivi temps réel de l\'activité', href: '/transport/pages/livraisons' },
@@ -439,6 +378,8 @@ export const PROFILS: Profil[] = [
   },
   {
     id: 'logistique',
+    categorie: 'operations',
+    phrase: 'Vous gérez la disponibilité et l’état de la flotte : véhicules opérationnels, bien documentés et rentabilisés.',
     nom: 'Responsable logistique',
     emoji: '📦',
     sousTitre: 'Gestion de la flotte, maintenances, optimisation des rotations',
@@ -486,6 +427,8 @@ export const PROFILS: Profil[] = [
   },
   {
     id: 'super-admin',
+    categorie: 'interne',
+    phrase: 'Profil interne Datakö : administration multi-organisations, support et paramétrage avancé.',
     nom: 'Super Admin Datakö',
     emoji: '⚡',
     sousTitre: 'Équipe interne Datakö — gestion multi-tenant et déploiements',

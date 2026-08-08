@@ -11,7 +11,7 @@ import { TRANSITIONS, VARIANTS } from '@/lib/motion'
 
 const moduleLabels: Record<Profil['modules'][number], string> = {
   transport: 'Transport',
-  vente: 'Distribution',
+  vente: 'Marketeur',
   proprietaire: 'Propriétaire',
   backoffice: 'Backoffice',
 }

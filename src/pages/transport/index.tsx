@@ -1,39 +1,17 @@
 import { Link } from 'react-router-dom'
-import { BookOpen, Layout, RefreshCw, AlertCircle, ChevronRight } from 'lucide-react'
+import { ChevronRight, Compass } from 'lucide-react'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { StaggerList } from '@/components/ui/StaggerList'
+import { ACCUEIL_ICONS } from '@/components/ui/MetierCard'
 import { motion } from 'framer-motion'
 import { TRANSITIONS } from '@/lib/motion'
+import { LANDING_TRANSPORT } from '@/data/fleet/accueil'
 
-const transportSections = [
-  {
-    titre: 'Comprendre les pages',
-    description: "10 pages expliquées : ce que vous voyez, pourquoi c'est utile, comment lire les données.",
-    href: '/transport/pages',
-    icon: Layout,
-    count: 10,
-  },
-  {
-    titre: 'Guides pas-à-pas',
-    description: '10 guides pour créer des rotations, valider des livraisons, générer des PDFs et plus.',
-    href: '/transport/guides',
-    icon: BookOpen,
-    count: 10,
-  },
-  {
-    titre: "Cycle d'une rotation",
-    description: 'Les 6 étapes de la création à l\'impact sur les tableaux de bord.',
-    href: '/transport/cycle',
-    icon: RefreshCw,
-    count: 6,
-  },
-  {
-    titre: 'Cas particuliers',
-    description: 'Véhicule géré, volume manquant, crédit-bail — les situations complexes expliquées.',
-    href: '/transport/cas-particuliers',
-    icon: AlertCircle,
-    count: 6,
-  },
+const liensSecondaires = [
+  { label: 'Cas particuliers', href: '/transport/cas-particuliers' },
+  { label: 'Portail Propriétaire', href: '/portail-proprietaire' },
+  { label: 'Alertes WhatsApp', href: '/whatsapp' },
+  { label: 'Guide destinataire', href: '/confirmation-livraison' },
 ]
 
 export function TransportIndex() {
@@ -49,32 +27,49 @@ export function TransportIndex() {
             Transport
           </h1>
           <p className="text-[var(--text-secondary)] mt-2 text-sm leading-relaxed">
-            Le module principal de Fleet Manager : rotations, livraisons, flotte, gains.
+            Gérez votre flotte, vos rotations, vos livraisons, vos clients et suivez la rentabilité de votre activité.
           </p>
         </div>
 
         <StaggerList className="space-y-3">
-          {transportSections.map(s => (
-            <motion.div key={s.href} whileHover={{ x: 4 }} transition={TRANSITIONS.fast}>
-              <Link
-                to={s.href}
-                className="flex items-center gap-4 p-5 rounded-xl border border-[var(--border)] bg-surface-2 hover:border-blue-500/30 hover:bg-surface-3 transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                  <s.icon size={18} className="text-blue-400" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium text-[var(--text-primary)] group-hover:text-blue-400 transition-colors">
-                    {s.titre}
-                  </p>
-                  <p className="text-sm text-[var(--text-muted)] mt-0.5">{s.description}</p>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">{s.count} articles</p>
-                </div>
-                <ChevronRight size={16} className="text-[var(--text-muted)] group-hover:text-blue-400 transition-colors flex-shrink-0" />
-              </Link>
-            </motion.div>
-          ))}
+          {LANDING_TRANSPORT.map(entree => {
+            const Icon = ACCUEIL_ICONS[entree.icon] ?? Compass
+            return (
+              <motion.div key={entree.href} whileHover={{ x: 4 }} transition={TRANSITIONS.fast}>
+                <Link
+                  to={entree.href}
+                  className="flex items-center gap-4 p-5 rounded-xl border border-[var(--border)] bg-surface-2 hover:border-blue-500/30 hover:bg-surface-3 transition-colors group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                    <Icon size={18} className="text-blue-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-[var(--text-primary)] group-hover:text-blue-400 transition-colors">
+                      {entree.titre}
+                    </p>
+                    <p className="text-sm text-[var(--text-muted)] mt-0.5">{entree.description}</p>
+                  </div>
+                  <ChevronRight size={16} className="text-[var(--text-muted)] group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                </Link>
+              </motion.div>
+            )
+          })}
         </StaggerList>
+
+        <div className="rounded-xl border border-[var(--border)] bg-surface-2 p-5">
+          <p className="text-sm font-medium text-[var(--text-primary)]">Aussi lié au Transport</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {liensSecondaires.map(lien => (
+              <Link
+                key={lien.href}
+                to={lien.href}
+                className="rounded-full border border-[var(--border)] px-3 py-1.5 text-xs text-[var(--text-secondary)] transition-colors hover:border-blue-500/30 hover:text-blue-400"
+              >
+                {lien.label}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </PageTransition>
   )

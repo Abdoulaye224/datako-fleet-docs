@@ -13,7 +13,7 @@ export function VentePagesList() {
         <Breadcrumb
           items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Vente / Distribution', href: '/vente' },
+            { label: 'Marketeur', href: '/vente' },
             { label: 'Comprendre les pages' },
           ]}
         />
@@ -21,7 +21,7 @@ export function VentePagesList() {
         <div>
           <h1 className="text-2xl font-bold text-[var(--text-primary)]">Comprendre les pages Vente</h1>
           <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-            Description de chaque écran du module Vente / Distribution.
+            Description de chaque écran du module Marketeur.
           </p>
         </div>
 

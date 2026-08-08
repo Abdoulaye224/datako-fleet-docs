@@ -1,5 +1,4 @@
 import { Suspense, lazy, useEffect } from 'react'
-import { AnimatePresence } from 'framer-motion'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
 import { ProfilProvider } from '@/context/ProfilContext'
@@ -27,9 +26,12 @@ const Profils = lazy(() => import('@/pages/Profils').then(m => ({ default: m.Pro
 const ProfilDetail = lazy(() => import('@/pages/ProfilDetail').then(m => ({ default: m.ProfilDetail })))
 const Recherche = lazy(() => import('@/pages/Recherche').then(m => ({ default: m.Recherche })))
 const NotFound = lazy(() => import('@/pages/NotFound').then(m => ({ default: m.NotFound })))
+const ParcoursComplet = lazy(() => import('@/pages/ParcoursComplet').then(m => ({ default: m.ParcoursComplet })))
+const ConfirmationLivraison = lazy(() => import('@/pages/ConfirmationLivraison').then(m => ({ default: m.ConfirmationLivraison })))
 
-// V2 — Vente / Distribution
+// Marketeur (module « Vente » dans Fleet Manager)
 const VenteIndex = lazy(() => import('@/pages/vente/index').then(m => ({ default: m.VenteIndex })))
+const VenteCycle = lazy(() => import('@/pages/vente/Cycle').then(m => ({ default: m.VenteCycle })))
 const VentePagesList = lazy(() => import('@/pages/vente/PagesList').then(m => ({ default: m.VentePagesList })))
 const VentePageDetail = lazy(() => import('@/pages/vente/PageDetail').then(m => ({ default: m.VentePageDetail })))
 const VenteGuidesList = lazy(() => import('@/pages/vente/GuidesList').then(m => ({ default: m.VenteGuidesList })))
@@ -62,8 +64,7 @@ function AppRoutes() {
   }, [openSearch])
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+    <Routes location={location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Suspense fallback={suspenseFallback}><Home /></Suspense>} />
           <Route path="transport" element={<Suspense fallback={suspenseFallback}><TransportIndex /></Suspense>} />
@@ -85,8 +86,9 @@ function AppRoutes() {
           <Route path="profils" element={<Suspense fallback={suspenseFallback}><Profils /></Suspense>} />
           <Route path="profils/:id" element={<Suspense fallback={suspenseFallback}><ProfilDetail /></Suspense>} />
           <Route path="recherche" element={<Suspense fallback={suspenseFallback}><Recherche /></Suspense>} />
-          {/* V2 — Vente / Distribution */}
+          {/* Marketeur */}
           <Route path="vente" element={<Suspense fallback={suspenseFallback}><VenteIndex /></Suspense>} />
+          <Route path="vente/cycle" element={<Suspense fallback={suspenseFallback}><VenteCycle /></Suspense>} />
           <Route path="vente/pages" element={<Suspense fallback={suspenseFallback}><VentePagesList /></Suspense>} />
           <Route path="vente/pages/:id" element={<Suspense fallback={suspenseFallback}><VentePageDetail /></Suspense>} />
           <Route path="vente/guides" element={<Suspense fallback={suspenseFallback}><VenteGuidesList /></Suspense>} />
@@ -98,10 +100,11 @@ function AppRoutes() {
           {/* V2 — Portail Propriétaire */}
           <Route path="portail-proprietaire" element={<Suspense fallback={suspenseFallback}><PortailProprietaireIndex /></Suspense>} />
           <Route path="portail-proprietaire/:id" element={<Suspense fallback={suspenseFallback}><PortailSectionDetail /></Suspense>} />
+          <Route path="parcours-complet" element={<Suspense fallback={suspenseFallback}><ParcoursComplet /></Suspense>} />
+          <Route path="confirmation-livraison" element={<Suspense fallback={suspenseFallback}><ConfirmationLivraison /></Suspense>} />
           <Route path="*" element={<Suspense fallback={suspenseFallback}><NotFound /></Suspense>} />
         </Route>
-      </Routes>
-    </AnimatePresence>
+    </Routes>
   )
 }
 

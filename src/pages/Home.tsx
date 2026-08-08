@@ -1,71 +1,21 @@
-import { BarChart3, Compass, HelpCircle, MessageCircle, Package, Truck, Users, ArrowRight, Zap, BookOpen } from 'lucide-react'
+import { ArrowRight, Compass, Info } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PageTransition } from '@/components/ui/PageTransition'
-import { SectionCard } from '@/components/ui/SectionCard'
 import { StaggerList } from '@/components/ui/StaggerList'
 import { Badge } from '@/components/ui/Badge'
+import { MetierCard, ACCUEIL_ICONS } from '@/components/ui/MetierCard'
 import { NOUVEAUTES } from '@/data/fleet'
+import {
+  ACCUEIL_NOTE,
+  ACCUEIL_QUESTION,
+  ACCUEIL_SECONDAIRE_TITRE,
+  ACCUEIL_SOUS_TITRE,
+  ACCUEIL_TITRE,
+  CARTES_METIER,
+  ENTREES_SECONDAIRES,
+} from '@/data/fleet/accueil'
 import { TRANSITIONS } from '@/lib/motion'
-
-const sections = [
-  {
-    titre: 'Transport',
-    description: 'Comprendre les pages, créer des rotations, valider des livraisons et piloter la flotte.',
-    href: '/transport/pages',
-    icon: Truck,
-    nbArticles: 30,
-    color: '#3B82F6',
-  },
-  {
-    titre: 'Vente / Distribution',
-    description: 'Commandes, tournées, facturation et indicateurs du module distribution.',
-    href: '/vente',
-    icon: Package,
-    nbArticles: 18,
-    color: '#10B981',
-  },
-  {
-    titre: 'WhatsApp',
-    description: 'Flux automatiques WhatsApp pour conducteurs, chefs d\'exploitation et DG.',
-    href: '/whatsapp',
-    icon: MessageCircle,
-    nbArticles: 6,
-    color: '#22C55E',
-  },
-  {
-    titre: 'Portail Propriétaire',
-    description: 'Espace dédié aux propriétaires de véhicules gérés : bilans et exports PDF.',
-    href: '/portail-proprietaire',
-    icon: BookOpen,
-    nbArticles: 5,
-    color: '#F59E0B',
-  },
-  {
-    titre: 'Les rôles',
-    description: 'Qui peut faire quoi dans Fleet Manager : Admin, Opérateur, Finance, Observateur, Propriétaire.',
-    href: '/roles',
-    icon: Users,
-    nbArticles: 5,
-    color: '#10B981',
-  },
-  {
-    titre: 'Indicateurs',
-    description: "CA Transport, Marge d'Exploitation, Cashflow, Gain par rotation — définitions et formules.",
-    href: '/indicateurs',
-    icon: BarChart3,
-    nbArticles: 7,
-    color: '#F59E0B',
-  },
-  {
-    titre: 'FAQ',
-    description: 'Réponses aux questions fréquentes sur les opérations, la finance et les rôles.',
-    href: '/faq',
-    icon: HelpCircle,
-    nbArticles: 10,
-    color: '#7C3AED',
-  },
-]
 
 const nouveauteMeta = {
   nouveau: { label: 'Nouveau', color: 'blue' },
@@ -93,7 +43,7 @@ export function Home() {
               letterSpacing: '-0.02em',
             }}
           >
-            Bienvenue dans le guide Datakö Fleet
+            {ACCUEIL_TITRE}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 8 }}
@@ -101,16 +51,43 @@ export function Home() {
             transition={{ ...TRANSITIONS.default, delay: 0.05 }}
             className="max-w-xl text-base leading-relaxed text-[var(--text-secondary)]"
           >
-            Dashboard BI pour PME transport et distribution en Guinée. Trouvez ici la réponse à toutes vos questions sur Fleet Manager.
+            {ACCUEIL_SOUS_TITRE}
           </motion.p>
         </div>
 
         <div>
-          <h2 className="mb-4 text-base font-semibold text-[var(--text-secondary)]">Explorer les sections</h2>
-          <StaggerList className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {sections.map(section => (
-              <SectionCard key={section.href} {...section} />
+          <div className="mb-5 flex items-center gap-2.5">
+            <Compass size={18} className="text-blue-400" />
+            <h2 className="text-base font-semibold text-[var(--text-primary)]">{ACCUEIL_QUESTION}</h2>
+          </div>
+          <StaggerList className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {CARTES_METIER.map(carte => (
+              <MetierCard key={carte.id} {...carte} />
             ))}
+          </StaggerList>
+        </div>
+
+        <div>
+          <h2 className="mb-4 text-base font-semibold text-[var(--text-secondary)]">{ACCUEIL_SECONDAIRE_TITRE}</h2>
+          <StaggerList className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {ENTREES_SECONDAIRES.map(entree => {
+              const Icon = ACCUEIL_ICONS[entree.icon] ?? Compass
+              return (
+                <motion.div key={entree.href} whileHover={{ y: -3 }} transition={TRANSITIONS.fast}>
+                  <Link
+                    to={entree.href}
+                    className="group flex h-full items-start gap-3 rounded-xl border border-[var(--border)] bg-surface-2 p-4 transition-colors hover:border-blue-500/30 hover:bg-surface-3"
+                  >
+                    <Icon size={18} className="mt-0.5 flex-shrink-0 text-[var(--text-muted)] transition-colors group-hover:text-blue-400" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-[var(--text-primary)]">{entree.titre}</p>
+                      <p className="mt-0.5 text-xs leading-relaxed text-[var(--text-muted)]">{entree.description}</p>
+                    </div>
+                    <ArrowRight size={14} className="mt-0.5 flex-shrink-0 text-[var(--text-muted)] opacity-0 transition-opacity group-hover:opacity-100" />
+                  </Link>
+                </motion.div>
+              )
+            })}
           </StaggerList>
         </div>
 
@@ -118,51 +95,10 @@ export function Home() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...TRANSITIONS.default, delay: 0.15 }}
-          className="rounded-2xl border border-[var(--border)] bg-surface-2 p-5"
+          className="flex items-start gap-3 rounded-xl border border-blue-500/20 bg-blue-500/5 p-5"
         >
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
-                <Compass size={18} />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-[var(--text-primary)]">Quel est votre profil ?</p>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
-                  Choisissez votre profil métier pour accéder à un parcours personnalisé et aux articles les plus utiles.
-                </p>
-              </div>
-            </div>
-            <Link
-              to="/profils"
-              className="inline-flex items-center gap-2 self-start rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400 transition-colors hover:bg-blue-500/15 hover:text-blue-300"
-            >
-              Choisir mon profil
-              <ArrowRight size={14} />
-            </Link>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...TRANSITIONS.default, delay: 0.2 }}
-          className="flex items-center justify-between gap-4 rounded-xl border border-blue-500/20 bg-blue-500/5 p-5"
-        >
-          <div className="flex items-start gap-3">
-            <Zap size={20} className="mt-0.5 flex-shrink-0 text-blue-400" />
-            <div>
-              <p className="text-sm font-semibold text-[var(--text-primary)]">Nouveau sur Fleet Manager ?</p>
-              <p className="mt-0.5 text-xs text-[var(--text-muted)]">Commencez par les guides pas-à-pas pour créer votre première rotation.</p>
-            </div>
-          </div>
-          <motion.div whileHover={{ x: 2 }} transition={TRANSITIONS.fast}>
-            <Link
-              to="/onboarding"
-              className="flex flex-shrink-0 items-center gap-1 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
-            >
-              Démarrer <ArrowRight size={14} />
-            </Link>
-          </motion.div>
+          <Info size={18} className="mt-0.5 flex-shrink-0 text-blue-400" />
+          <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{ACCUEIL_NOTE}</p>
         </motion.div>
 
         <div>

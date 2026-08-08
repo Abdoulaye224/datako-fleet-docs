@@ -13,7 +13,7 @@ export function VenteIndicateursList() {
         <Breadcrumb
           items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Vente / Distribution', href: '/vente' },
+            { label: 'Marketeur', href: '/vente' },
             { label: 'Indicateurs vente' },
           ]}
         />

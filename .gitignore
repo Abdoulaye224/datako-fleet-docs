@@ -2,3 +2,9 @@ node_modules/
 dist/
 .DS_Store
 *.tsbuildinfo
+
+# Références de design haute résolution (sources lourdes, versions optimisées dans src/assets/)
+docs/design-refs/
+
+# Briefs de travail temporaires
+BRIEF_*.md

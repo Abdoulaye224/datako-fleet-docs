@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, MessageCircle, Package, Sparkles, Truck, Users, Zap } from 'lucide-react'
@@ -23,12 +23,13 @@ const navItems = [
     ],
   },
   {
-    label: 'Vente / Distribution',
+    label: 'Marketeur',
     icon: Package,
     children: [
+      { label: 'Le cycle Marketeur', href: '/vente/cycle' },
       { label: 'Comprendre les pages', href: '/vente/pages' },
       { label: 'Guides pas-à-pas', href: '/vente/guides' },
-      { label: 'Indicateurs vente', href: '/vente/indicateurs' },
+      { label: 'Indicateurs Marketeur', href: '/vente/indicateurs' },
     ],
   },
   { label: 'WhatsApp', href: '/whatsapp', icon: MessageCircle },
@@ -51,12 +52,25 @@ const navItems = [
 
 export function Sidebar() {
   const location = useLocation()
-  const [openSections, setOpenSections] = useState<string[]>(['Transport'])
+  const [sectionOverrides, setSectionOverrides] = useState<Record<string, boolean>>({})
   const { profilActif, progress } = useProfil()
   const profil = PROFILS.find(item => item.id === profilActif)
 
-  const toggleSection = (label: string) => {
-    setOpenSections(prev => (prev.includes(label) ? prev.filter(section => section !== label) : [...prev, label]))
+  useEffect(() => {
+    const activeSection = navItems.find(
+      item => 'children' in item && item.children.some(child => location.pathname.startsWith(child.href)),
+    )
+    if (!activeSection) return
+    setSectionOverrides(prev => {
+      if (!(activeSection.label in prev)) return prev
+      const next = { ...prev }
+      delete next[activeSection.label]
+      return next
+    })
+  }, [location.pathname])
+
+  const toggleSection = (label: string, isOpen: boolean) => {
+    setSectionOverrides(prev => ({ ...prev, [label]: !isOpen }))
   }
 
   return (
@@ -136,14 +150,15 @@ export function Sidebar() {
             )
           }
 
-          const isOpen = openSections.includes(item.label)
           const isChildActive = item.children.some(child => location.pathname.startsWith(child.href))
+          const isOpen = sectionOverrides[item.label] ?? isChildActive
 
           return (
             <div key={item.label}>
               <button
                 type="button"
-                onClick={() => toggleSection(item.label)}
+                onClick={() => toggleSection(item.label, isOpen)}
+                aria-expanded={isOpen}
                 className={`flex w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
                   isChildActive
                     ? 'text-[var(--text-primary)]'

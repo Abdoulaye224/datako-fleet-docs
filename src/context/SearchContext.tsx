@@ -15,6 +15,8 @@ import {
 import { appPages as ventePages } from '@/data/fleet/vente/pages'
 import { guides as venteGuides } from '@/data/fleet/vente/guides'
 import { INDICATEURS as venteIndicateurs } from '@/data/fleet/vente/indicateurs'
+import { cycleEtapes as venteCycle } from '@/data/fleet/vente/cycle'
+import { GUIDE_CONFIRMATION_DESTINATAIRE } from '@/data/fleet/transport/confirmationDestinataire'
 import { WHATSAPP_FLUX } from '@/data/fleet/whatsapp'
 import { PORTAIL_SECTIONS } from '@/data/fleet/portail'
 import { buildSearchIndex, scoreEntry, type SearchEntry } from '@/lib/search'
@@ -51,6 +53,8 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
         ventePages,
         venteGuides,
         venteIndicateurs,
+        venteCycle,
+        guideDestinataire: GUIDE_CONFIRMATION_DESTINATAIRE,
         whatsappFlux: WHATSAPP_FLUX,
         portailSections: PORTAIL_SECTIONS,
       }),

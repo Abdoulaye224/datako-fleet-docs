@@ -69,4 +69,12 @@ export const INDICATEURS: Indicateur[] = [
     exemple: 'Route Conakry → Kankan : Carburant 850 000 GNF + Prime chauffeur 150 000 GNF + Péages 40 000 GNF = 1 040 000 GNF de coûts variables',
     conseil: 'Ce détail est visible aussi bien côté administrateur (page Livraisons) que côté propriétaire (Historique rotations du Portail Propriétaire), avec la mention "Paramètre de route" comme source de chaque montant. Si une route est mal paramétrée, ces montants sont faux sur toutes les rotations qui l\'utilisent jusqu\'à correction et recalcul.',
   },
+  {
+    id: 'dossier-livraison-complet',
+    nom: 'Dossier de livraison complet',
+    definition: 'La part de vos livraisons dont le dossier documentaire est en règle. Un dossier est complet quand le numéro de bon de livraison est renseigné et qu\'au moins une pièce est effectivement jointe. Cet indicateur ne dit rien de la validation de la livraison elle-même : une rotation finalisée et payée peut très bien avoir un dossier incomplet.',
+    formule: 'Numéro de bon de livraison renseigné ET au moins un document joint = Complet',
+    exemple: 'Une rotation avec le numéro BL-2026-114 mais aucune pièce jointe reste "Incomplet". Une rotation avec un bon de livraison scanné mais sans numéro saisi aussi.',
+    conseil: 'C\'est ce chiffre qui détermine votre capacité à répondre à une contestation client plusieurs mois après la livraison. Utilisez le filtre "Dossier incomplet" de la page Livraisons pour rattraper les rotations concernées pendant que les documents papier sont encore retrouvables — pas au moment du litige. Les livraisons annulées ne portent jamais cet indicateur.',
+  },
 ]

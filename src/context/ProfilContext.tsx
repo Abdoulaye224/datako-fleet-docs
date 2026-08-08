@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { PROFILS } from '@/data/fleet/profils'
 
 interface ProfilContextValue {
   profilActif: string | null
@@ -30,6 +31,11 @@ export function ProfilProvider({ children }: ProfilProviderProps) {
   useEffect(() => {
     try {
       const savedProfil = window.localStorage.getItem('hc-profil')
+      if (savedProfil && !PROFILS.some(profil => profil.id === savedProfil)) {
+        window.localStorage.removeItem('hc-profil')
+        window.localStorage.removeItem(`hc-profil-progress-${savedProfil}`)
+        return
+      }
       if (savedProfil) {
         setProfilActif(savedProfil)
         const savedProgress = window.localStorage.getItem(`hc-profil-progress-${savedProfil}`)

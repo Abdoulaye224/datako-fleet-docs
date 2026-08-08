@@ -101,11 +101,13 @@ export const guides: Guide[] = [
     erreurs: [
       'Une livraison non validée ne compte pas dans les Gains ni dans le Dashboard financier.',
       'Si le volume livré est inférieur au volume chargé, l\'écart est automatiquement comptabilisé comme "manquant".',
+      'Si le client est soumis à la double validation, le bouton devient "Déclarer le déchargement" et la livraison ne se finalise pas tout de suite : elle attend la confirmation du destinataire.',
     ],
     precedent: { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation' },
     suivant: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
     articlesConnexes: [
       { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
+      { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client', section: 'Guides' },
     ],
   },
   {
@@ -310,6 +312,103 @@ export const guides: Guide[] = [
       { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
       { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
       { href: '/portail-proprietaire/historique-rotations', titre: 'Historique rotations (vue propriétaire)', section: 'Portail Propriétaire' },
+    ],
+  },
+  {
+    id: 'configurer-double-validation',
+    title: 'Activer la double validation pour un client',
+    objectif:
+      "Exiger qu'un client confirme lui-même la quantité reçue, pour disposer d'une preuve de réception indépendante du chauffeur en cas de litige.",
+    prerequis: [
+      'Avoir le rôle Administrateur',
+      'Connaître le responsable de réception chez ce client : son nom, et son e-mail ou son numéro WhatsApp',
+      "Avoir obtenu son accord pour être contacté à ce sujet",
+    ],
+    etapes: [
+      'Ouvrez la fiche du client concerné.',
+      'Repérez le bloc "Validation des livraisons".',
+      'Dans "Mode de validation", choisissez "Opérateur et destinataire". Par défaut, tous les clients sont en "Opérateur uniquement".',
+      'Renseignez le "Responsable de réception" : c\'est la personne qui réceptionne physiquement le carburant, pas votre contact de facturation.',
+      'Indiquez son e-mail et/ou son numéro WhatsApp selon la façon dont vous souhaitez le prévenir.',
+      'Dans "Comment le prévenir", choisissez le canal : E-mail (envoyé automatiquement), WhatsApp (le message est préparé, c\'est vous qui l\'envoyez), ou Les deux.',
+      'Cochez "Le destinataire accepte d\'être contacté" : sans cette case, aucun message ne partira jamais, quel que soit le canal.',
+      'Décidez enfin si vous autorisez une finalisation exceptionnelle : décochée, cette option rend la double validation stricte — plus personne ne pourra clore une livraison sans la réponse du destinataire.',
+      'Enregistrez la fiche client.',
+    ],
+    resultat:
+      'Le client porte la mention "Double validation" dans la liste des clients. Toutes ses prochaines livraisons attendront la confirmation de son destinataire avant d\'être finalisées.',
+    erreurs: [
+      "La case de consentement n'est pas cochée : aucun message ne part, ni par e-mail ni par WhatsApp. C'est un refus volontaire, pas une panne.",
+      "Le responsable de réception est confondu avec le contact de facturation : le lien part alors à la mauvaise personne, qui n'était pas sur le terrain au déchargement.",
+      "La double validation stricte est activée sans que le destinataire soit réellement joignable : les livraisons de ce client resteront bloquées, personne ne pouvant les clore.",
+    ],
+    impacts: [
+      'Aucune facture ni aucun chiffre d\'affaires n\'est reconnu tant que la livraison n\'est pas finalisée',
+      'Les livraisons concernées restent visibles dans la page Livraisons, avec le badge "En attente de confirmation"',
+      'Les clients déjà existants ne sont pas affectés : sans réglage explicite, ils restent en validation par l\'opérateur seul',
+    ],
+    attention: [
+      "Ce réglage se décide client par client, dans sa fiche. Il n'existe pas de réglage global qui l'activerait pour tout le monde.",
+      'Le mode choisi est figé sur chaque livraison au moment du déchargement : changer la politique du client ne modifie pas les livraisons déjà en cours.',
+    ],
+    precedent: { href: '/transport/guides/recalculer-couts-variables', titre: 'Recalculer les coûts variables' },
+    suivant: { href: '/transport/guides/traiter-ecart-destinataire', titre: 'Traiter un écart signalé par le destinataire' },
+    articlesConnexes: [
+      { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison', section: 'Guides' },
+      { href: '/confirmation-livraison', titre: 'Confirmer une livraison Datakö (vue destinataire)', section: 'Destinataire' },
+      { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
+    ],
+  },
+  {
+    id: 'traiter-ecart-destinataire',
+    title: 'Traiter un écart signalé par le destinataire',
+    objectif:
+      "Comprendre ce qui se passe quand le destinataire annonce une quantité différente de celle déclarée par votre exploitant, et clore la livraison correctement.",
+    prerequis: [
+      'Avoir le rôle Administrateur de votre organisation',
+      'La livraison doit porter le badge "Écart signalé"',
+    ],
+    etapes: [
+      'Ouvrez la page Livraisons et repérez la livraison portant le badge "Écart signalé".',
+      'Ouvrez son détail : les deux quantités sont affichées côte à côte, celle déclarée par votre exploitant et celle déclarée par le destinataire.',
+      'Contactez le destinataire ou votre chauffeur pour comprendre l\'origine de la différence : erreur de saisie, mesure après dépotage, incident réel pendant le transport.',
+      'Une fois la vérité établie, cliquez sur "Trancher l\'écart et finaliser".',
+      'Saisissez la quantité finalement retenue : elle peut être celle de l\'un, de l\'autre, ou une troisième valeur issue de votre arbitrage.',
+      'Renseignez le motif et le commentaire — ils sont obligatoires.',
+      'Confirmez : la livraison est finalisée et le chiffre d\'affaires est calculé sur la quantité retenue.',
+    ],
+    resultat:
+      "La livraison est finalisée avec la mention \"Finalisée après résolution d'un écart\", et l'historique conserve les deux déclarations d'origine ainsi que votre décision.",
+    erreurs: [
+      "Croire que l'écart bloque définitivement la livraison : il ouvre une phase de discussion, pas un blocage. Seul un administrateur de votre organisation peut la trancher.",
+      "Attendre que le destinataire \"corrige\" sa réponse : il ne le peut pas. Sa déclaration est définitive une fois envoyée, c'est votre arbitrage qui tranche.",
+      "Redéclarer la quantité côté exploitant pour faire disparaître l'écart : cela n'efface pas la phase contradictoire, qui reste ouverte jusqu'à l'arbitrage.",
+    ],
+    exempleConcret:
+      "Un camion part avec 36 000 L. Votre exploitant déclare 36 000 L livrés, le destinataire mesure 35 700 L après dépotage. L'écart de 300 L est signalé. Après vérification, vous retenez 35 700 L : la livraison est finalisée sur cette quantité et 300 L apparaissent alors en manquant.",
+    avantApres: {
+      titre: 'Livraison de 36 000 L chargés',
+      lignes: [
+        { ligne: 'Quantité livrée retenue', avant: 'non établie', apres: '35 700 L' },
+        { ligne: 'Manquant', avant: 'non calculé', apres: '300 L' },
+        { ligne: 'Écart de déclarations', avant: '300 L', apres: 'résolu' },
+      ],
+    },
+    impacts: [
+      'Le chiffre d\'affaires est calculé sur la quantité retenue, jamais sur le volume chargé',
+      'Le manquant officiel n\'apparaît qu\'après la finalisation',
+      'La facturation redevient possible une fois la livraison finalisée',
+    ],
+    attention: [
+      "Un écart signalé n'est pas un manquant. L'écart oppose deux déclarations avant finalisation ; le manquant est le résultat officiel, calculé après, entre le volume chargé et le volume retenu.",
+      "L'historique de la livraison est définitif : aucune étape déjà enregistrée ne peut être modifiée ni supprimée. C'est ce qui lui donne sa valeur en cas de litige.",
+      "Si le destinataire ne répond jamais, l'option \"Finaliser sans réponse du destinataire\" n'est disponible que si la fiche de ce client l'autorise.",
+    ],
+    precedent: { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
+    articlesConnexes: [
+      { href: '/transport/cas-particuliers/destinataire-sans-reponse', titre: 'Le destinataire ne répond pas', section: 'Cas particuliers' },
+      { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
+      { href: '/confirmation-livraison', titre: 'Confirmer une livraison Datakö (vue destinataire)', section: 'Destinataire' },
     ],
   },
 ]

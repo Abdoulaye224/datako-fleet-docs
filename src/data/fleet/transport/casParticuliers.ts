@@ -49,4 +49,34 @@ export const casParticuliers: CasParticulier[] = [
     regle: 'La mensualité du crédit-bail n\'apparaît pas dans les Charges d\'exploitation mais est déduite directement du Cashflow. C\'est pourquoi le Cashflow est toujours inférieur à la Marge d\'Exploitation.',
     exemple: 'Marge d\'exploitation : 15 000 000 GNF. Mensualité crédit-bail : 8 000 000 GNF. Cashflow net : 7 000 000 GNF.',
   },
+  {
+    id: 'destinataire-sans-reponse',
+    titre: 'Le destinataire ne répond pas',
+    contexte:
+      'Pour un client soumis à la double validation, la livraison attend la confirmation du destinataire. Celui-ci peut ne jamais ouvrir son lien, l\'avoir perdu, ou l\'avoir laissé expirer au bout de sept jours.',
+    regle:
+      'Commencez par renvoyer un lien depuis le détail de la livraison : le précédent devient alors inutilisable. Si le destinataire reste injoignable, seul un administrateur de votre organisation peut utiliser "Finaliser sans réponse du destinataire", avec un motif obligatoire — et uniquement si la fiche de ce client l\'autorise. La livraison porte alors la mention "Finalisée sans réponse du destinataire" : elle n\'est jamais présentée comme confirmée par le client.',
+    exemple:
+      'Une livraison déclarée le 2 du mois n\'a toujours pas de réponse le 10. L\'administrateur renvoie un lien, sans succès, puis finalise avec le motif "Destinataire injoignable après deux relances". Le CA est reconnu et la facturation redevient possible.',
+  },
+  {
+    id: 'ecart-vs-manquant',
+    titre: 'Écart signalé et manquant : deux notions différentes',
+    contexte:
+      'Ces deux chiffres ressemblent tous les deux à "il manque du carburant", mais ils ne mesurent pas la même chose et n\'apparaissent pas au même moment.',
+    regle:
+      'Le manquant est la différence entre le volume chargé et le volume finalement livré. C\'est le résultat officiel, calculé seulement après la finalisation, et c\'est lui qui alimente vos indicateurs et vos exports. L\'écart signalé oppose deux déclarations sur la même livraison — celle de votre exploitant et celle du destinataire — avant toute finalisation. C\'est un désaccord temporaire, qui disparaît dès qu\'un administrateur tranche.',
+    exemple:
+      'Chargé 36 000 L. Votre exploitant déclare 36 000 L, le destinataire 35 700 L : écart signalé de 300 L, aucun manquant encore calculé. Après arbitrage retenant 35 700 L : l\'écart est résolu et un manquant de 300 L apparaît.',
+  },
+  {
+    id: 'dossier-livraison-complet',
+    titre: 'Dossier de livraison complet ou incomplet',
+    contexte:
+      'Chaque livraison porte un indicateur "Complet" ou "Incomplet" dans la liste, dans son détail et dans l\'export. Il ne concerne que les pièces du dossier, pas la validation de la livraison elle-même.',
+    regle:
+      'Un dossier est considéré comme complet quand le numéro de bon de livraison est renseigné et qu\'au moins un document est effectivement joint. Un numéro sans pièce jointe, ou une pièce jointe sans numéro, laisse le dossier incomplet. Les livraisons annulées n\'affichent aucun indicateur. Un filtre dédié permet de n\'afficher que les dossiers incomplets.',
+    exemple:
+      'Une livraison avec son numéro de bon de livraison et le bon signé en pièce jointe est complète. La même livraison sans aucune pièce jointe reste incomplète, même si toutes les quantités sont saisies.',
+  },
 ]
