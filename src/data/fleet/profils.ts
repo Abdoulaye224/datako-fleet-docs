@@ -362,6 +362,12 @@ export const PROFILS: Profil[] = [
         articleLie: '/transport/guides/configurer-double-validation',
       },
       {
+        situation: 'Avoir fermé la fenêtre du lien de confirmation sans l\'avoir transmis',
+        consequence: 'Ni le lien ni son QR code ne réapparaissent dans le détail de la livraison',
+        solution: 'C\'est volontaire, pas une perte : générez un nouveau lien depuis la livraison. Le précédent est annulé et le nouveau QR ouvre la même page.',
+        articleLie: '/transport/cas-particuliers/lien-confirmation-affiche-une-fois',
+      },
+      {
         situation: 'Vouloir clore soi-même une livraison dont le destinataire ne répond pas',
         consequence: 'L\'option n\'apparaît pas : elle est réservée à un administrateur de votre organisation, et seulement si la fiche du client l\'autorise',
         solution: 'Renvoyer d\'abord un lien au destinataire, puis solliciter un administrateur si le silence persiste.',

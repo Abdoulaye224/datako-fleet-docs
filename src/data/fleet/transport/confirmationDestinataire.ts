@@ -30,7 +30,7 @@ export const GUIDE_CONFIRMATION_DESTINATAIRE: GuideConfirmationDestinataire = {
     {
       titre: 'Ouvrez le lien reçu',
       description:
-        'Le lien vous parvient par e-mail ou par WhatsApp. Il ouvre une page intitulée « Confirmation de réception », au nom du transporteur qui vous a livré.',
+        'Le lien vous parvient par e-mail ou par WhatsApp. Si vous êtes sur place au moment du déchargement, la personne qui enregistre la livraison peut aussi vous présenter un QR code à scanner sur son écran : il ouvre exactement la même page, sans attendre le message. Dans les deux cas, vous arrivez sur une page intitulée « Confirmation de réception », au nom du transporteur qui vous a livré.',
     },
     {
       titre: 'Vérifiez les informations de la livraison',

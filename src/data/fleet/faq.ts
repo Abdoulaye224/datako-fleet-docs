@@ -161,6 +161,30 @@ export const FAQ_ITEMS: FAQItem[] = [
     reponse: 'La livraison porte une mention de confirmation dans la liste et dans son détail : "En attente de confirmation" tant qu\'il n\'a pas répondu, puis "Confirmée par le destinataire". L\'historique de la livraison indique en plus quand le lien a été envoyé, quand il a été ouvert et quand la réponse est arrivée.',
   },
   {
+    id: 'lien-confirmation-disparu',
+    categorie: 'transport',
+    question: 'J\'ai fermé la fenêtre du lien de confirmation, je ne le retrouve plus. Est-ce perdu ?',
+    reponse: 'Non, et ce n\'est pas une anomalie : le lien ne s\'affiche qu\'une seule fois, volontairement, pour qu\'il ne puisse pas circuler à votre insu. Générez simplement un nouveau lien depuis le détail de la livraison — le précédent est annulé, le nouveau reste valable sept jours et ouvre la même page de confirmation.',
+  },
+  {
+    id: 'qr-et-lien-difference',
+    categorie: 'transport',
+    question: 'Le QR code et le lien WhatsApp, est-ce la même chose ?',
+    reponse: 'Oui. Le QR code contient exactement le même lien à usage unique que celui envoyé par WhatsApp ou par e-mail, et mène à la même page de confirmation. C\'est simplement une autre façon d\'y accéder, pratique quand le destinataire est présent au déchargement : il scanne et répond sur place, sans attendre un message. Utiliser le QR n\'annule pas le lien envoyé, et inversement — c\'est le même lien, donc la première réponse enregistrée clôt la demande.',
+  },
+  {
+    id: 'notification-cloche-rouge',
+    categorie: 'transport',
+    question: 'Pourquoi la cloche de notifications est-elle passée en rouge ?',
+    reponse: 'Parce qu\'un destinataire a signalé un écart de quantité et que vous n\'avez pas encore ouvert la notification correspondante. La cloche reste rouge tant que cet écart n\'a pas été lu : c\'est le signal qu\'une décision est attendue de votre part, pas une alerte technique. Une confirmation conforme, elle, n\'apparaît qu\'en vert.',
+  },
+  {
+    id: 'pas-de-notification-cloche',
+    categorie: 'transport',
+    question: 'Je ne vois aucune cloche de notifications. Pourquoi ?',
+    reponse: 'La cloche n\'est affichée qu\'aux Administrateurs et aux Opérateurs, car ce sont eux qui traitent les livraisons. Si vous avez l\'un de ces rôles et qu\'elle reste vide, c\'est simplement qu\'aucun destinataire n\'a encore répondu : elle ne se remplit que sur deux événements, la confirmation d\'une livraison et le signalement d\'un écart de quantité.',
+  },
+  {
     id: 'que-signifie-ecart-signale',
     categorie: 'transport',
     question: 'Que signifie la mention "Écart signalé" ?',

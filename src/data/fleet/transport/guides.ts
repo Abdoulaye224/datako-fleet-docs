@@ -308,6 +308,7 @@ export const guides: Guide[] = [
       "Ne modifie jamais le CA ni les livraisons futures — seulement les coûts variables des livraisons déjà enregistrées, sur le périmètre choisi.",
     ],
     precedent: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
+    suivant: { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
     articlesConnexes: [
       { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
       { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
@@ -336,7 +337,7 @@ export const guides: Guide[] = [
       'Enregistrez la fiche client.',
     ],
     resultat:
-      'Le client porte la mention "Double validation" dans la liste des clients. Toutes ses prochaines livraisons attendront la confirmation de son destinataire avant d\'être finalisées.',
+      'Le client porte la mention "Double validation" dans la liste des clients. Toutes ses prochaines livraisons attendront la confirmation de son destinataire avant d\'être finalisées. À chaque déclaration de déchargement, une fenêtre vous proposera le lien de confirmation accompagné d\'un QR code, que le destinataire présent sur place peut scanner sans attendre de message.',
     erreurs: [
       "La case de consentement n'est pas cochée : aucun message ne part, ni par e-mail ni par WhatsApp. C'est un refus volontaire, pas une panne.",
       "Le responsable de réception est confondu avec le contact de facturation : le lien part alors à la mauvaise personne, qui n'était pas sur le terrain au déchargement.",
@@ -405,9 +406,46 @@ export const guides: Guide[] = [
       "Si le destinataire ne répond jamais, l'option \"Finaliser sans réponse du destinataire\" n'est disponible que si la fiche de ce client l'autorise.",
     ],
     precedent: { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
+    suivant: { href: '/transport/guides/suivre-confirmations-notifications', titre: 'Suivre les confirmations depuis la cloche de notifications' },
     articlesConnexes: [
       { href: '/transport/cas-particuliers/destinataire-sans-reponse', titre: 'Le destinataire ne répond pas', section: 'Cas particuliers' },
       { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
+      { href: '/confirmation-livraison', titre: 'Confirmer une livraison Datakö (vue destinataire)', section: 'Destinataire' },
+    ],
+  },
+  {
+    id: 'suivre-confirmations-notifications',
+    title: 'Suivre les confirmations depuis la cloche de notifications',
+    objectif:
+      "Être prévenu dès qu'un destinataire confirme une livraison ou signale un écart, sans avoir à surveiller la page Livraisons.",
+    prerequis: [
+      'Avoir le rôle Administrateur ou Opérateur — la cloche est invisible pour les autres rôles',
+      'Au moins un client configuré en double validation',
+    ],
+    etapes: [
+      'Repérez la cloche en haut de l\'écran, à droite. Une pastille indique le nombre de notifications non lues.',
+      'Cliquez dessus pour dérouler les notifications les plus récentes.',
+      'Repérez la couleur : vert pour une livraison confirmée, rouge pour un écart de quantité signalé.',
+      'Cliquez sur une notification pour ouvrir directement la livraison concernée.',
+      'Vous pouvez aussi cliquer sur "Marquer comme lue" pour la traiter plus tard sans quitter votre écran.',
+    ],
+    resultat:
+      "Vous êtes prévenu des réponses de vos destinataires sans surveiller la page Livraisons. Tant qu'un écart de quantité n'a pas été lu, la cloche elle-même passe en rouge : c'est le signal qu'une décision est attendue. Les notifications déjà lues restent consultables, simplement estompées, et ouvrir une livraison depuis la cloche la marque automatiquement comme lue.",
+    erreurs: [
+      "Attendre une notification pour chaque étape : seuls deux événements sont notifiés, la confirmation du destinataire et l'écart de quantité. L'envoi du lien, la relance ou la finalisation ne le sont pas.",
+      "Croire que la cloche remplace la page Livraisons : elle affiche les vingt notifications les plus récentes, pas l'ensemble de votre activité.",
+      "S'étonner de ne rien voir sur des livraisons anciennes : seules les confirmations survenues après la mise en service alimentent la cloche.",
+    ],
+    attention: [
+      "La cloche signale ce qui n'a pas été lu, pas ce qui reste à traiter : dès que vous ouvrez une notification d'écart, elle redevient neutre, même si l'écart n'a pas encore été tranché. Le suivi des écarts en attente d'arbitrage se fait dans la page Livraisons, pas dans la cloche.",
+      'Chaque personne a ses propres notifications : les marquer comme lues n\'affecte pas vos collègues.',
+      'Le compteur se met à jour tout seul, et se rafraîchit dès que vous revenez sur l\'onglet.',
+      "La cloche ne concerne que les confirmations de destinataires. Les alertes d'activité (écart de volume, camion inactif, marge inhabituelle) passent par WhatsApp, pas par elle.",
+    ],
+    precedent: { href: '/transport/guides/traiter-ecart-destinataire', titre: 'Traiter un écart signalé par le destinataire' },
+    articlesConnexes: [
+      { href: '/transport/cas-particuliers/lien-confirmation-affiche-une-fois', titre: "La fenêtre du lien de confirmation n'apparaît qu'une fois", section: 'Cas particuliers' },
+      { href: '/transport/cas-particuliers/destinataire-sans-reponse', titre: 'Le destinataire ne répond pas', section: 'Cas particuliers' },
       { href: '/confirmation-livraison', titre: 'Confirmer une livraison Datakö (vue destinataire)', section: 'Destinataire' },
     ],
   },

@@ -55,9 +55,19 @@ export const casParticuliers: CasParticulier[] = [
     contexte:
       'Pour un client soumis à la double validation, la livraison attend la confirmation du destinataire. Celui-ci peut ne jamais ouvrir son lien, l\'avoir perdu, ou l\'avoir laissé expirer au bout de sept jours.',
     regle:
-      'Commencez par renvoyer un lien depuis le détail de la livraison : le précédent devient alors inutilisable. Si le destinataire reste injoignable, seul un administrateur de votre organisation peut utiliser "Finaliser sans réponse du destinataire", avec un motif obligatoire — et uniquement si la fiche de ce client l\'autorise. La livraison porte alors la mention "Finalisée sans réponse du destinataire" : elle n\'est jamais présentée comme confirmée par le client.',
+      'Le meilleur moment pour obtenir une réponse reste le déchargement lui-même : la fenêtre qui affiche le lien propose aussi un QR code, que le destinataire présent sur place peut scanner immédiatement. Passé ce moment, renvoyez un lien depuis le détail de la livraison : le précédent devient alors inutilisable. Si le destinataire reste injoignable, seul un administrateur de votre organisation peut utiliser "Finaliser sans réponse du destinataire", avec un motif obligatoire — et uniquement si la fiche de ce client l\'autorise. La livraison porte alors la mention "Finalisée sans réponse du destinataire" : elle n\'est jamais présentée comme confirmée par le client.',
     exemple:
       'Une livraison déclarée le 2 du mois n\'a toujours pas de réponse le 10. L\'administrateur renvoie un lien, sans succès, puis finalise avec le motif "Destinataire injoignable après deux relances". Le CA est reconnu et la facturation redevient possible.',
+  },
+  {
+    id: 'lien-confirmation-affiche-une-fois',
+    titre: 'La fenêtre du lien de confirmation n\'apparaît qu\'une fois',
+    contexte:
+      'Au moment où vous déclarez le déchargement d\'un client soumis à la double validation, une fenêtre "Lien de confirmation du destinataire" s\'affiche : elle contient le lien en clair, un QR code à faire scanner sur place, et un bouton pour préparer le message WhatsApp. Une fois cette fenêtre fermée, ni le lien ni le QR ne réapparaissent dans le détail de la livraison.',
+    regle:
+      'Ce n\'est pas un dysfonctionnement : le lien n\'est jamais conservé en clair, c\'est précisément ce qui garantit qu\'il ne peut pas circuler à votre insu. Si vous avez fermé la fenêtre trop tôt, générez simplement un nouveau lien depuis le détail de la livraison : le précédent est alors annulé et le nouveau QR ouvre la même page de confirmation. Le QR et le lien ne sont pas deux mécanismes différents — c\'est le même lien à usage unique, valable sept jours, présenté de deux façons.',
+    exemple:
+      'Un exploitant ferme la fenêtre avant d\'avoir fait scanner le QR par le réceptionnaire. Il régénère un lien depuis la livraison, fait scanner le nouveau QR sur place, et la confirmation est enregistrée dans la minute — sans passer par WhatsApp.',
   },
   {
     id: 'ecart-vs-manquant',
