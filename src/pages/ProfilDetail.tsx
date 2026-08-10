@@ -131,14 +131,24 @@ export function ProfilDetail() {
                       }
                     </motion.div>
                   </button>
-                  <Link
-                    to={article.href}
-                    className={`flex-1 text-sm font-medium transition-colors ${
-                      isDone ? 'text-[var(--text-muted)] line-through decoration-emerald-500/40' : 'text-[var(--text-primary)]'
-                    }`}
-                  >
-                    {article.label}
-                  </Link>
+                  {article.href ? (
+                    <Link
+                      to={article.href}
+                      className={`flex-1 text-sm font-medium transition-colors ${
+                        isDone ? 'text-[var(--text-muted)] line-through decoration-emerald-500/40' : 'text-[var(--text-primary)]'
+                      }`}
+                    >
+                      {article.label}
+                    </Link>
+                  ) : (
+                    <span
+                      className={`flex-1 text-sm font-medium ${
+                        isDone ? 'text-[var(--text-muted)] line-through decoration-emerald-500/40' : 'text-[var(--text-primary)]'
+                      }`}
+                    >
+                      {article.label}
+                    </span>
+                  )}
                   <Badge label={priorityLabels[article.priorite]} color={priorityColors[article.priorite]} />
                 </motion.div>
               )
@@ -149,16 +159,23 @@ export function ProfilDetail() {
         <section className="space-y-4">
           <h2 className="text-lg font-semibold text-[var(--text-primary)]">Actions typiques</h2>
           <div className="space-y-3">
-            {profil.actionsTupiques.map(action => (
-              <Link
-                key={`${action.titre}-${action.guide}`}
-                to={action.guide}
-                className="block rounded-2xl border border-[var(--border)] bg-surface-2 p-4 transition-colors hover:border-blue-500/25 hover:bg-surface-3"
-              >
-                <p className="text-sm font-medium text-[var(--text-primary)]">{action.titre}</p>
-                <p className="mt-1 text-sm text-blue-400">Ouvrir le guide →</p>
-              </Link>
-            ))}
+            {profil.actionsTupiques.map(action => {
+              const contenu = <p className="text-sm font-medium text-[var(--text-primary)]">{action.titre}</p>
+              return action.guide ? (
+                <Link
+                  key={`${action.titre}-${action.guide}`}
+                  to={action.guide}
+                  className="block rounded-2xl border border-[var(--border)] bg-surface-2 p-4 transition-colors hover:border-blue-500/25 hover:bg-surface-3"
+                >
+                  {contenu}
+                  <p className="mt-1 text-sm text-blue-400">Ouvrir le guide →</p>
+                </Link>
+              ) : (
+                <div key={action.titre} className="rounded-2xl border border-[var(--border)] bg-surface-2 p-4">
+                  {contenu}
+                </div>
+              )
+            })}
           </div>
         </section>
 
@@ -183,16 +200,27 @@ export function ProfilDetail() {
         <section className="space-y-4">
           <h2 className="text-lg font-semibold text-[var(--text-primary)]">Indicateurs clés</h2>
           <div className="space-y-3">
-            {profil.indicateurs.map(indicateur => (
-              <Link
-                key={`${indicateur.nom}-${indicateur.href}`}
-                to={indicateur.href}
-                className="block rounded-2xl border border-[var(--border)] bg-surface-2 p-4 transition-colors hover:border-blue-500/25 hover:bg-surface-3"
-              >
-                <p className="text-sm font-semibold text-[var(--text-primary)]">{indicateur.nom}</p>
-                <p className="mt-1 text-sm text-[var(--text-secondary)]">{indicateur.pourquoi}</p>
-              </Link>
-            ))}
+            {profil.indicateurs.map(indicateur => {
+              const contenu = (
+                <>
+                  <p className="text-sm font-semibold text-[var(--text-primary)]">{indicateur.nom}</p>
+                  <p className="mt-1 text-sm text-[var(--text-secondary)]">{indicateur.pourquoi}</p>
+                </>
+              )
+              return indicateur.href ? (
+                <Link
+                  key={`${indicateur.nom}-${indicateur.href}`}
+                  to={indicateur.href}
+                  className="block rounded-2xl border border-[var(--border)] bg-surface-2 p-4 transition-colors hover:border-blue-500/25 hover:bg-surface-3"
+                >
+                  {contenu}
+                </Link>
+              ) : (
+                <div key={indicateur.nom} className="rounded-2xl border border-[var(--border)] bg-surface-2 p-4">
+                  {contenu}
+                </div>
+              )
+            })}
           </div>
         </section>
 

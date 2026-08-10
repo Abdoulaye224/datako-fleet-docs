@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit && vite build",
+    "build": "node scripts/verifier-liens.mjs && tsc --noEmit && tsc -p tsconfig.node.json --noEmit && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verifier-liens": "node scripts/verifier-liens.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.0",

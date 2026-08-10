@@ -78,7 +78,7 @@ export const guides: Guide[] = [
     suivant: { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison' },
     articlesConnexes: [
       { href: '/transport/cycle', titre: "Cycle d'une rotation", section: 'Transport' },
-      { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume manquant', section: 'Cas particuliers' },
+      { href: '/transport/cas-particuliers/volume-livre-different', titre: 'Volume manquant', section: 'Cas particuliers' },
     ],
   },
   {
@@ -106,7 +106,7 @@ export const guides: Guide[] = [
     precedent: { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation' },
     suivant: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
     articlesConnexes: [
-      { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
+      { href: '/transport/cas-particuliers/volume-livre-different', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
       { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client', section: 'Guides' },
     ],
   },
@@ -256,7 +256,7 @@ export const guides: Guide[] = [
     suivant: { href: '/transport/guides/recalculer-couts-variables', titre: 'Recalculer les coûts variables' },
     articlesConnexes: [
       { href: '/transport/pages/livraisons', titre: 'Page Livraisons', section: 'Transport' },
-      { href: '/transport/guides/generer-releve-client-pdf', titre: 'Générer un relevé client PDF', section: 'Guides' },
+      { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF', section: 'Guides' },
       { href: '/roles/finance', titre: 'Rôle Finance', section: 'Rôles' },
     ],
   },
@@ -409,7 +409,7 @@ export const guides: Guide[] = [
     suivant: { href: '/transport/guides/suivre-confirmations-notifications', titre: 'Suivre les confirmations depuis la cloche de notifications' },
     articlesConnexes: [
       { href: '/transport/cas-particuliers/destinataire-sans-reponse', titre: 'Le destinataire ne répond pas', section: 'Cas particuliers' },
-      { href: '/transport/cas-particuliers/volume-manquant', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
+      { href: '/transport/cas-particuliers/volume-livre-different', titre: 'Volume livré ≠ volume chargé', section: 'Cas particuliers' },
       { href: '/confirmation-livraison', titre: 'Confirmer une livraison Datakö (vue destinataire)', section: 'Destinataire' },
     ],
   },

@@ -1,12 +1,12 @@
 export interface ProfilArticle {
-  href: string
+  href?: string
   label: string
   priorite: 'critique' | 'importante' | 'utile'
 }
 
 export interface ProfilAction {
   titre: string
-  guide: string
+  guide?: string
 }
 
 export interface ProfilErreur {
@@ -19,7 +19,7 @@ export interface ProfilErreur {
 export interface ProfilIndicateur {
   nom: string
   pourquoi: string
-  href: string
+  href?: string
 }
 
 export interface ProfilExport {
@@ -85,17 +85,17 @@ export const PROFILS: Profil[] = [
     rolesFleetManager: ['owner'],
     color: '#F59E0B',
     parcoursRecommande: [
-      { href: '/roles/proprietaire', label: 'Comprendre votre rôle et vos accès', priorite: 'critique' },
+      { href: '/roles/owner', label: 'Comprendre votre rôle et vos accès', priorite: 'critique' },
       { href: '/indicateurs/part-proprietaire', label: 'Comment est calculée ma part', priorite: 'importante' },
       { href: '/portail-proprietaire/historique-rotations', label: 'Comprendre le détail d\'une rotation (volumes, coûts, trajet, historique)', priorite: 'importante' },
-      { href: '/transport/guides/generer-bilan-proprietaire-pdf', label: 'Télécharger mon bilan PDF', priorite: 'utile' },
+      { href: '/transport/guides/bilan-proprietaire-pdf', label: 'Télécharger mon bilan PDF', priorite: 'utile' },
       { href: '/transport/guides/recalculer-couts-variables', label: 'Comprendre le badge "Coûts recalculés" sur une livraison', priorite: 'utile' },
     ],
     actionsTupiques: [
-      { titre: 'Vérifier les rotations effectuées ce mois par mes camions', guide: '/roles/proprietaire' },
+      { titre: 'Vérifier les rotations effectuées ce mois par mes camions', guide: '/roles/owner' },
       { titre: 'Calculer ma part de gains sur le mois', guide: '/indicateurs/part-proprietaire' },
       { titre: 'Vérifier le détail des coûts d\'une livraison précise', guide: '/portail-proprietaire/historique-rotations' },
-      { titre: 'Télécharger mon bilan PDF pour validation', guide: '/transport/guides/generer-bilan-proprietaire-pdf' },
+      { titre: 'Télécharger mon bilan PDF pour validation', guide: '/transport/guides/bilan-proprietaire-pdf' },
     ],
     erreursFréquentes: [
       {
@@ -142,7 +142,7 @@ export const PROFILS: Profil[] = [
       { href: '/indicateurs/cashflow-net', label: 'Comprendre le cashflow net', priorite: 'critique' },
       { href: '/transport/pages/clients', label: 'Surveiller les impayés clients', priorite: 'critique' },
       { href: '/transport/pages/flotte', label: 'Performance globale de la flotte', priorite: 'importante' },
-      { href: '/transport/pages/profit-par-camion', label: 'Profit par véhicule', priorite: 'importante' },
+      { href: '/transport/pages/profit-camion', label: 'Profit par véhicule', priorite: 'importante' },
       { href: '/transport/pages/simulations', label: 'Simuler des scénarios d\'investissement', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains entre acteurs', priorite: 'utile' },
       { href: '/transport/guides/generer-facture-transport', label: 'Générer une facture transport client', priorite: 'utile' },
@@ -157,7 +157,7 @@ export const PROFILS: Profil[] = [
     actionsTupiques: [
       { titre: 'Faire le point KPI du lundi matin en 5 minutes', guide: '/transport/pages/dashboard' },
       { titre: 'Comparer la rentabilité du transport et de la distribution', guide: '/vente/pages/vue-ensemble' },
-      { titre: 'Identifier les camions qui coûtent de l\'argent', guide: '/transport/pages/profit-par-camion' },
+      { titre: 'Identifier les camions qui coûtent de l\'argent', guide: '/transport/pages/profit-camion' },
       { titre: 'Simuler l\'impact d\'un nouveau camion sur le cashflow', guide: '/transport/pages/simulations' },
     ],
     erreursFréquentes: [
@@ -178,7 +178,7 @@ export const PROFILS: Profil[] = [
       { nom: 'Cashflow net', pourquoi: 'Trésorerie réelle après crédit-bail', href: '/indicateurs/cashflow-net' },
       { nom: 'CA Transport', pourquoi: 'Volume d\'activité global', href: '/indicateurs/ca-transport' },
       { nom: 'Impayés clients', pourquoi: 'Risque de recouvrement', href: '/transport/pages/clients' },
-      { nom: 'Profit par camion', pourquoi: 'Rentabilité granulaire', href: '/indicateurs/profit-par-camion' },
+      { nom: 'Profit par camion', pourquoi: 'Rentabilité granulaire', href: '/transport/pages/profit-camion' },
       { nom: 'Marge nette Marketeur', pourquoi: 'Rentabilité réelle de la distribution, charges comprises', href: '/vente/indicateurs/marge-nette-marketeur' },
       { nom: 'Position TVA', pourquoi: 'Ce que la trésorerie affichée ne vous appartient pas encore', href: '/vente/indicateurs/position-tva' },
     ],
@@ -201,9 +201,9 @@ export const PROFILS: Profil[] = [
     color: '#06B6D4',
     parcoursRecommande: [
       { href: '/transport/pages/livraisons', label: 'Page Livraisons — suivi des paiements', priorite: 'critique' },
-      { href: '/transport/guides/confirmer-un-paiement', label: 'Confirmer un paiement', priorite: 'critique' },
+      { href: '/transport/guides/confirmer-paiement', label: 'Confirmer un paiement', priorite: 'critique' },
       { href: '/transport/guides/generer-facture-transport', label: 'Générer une facture transport PDF', priorite: 'critique' },
-      { href: '/transport/guides/generer-releve-client-pdf', label: 'Générer un relevé client PDF', priorite: 'critique' },
+      { href: '/transport/guides/releve-client-pdf', label: 'Générer un relevé client PDF', priorite: 'critique' },
       { href: '/transport/guides/exporter-excel', label: 'Exporter les données en Excel', priorite: 'critique' },
       { href: '/transport/cas-particuliers/charges-fixes-periode', label: 'Charges fixes sur période de gestion', priorite: 'importante' },
       { href: '/indicateurs/cashflow-net', label: 'Comprendre le cashflow', priorite: 'importante' },
@@ -216,7 +216,7 @@ export const PROFILS: Profil[] = [
     ],
     actionsTupiques: [
       { titre: 'Rapprocher les paiements reçus avec les livraisons', guide: '/transport/pages/livraisons' },
-      { titre: 'Générer les relevés clients de fin de mois', guide: '/transport/guides/generer-releve-client-pdf' },
+      { titre: 'Générer les relevés clients de fin de mois', guide: '/transport/guides/releve-client-pdf' },
       { titre: 'Exporter toutes les livraisons en Excel pour le journal comptable', guide: '/transport/guides/exporter-excel' },
       { titre: 'Pointer les ventes restées au statut « Émise » en fin de mois', guide: '/vente/guides/suivre-vente-reglement' },
     ],
@@ -262,7 +262,7 @@ export const PROFILS: Profil[] = [
       { href: '/indicateurs/marge-exploitation', label: 'Marge d\'exploitation', priorite: 'critique' },
       { href: '/transport/pages/cashflow', label: 'Page Cashflow — vue complète', priorite: 'critique' },
       { href: '/transport/pages/simulations', label: 'Simulations financières', priorite: 'critique' },
-      { href: '/transport/pages/profit-par-camion', label: 'Profit par camion — granularité', priorite: 'importante' },
+      { href: '/transport/pages/profit-camion', label: 'Profit par camion — granularité', priorite: 'importante' },
       { href: '/transport/pages/clients', label: 'Clients — encours et impayés', priorite: 'importante' },
       { href: '/indicateurs/ca-transport', label: 'CA Transport — structure', priorite: 'utile' },
       { href: '/transport/pages/repartition-acteurs', label: 'Répartition des gains', priorite: 'utile' },
@@ -315,24 +315,24 @@ export const PROFILS: Profil[] = [
     rolesFleetManager: ['operator'],
     color: '#84CC16',
     parcoursRecommande: [
-      { href: '/roles/operateur', label: 'Comprendre votre rôle et vos droits', priorite: 'critique' },
-      { href: '/transport/guides/creer-une-rotation', label: 'Créer une rotation — guide complet', priorite: 'critique' },
-      { href: '/transport/guides/valider-une-livraison', label: 'Valider une livraison', priorite: 'critique' },
-      { href: '/transport/guides/confirmer-un-paiement', label: 'Confirmer un paiement', priorite: 'critique' },
-      { href: '/transport/cas-particuliers/volume-manquant', label: 'Que faire si le volume livré est inférieur', priorite: 'critique' },
+      { href: '/roles/operator', label: 'Comprendre votre rôle et vos droits', priorite: 'critique' },
+      { href: '/transport/guides/creer-rotation', label: 'Créer une rotation — guide complet', priorite: 'critique' },
+      { href: '/transport/guides/valider-livraison', label: 'Valider une livraison', priorite: 'critique' },
+      { href: '/transport/guides/confirmer-paiement', label: 'Confirmer un paiement', priorite: 'critique' },
+      { href: '/transport/cas-particuliers/volume-livre-different', label: 'Que faire si le volume livré est inférieur', priorite: 'critique' },
       { href: '/transport/cas-particuliers/ecart-vs-manquant', label: 'Écart signalé ou manquant : ne pas confondre', priorite: 'critique' },
       { href: '/transport/cas-particuliers/destinataire-sans-reponse', label: 'Le destinataire ne répond pas', priorite: 'importante' },
       { href: '/transport/pages/livraisons', label: 'Page Livraisons — vue d\'ensemble', priorite: 'importante' },
       { href: '/transport/cas-particuliers/dossier-livraison-complet', label: 'Compléter le dossier documentaire d\'une livraison', priorite: 'importante' },
       { href: '/confirmation-livraison', label: 'Ce que voit le destinataire quand il reçoit le lien', priorite: 'utile' },
-      { href: '/transport/guides/ajouter-une-maintenance', label: 'Signaler une maintenance', priorite: 'utile' },
+      { href: '/transport/guides/ajouter-maintenance', label: 'Signaler une maintenance', priorite: 'utile' },
     ],
     actionsTupiques: [
-      { titre: 'Enregistrer le départ du camion le matin', guide: '/transport/guides/creer-une-rotation' },
-      { titre: 'Saisir le volume livré à l\'arrivée et valider', guide: '/transport/guides/valider-une-livraison' },
-      { titre: 'Envoyer au destinataire le lien de confirmation de réception', guide: '/transport/guides/valider-une-livraison' },
+      { titre: 'Enregistrer le départ du camion le matin', guide: '/transport/guides/creer-rotation' },
+      { titre: 'Saisir le volume livré à l\'arrivée et valider', guide: '/transport/guides/valider-livraison' },
+      { titre: 'Envoyer au destinataire le lien de confirmation de réception', guide: '/transport/guides/valider-livraison' },
       { titre: 'Joindre le bon de livraison scanné au dossier de la rotation', guide: '/transport/cas-particuliers/dossier-livraison-complet' },
-      { titre: 'Gérer un volume manquant (différence chargé / livré)', guide: '/transport/cas-particuliers/volume-manquant' },
+      { titre: 'Gérer un volume manquant (différence chargé / livré)', guide: '/transport/cas-particuliers/volume-livre-different' },
     ],
     erreursFréquentes: [
       {
@@ -395,18 +395,18 @@ export const PROFILS: Profil[] = [
     color: '#A78BFA',
     parcoursRecommande: [
       { href: '/transport/pages/flotte', label: 'Page Flotte — vue d\'ensemble des véhicules', priorite: 'critique' },
-      { href: '/transport/guides/ajouter-un-camion', label: 'Ajouter un camion', priorite: 'critique' },
-      { href: '/transport/guides/ajouter-une-charge-fixe', label: 'Ajouter les charges fixes', priorite: 'critique' },
-      { href: '/transport/guides/ajouter-une-maintenance', label: 'Enregistrer une maintenance', priorite: 'critique' },
-      { href: '/transport/cas-particuliers/vehicule-gere-vs-propre', label: 'Véhicule propre vs géré', priorite: 'importante' },
-      { href: '/transport/pages/profit-par-camion', label: 'Profit par camion — performance', priorite: 'importante' },
+      { href: '/transport/guides/ajouter-camion', label: 'Ajouter un camion', priorite: 'critique' },
+      { href: '/transport/guides/ajouter-charge-fixe', label: 'Ajouter les charges fixes', priorite: 'critique' },
+      { href: '/transport/guides/ajouter-maintenance', label: 'Enregistrer une maintenance', priorite: 'critique' },
+      { href: '/transport/cas-particuliers/vehicule-propre-vs-gere', label: 'Véhicule propre vs géré', priorite: 'importante' },
+      { href: '/transport/pages/profit-camion', label: 'Profit par camion — performance', priorite: 'importante' },
       { href: '/indicateurs/charges-fixes-vehicule', label: 'Comprendre les charges fixes', priorite: 'importante' },
       { href: '/transport/cas-particuliers/charges-fixes-periode', label: 'Charges sur période de gestion', priorite: 'utile' },
     ],
     actionsTupiques: [
-      { titre: 'Configurer un nouveau camion dans Fleet Manager', guide: '/transport/guides/ajouter-un-camion' },
-      { titre: 'Enregistrer l\'assurance annuelle et la répartir sur l\'année', guide: '/transport/guides/ajouter-une-charge-fixe' },
-      { titre: 'Suivre les interventions mécaniques et leur coût', guide: '/transport/guides/ajouter-une-maintenance' },
+      { titre: 'Configurer un nouveau camion dans Fleet Manager', guide: '/transport/guides/ajouter-camion' },
+      { titre: 'Enregistrer l\'assurance annuelle et la répartir sur l\'année', guide: '/transport/guides/ajouter-charge-fixe' },
+      { titre: 'Suivre les interventions mécaniques et leur coût', guide: '/transport/guides/ajouter-maintenance' },
     ],
     erreursFréquentes: [
       {
@@ -423,7 +423,7 @@ export const PROFILS: Profil[] = [
     ],
     indicateurs: [
       { nom: 'Charges fixes par véhicule', pourquoi: 'Coût plancher à couvrir par les rotations', href: '/indicateurs/charges-fixes-vehicule' },
-      { nom: 'Profit par camion', pourquoi: 'ROI de chaque véhicule dans la flotte', href: '/indicateurs/profit-par-camion' },
+      { nom: 'Profit par camion', pourquoi: 'ROI de chaque véhicule dans la flotte', href: '/transport/pages/profit-camion' },
       { nom: 'Maintenances sur la période', pourquoi: 'Coûts de réparation et tendances', href: '/transport/pages/flotte' },
     ],
     exports: [
@@ -443,17 +443,17 @@ export const PROFILS: Profil[] = [
     rolesFleetManager: ['super_admin'],
     color: '#EC4899',
     parcoursRecommande: [
-      { href: '/backoffice/creer-une-organisation', label: 'Créer une organisation cliente', priorite: 'critique' },
-      { href: '/backoffice/activer-modules', label: 'Activer les modules d\'une organisation', priorite: 'critique' },
-      { href: '/backoffice/white-label', label: 'Configurer le branding white-label', priorite: 'critique' },
-      { href: '/backoffice/gestion-membres', label: 'Gérer les membres d\'une organisation', priorite: 'importante' },
-      { href: '/backoffice/plans-modules', label: 'Mapping plans → modules', priorite: 'importante' },
+      { label: 'Créer une organisation cliente', priorite: 'critique' },
+      { label: 'Activer les modules d\'une organisation', priorite: 'critique' },
+      { label: 'Configurer le branding white-label', priorite: 'critique' },
+      { label: 'Gérer les membres d\'une organisation', priorite: 'importante' },
+      { label: 'Mapping plans → modules', priorite: 'importante' },
       { href: '/indicateurs/marge-exploitation', label: 'Comprendre les KPI pour accompagner les clients', priorite: 'utile' },
     ],
     actionsTupiques: [
-      { titre: 'Onboarder un nouveau client (org + membres + modules + données seed)', guide: '/backoffice/creer-une-organisation' },
-      { titre: 'Activer le module WhatsApp pour une organisation', guide: '/backoffice/activer-modules' },
-      { titre: 'Configurer le white-label pour DC Energy', guide: '/backoffice/white-label' },
+      { titre: 'Onboarder un nouveau client (org + membres + modules + données seed)' },
+      { titre: 'Activer le module WhatsApp pour une organisation' },
+      { titre: 'Configurer le white-label pour DC Energy' },
     ],
     erreursFréquentes: [
       {
@@ -468,8 +468,8 @@ export const PROFILS: Profil[] = [
       },
     ],
     indicateurs: [
-      { nom: 'Organisations actives', pourquoi: 'Santé de la base clients', href: '/backoffice/tableau-de-bord' },
-      { nom: 'Modules activés par org', pourquoi: 'Revenue et engagement', href: '/backoffice/plans-modules' },
+      { nom: 'Organisations actives', pourquoi: 'Santé de la base clients' },
+      { nom: 'Modules activés par org', pourquoi: 'Revenue et engagement' },
     ],
     exports: [
       { nom: 'Scripts SQL de seed', quand: 'Onboarding d\'un nouveau client', comment: 'Outil Streamlit interne → SQL Editor Supabase' },
