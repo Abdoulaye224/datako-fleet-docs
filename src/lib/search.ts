@@ -208,11 +208,12 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
   })
 
   data.nouveautes.forEach(item => {
+    const aVenir = item.type === 'a_venir'
     entries.push({
       id: `nouveaute-${item.id}`,
-      titre: item.titre,
+      titre: aVenir ? `À venir — ${item.titre}` : item.titre,
       chapeau: item.description,
-      contenu: `${item.titre} ${item.description} ${item.module ?? ''} ${item.mois}`,
+      contenu: `${item.titre} ${item.description} ${item.module ?? ''} ${aVenir ? 'à venir prochainement bientôt' : item.mois}`,
       section: 'nouveautes',
       categorie: 'Nouveautés',
       href: '/nouveautes',

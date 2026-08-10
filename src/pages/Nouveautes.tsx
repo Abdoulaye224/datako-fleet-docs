@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/Badge'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { StaggerList } from '@/components/ui/StaggerList'
-import { NOUVEAUTES } from '@/data/fleet'
+import { NOUVEAUTES, NOUVEAUTES_A_VENIR } from '@/data/fleet'
 
 const typeMeta = {
   nouveau: { label: 'Nouveau', color: 'blue' },
@@ -28,7 +28,46 @@ export function Nouveautes() {
           </p>
         </div>
 
+        {NOUVEAUTES_A_VENIR.length > 0 && (
+          <section className="space-y-4">
+            <div>
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">À venir</h2>
+              <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                Ces fonctionnalités sont en préparation. Elles ne sont pas encore disponibles dans Fleet Manager, et
+                aucune date de mise en service n'est annoncée.
+              </p>
+            </div>
+            <StaggerList className="space-y-3">
+              {NOUVEAUTES_A_VENIR.map(item => (
+                <div
+                  key={item.id}
+                  className="rounded-2xl border border-dashed border-[var(--accent-purple-border)] bg-[var(--accent-purple-bg)] p-5"
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge label="À venir" color="purple" />
+                    {item.module && (
+                      <span className="rounded-full border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--text-secondary)]">
+                        {item.module}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-3 text-base font-semibold text-[var(--text-primary)]">{item.titre}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{item.description}</p>
+                </div>
+              ))}
+            </StaggerList>
+          </section>
+        )}
+
         <div className="space-y-8">
+          {NOUVEAUTES_A_VENIR.length > 0 && (
+            <div className="border-t border-[var(--border)] pt-6">
+              <h2 className="text-base font-semibold text-[var(--text-primary)]">Déjà disponible</h2>
+              <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                Les fonctionnalités ci-dessous sont en service, classées par mois de mise à disposition.
+              </p>
+            </div>
+          )}
           {Object.entries(grouped).map(([mois, items]) => (
             <section key={mois} className="space-y-4">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">{mois}</h2>

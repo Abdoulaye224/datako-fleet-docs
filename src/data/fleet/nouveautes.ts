@@ -1,16 +1,36 @@
-export type NouveauteType = 'nouveau' | 'amelioration' | 'corrige' | 'deprecated'
+export type NouveauteTypeLivree = 'nouveau' | 'amelioration' | 'corrige' | 'deprecated'
+export type NouveauteType = NouveauteTypeLivree | 'a_venir'
 
-export interface Nouveaute {
+interface NouveauteBase {
   id: string
-  date: string
-  mois: string
   titre: string
   description: string
-  type: NouveauteType
   module?: string
 }
 
-export const NOUVEAUTES: Nouveaute[] = [
+export interface NouveauteLivree extends NouveauteBase {
+  type: NouveauteTypeLivree
+  date: string
+  mois: string
+}
+
+export interface NouveauteAVenir extends NouveauteBase {
+  type: 'a_venir'
+}
+
+export type Nouveaute = NouveauteLivree | NouveauteAVenir
+
+export const NOUVEAUTES_A_VENIR: NouveauteAVenir[] = [
+  {
+    id: 'mission-conducteur-whatsapp',
+    titre: 'Le conducteur suivra sa mission depuis WhatsApp',
+    description: 'Le conducteur sera prévenu par WhatsApp dès qu\'une mission lui est affectée, et pourra depuis WhatsApp démarrer sa mission puis signaler son arrivée et le déchargement. La validation finale ne changera pas : c\'est le même QR code à usage unique que celui déjà en service qui sera présenté, pas un second système de confirmation. Ce chantier est en cours de conception : aucune date n\'est annoncée à ce stade.',
+    type: 'a_venir',
+    module: 'Transport',
+  },
+]
+
+export const NOUVEAUTES: NouveauteLivree[] = [
   {
     id: 'notifications-retention',
     date: '2026-08-10',
