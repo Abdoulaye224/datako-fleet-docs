@@ -35,6 +35,91 @@ export const guides: Guide[] = [
       'Si le camion n\'apparaît pas dans Nouvelle Rotation, vérifiez que son statut est "Actif".',
       'Un camion sans assurance valide affichera un badge rouge dans le formulaire.',
     ],
+    suivant: { href: '/transport/guides/configurer-repartition-acteurs', titre: 'Configurer la répartition pour un véhicule géré' },
+  },
+  {
+    id: 'configurer-repartition-acteurs',
+    title: 'Configurer la répartition pour un véhicule géré',
+    objectif:
+      "Définir comment les revenus d'un véhicule géré se partagent entre votre organisation et son propriétaire, avant que les rotations ne s'accumulent.",
+    prerequis: [
+      'Avoir le rôle Administrateur',
+      'Le véhicule doit déjà exister dans la Flotte, marqué comme "Géré"',
+      'Savoir qui est le propriétaire bénéficiaire',
+    ],
+    etapes: [
+      'Allez dans Configuration, onglet Acteurs.',
+      'Ouvrez le formulaire de nouvelle règle de répartition.',
+      'Choisissez l\'acteur bénéficiaire dans la liste — ou créez-le sur place avec "+ Nouvel acteur" si le propriétaire n\'existe pas encore.',
+      'Choisissez le type de règle : "Commission (%)" pour un pourcentage, "Résiduel" pour attribuer tout ce qui reste.',
+      'Si vous avez choisi Commission, saisissez le pourcentage du chiffre d\'affaires brut.',
+      'Choisissez le périmètre : "Véhicules spécifiques" en cochant le camion concerné, ou "Tous les véhicules gérés" si la règle vaut pour l\'ensemble.',
+      'Enregistrez.',
+    ],
+    resultat:
+      "La règle apparaît dans la page Répartition acteurs et s'applique aux prochaines rotations du véhicule. Elle alimente aussi le profit par camion, le cashflow, les gains et la ligne \"Commission exploitant\" ou \"Résiduel\" du bilan propriétaire PDF.",
+    erreurs: [
+      'Le pourcentage doit être supérieur à 0 et ne pas dépasser 100.',
+      "Le total des commissions de votre organisation ne peut pas dépasser 100 % : si la nouvelle règle fait franchir ce seuil, l'enregistrement est refusé avec le total qui aurait été atteint.",
+      'Si vous choisissez "Véhicules spécifiques" sans cocher aucun véhicule, la règle est refusée.',
+      "Créer un second résiduel sur le même périmètre ne l'ajoute pas au premier : l'application demande confirmation, puis désactive l'ancien et transfère sa part au nouveau bénéficiaire.",
+    ],
+    attention: [
+      "Tant qu'aucune règle n'existe, les revenus d'un véhicule géré reviennent intégralement à son propriétaire : la page Répartition acteurs affiche alors les montants sans rien répartir.",
+      "La page Répartition acteurs ne fait qu'afficher le résultat. La règle se crée uniquement dans Configuration, onglet Acteurs.",
+      "L'application indique qu'il n'y a qu'un seul résiduel par organisation. En pratique, c'est un seul résiduel actif à la fois sur un même périmètre.",
+    ],
+    precedent: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
+    suivant: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
+    articlesConnexes: [
+      { href: '/transport/pages/repartition-acteurs', titre: 'Répartition acteurs', section: 'Pages' },
+      { href: '/transport/cas-particuliers/vehicule-propre-vs-gere', titre: 'Véhicule propre ou géré', section: 'Cas particuliers' },
+      { href: '/indicateurs/part-proprietaire', titre: 'Part propriétaire', section: 'Indicateurs' },
+    ],
+  },
+  {
+    id: 'ajouter-charge-fixe',
+    title: 'Ajouter une charge fixe',
+    objectif: "Enregistrer une charge récurrente sur un véhicule (assurance, vignette, visite technique, patente) pour qu'elle soit prise en compte dans le calcul de profit.",
+    prerequis: ['Avoir le rôle Administrateur'],
+    etapes: [
+      'Allez dans la section Flotte.',
+      'Cliquez sur le véhicule concerné pour accéder à sa fiche.',
+      'Ouvrez l\'onglet "Charges fixes".',
+      'Cliquez sur "+ Ajouter une charge".',
+      'Choisissez le type : Assurance, Vignette, Visite technique ou Patente.',
+      'Saisissez le montant et la fréquence (mensuelle, annuelle).',
+      'Indiquez les dates de début et de fin de validité.',
+      'Enregistrez.',
+    ],
+    resultat: 'La charge est prise en compte dans le calcul de Profit par Camion et dans les indicateurs de Cashflow.',
+    erreurs: [
+      'Une charge sans date de fin sera comptabilisée indéfiniment. Vérifiez les dates.',
+      "Les charges fixes s'accumulent même les mois sans rotation.",
+    ],
+    precedent: { href: '/transport/guides/configurer-repartition-acteurs', titre: 'Configurer la répartition pour un véhicule géré' },
+    suivant: { href: '/transport/guides/ajouter-maintenance', titre: 'Ajouter une maintenance' },
+    articlesConnexes: [
+      { href: '/indicateurs/charges-fixes-vehicule', titre: 'Charges fixes véhicule', section: 'Indicateurs' },
+    ],
+  },
+  {
+    id: 'ajouter-maintenance',
+    title: 'Ajouter une maintenance',
+    objectif: "Enregistrer une dépense de maintenance sur un véhicule pour qu'elle apparaisse dans les coûts d'exploitation.",
+    prerequis: ['Avoir le rôle Administrateur ou Opérateur'],
+    etapes: [
+      'Allez dans la section Flotte.',
+      'Cliquez sur le véhicule concerné.',
+      'Ouvrez l\'onglet "Maintenances".',
+      'Cliquez sur "+ Ajouter une maintenance".',
+      "Décrivez l'intervention et saisissez le montant.",
+      'Indiquez la date.',
+      'Enregistrez.',
+    ],
+    resultat: 'La maintenance est incluse dans les coûts d\'exploitation du véhicule sur la période concernée.',
+    erreurs: ['La maintenance n\'apparaît dans les KPIs que sur la période correspondant à sa date.'],
+    precedent: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
     suivant: { href: '/transport/guides/ajouter-client', titre: 'Ajouter un client' },
   },
   {
@@ -51,7 +136,7 @@ export const guides: Guide[] = [
     ],
     resultat: 'Le client est disponible dans le menu déroulant du formulaire Nouvelle Rotation.',
     erreurs: ['Si le client n\'apparaît pas dans Nouvelle Rotation, rechargez la page.'],
-    precedent: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
+    precedent: { href: '/transport/guides/ajouter-maintenance', titre: 'Ajouter une maintenance' },
     suivant: { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation' },
   },
   {
@@ -125,51 +210,6 @@ export const guides: Guide[] = [
     resultat: 'Le badge passe au vert "Payé". La créance est soldée dans les indicateurs financiers.',
     erreurs: ['Si le badge n\'est pas cliquable, vérifiez votre rôle (Observateur ne peut pas modifier).'],
     precedent: { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison' },
-    suivant: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
-  },
-  {
-    id: 'ajouter-charge-fixe',
-    title: 'Ajouter une charge fixe',
-    objectif: "Enregistrer une charge récurrente sur un véhicule (assurance, vignette, visite technique, patente) pour qu'elle soit prise en compte dans le calcul de profit.",
-    prerequis: ['Avoir le rôle Administrateur'],
-    etapes: [
-      'Allez dans la section Flotte.',
-      'Cliquez sur le véhicule concerné pour accéder à sa fiche.',
-      'Ouvrez l\'onglet "Charges fixes".',
-      'Cliquez sur "+ Ajouter une charge".',
-      'Choisissez le type : Assurance, Vignette, Visite technique ou Patente.',
-      'Saisissez le montant et la fréquence (mensuelle, annuelle).',
-      'Indiquez les dates de début et de fin de validité.',
-      'Enregistrez.',
-    ],
-    resultat: 'La charge est prise en compte dans le calcul de Profit par Camion et dans les indicateurs de Cashflow.',
-    erreurs: [
-      'Une charge sans date de fin sera comptabilisée indéfiniment. Vérifiez les dates.',
-      "Les charges fixes s'accumulent même les mois sans rotation.",
-    ],
-    precedent: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
-    suivant: { href: '/transport/guides/ajouter-maintenance', titre: 'Ajouter une maintenance' },
-    articlesConnexes: [
-      { href: '/indicateurs/charges-fixes-vehicule', titre: 'Charges fixes véhicule', section: 'Indicateurs' },
-    ],
-  },
-  {
-    id: 'ajouter-maintenance',
-    title: 'Ajouter une maintenance',
-    objectif: "Enregistrer une dépense de maintenance sur un véhicule pour qu'elle apparaisse dans les coûts d'exploitation.",
-    prerequis: ['Avoir le rôle Administrateur ou Opérateur'],
-    etapes: [
-      'Allez dans la section Flotte.',
-      'Cliquez sur le véhicule concerné.',
-      'Ouvrez l\'onglet "Maintenances".',
-      'Cliquez sur "+ Ajouter une maintenance".',
-      "Décrivez l'intervention et saisissez le montant.",
-      'Indiquez la date.',
-      'Enregistrez.',
-    ],
-    resultat: 'La maintenance est incluse dans les coûts d\'exploitation du véhicule sur la période concernée.',
-    erreurs: ['La maintenance n\'apparaît dans les KPIs que sur la période correspondant à sa date.'],
-    precedent: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
     suivant: { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF' },
   },
   {
@@ -186,7 +226,7 @@ export const guides: Guide[] = [
     ],
     resultat: 'Un PDF est généré avec le logo Datakö, les livraisons de la période, les montants et le solde.',
     erreurs: ['Si le PDF est vide, vérifiez qu\'il y a des livraisons validées sur la période sélectionnée.'],
-    precedent: { href: '/transport/guides/ajouter-maintenance', titre: 'Ajouter une maintenance' },
+    precedent: { href: '/transport/guides/confirmer-paiement', titre: 'Confirmer un paiement' },
     suivant: { href: '/transport/guides/bilan-proprietaire-pdf', titre: 'Générer un bilan propriétaire PDF' },
   },
   {
@@ -205,6 +245,7 @@ export const guides: Guide[] = [
     precedent: { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF' },
     suivant: { href: '/transport/guides/exporter-excel', titre: 'Exporter les données Excel' },
     articlesConnexes: [
+      { href: '/transport/guides/configurer-repartition-acteurs', titre: 'Configurer la répartition pour un véhicule géré', section: 'Guides' },
       { href: '/roles/owner', titre: 'Rôle Propriétaire', section: 'Rôles' },
       { href: '/indicateurs/part-proprietaire', titre: 'Part propriétaire', section: 'Indicateurs' },
     ],
@@ -253,66 +294,11 @@ export const guides: Guide[] = [
       'Si le branding white-label est actif sur votre organisation, l\'en-tête du PDF affichera le logo et les couleurs de votre entreprise plutôt que l\'identité Datakö.',
     ],
     precedent: { href: '/transport/guides/exporter-excel', titre: 'Exporter les données Excel' },
-    suivant: { href: '/transport/guides/recalculer-couts-variables', titre: 'Recalculer les coûts variables' },
+    suivant: { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
     articlesConnexes: [
       { href: '/transport/pages/livraisons', titre: 'Page Livraisons', section: 'Transport' },
       { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF', section: 'Guides' },
       { href: '/roles/finance', titre: 'Rôle Finance', section: 'Rôles' },
-    ],
-  },
-  {
-    id: 'recalculer-couts-variables',
-    title: 'Recalculer les coûts variables',
-    objectif:
-      "Corriger le carburant et la prime chauffeur déjà enregistrés sur des livraisons passées, après avoir détecté une erreur de paramétrage sur une route — sans réimporter tout l'historique.",
-    prerequis: [
-      'Avoir le rôle Administrateur',
-      "Avoir déjà corrigé la route concernée dans Tarifs de transport (nouvelle consommation carburant ou nouvelle prime)",
-    ],
-    etapes: [
-      "Corrigez d'abord la route concernée dans Tarifs de transport : mettez à jour la consommation carburant ou la prime chauffeur.",
-      'Allez dans Paramètres → onglet Transport → Outils de maintenance.',
-      'Ouvrez "Recalcul des coûts variables".',
-      'Choisissez la période, le véhicule (ou "Tous les véhicules") et la route (ou "Toutes les routes") concernés par l\'erreur.',
-      'Cliquez sur "Prévisualiser" — cette étape est obligatoire, aucune donnée n\'est modifiée à ce stade.',
-      "Vérifiez l'aperçu : la liste des livraisons concernées, l'ancien montant et le nouveau montant pour le carburant et la prime, ainsi que l'impact sur la marge.",
-      'Si tout est correct, cliquez sur "Confirmer le recalcul". C\'est uniquement à ce moment que les données sont mises à jour.',
-    ],
-    resultat:
-      "Les livraisons du périmètre choisi sont mises à jour avec les coûts variables corrects. La marge, la répartition propriétaire, le Cashflow, le Profit par camion et les Gains par rotation reflètent la correction dès le prochain chargement de la page.",
-    erreurs: [
-      'Si l\'aperçu ne montre aucune livraison, vérifiez que la période, le véhicule ou la route sélectionnés correspondent bien aux rotations concernées.',
-      "Si les montants de l'aperçu n'ont pas changé, la route n'a probablement pas encore été corrigée dans Tarifs de transport.",
-    ],
-    exempleConcret:
-      "Sur la route Conakry → Kankan, la prime chauffeur avait été saisie à tort à 500 000 GNF au lieu de 150 000 GNF lors de l'onboarding. 3 rotations ont été enregistrées avec cette erreur. Après correction de la route (150 000 GNF) puis recalcul, les 3 rotations sont mises à jour et la marge du véhicule sur la page Profit par camion reflète immédiatement la correction.",
-    avantApres: {
-      titre: 'Route Conakry → Kankan — 3 rotations concernées',
-      lignes: [
-        { ligne: 'Prime chauffeur (par rotation)', avant: '500 000 GNF', apres: '150 000 GNF' },
-        { ligne: 'Impact sur la marge (par rotation)', avant: '—', apres: '+350 000 GNF' },
-      ],
-    },
-    impacts: [
-      'CA transport : inchangé',
-      'Coûts variables : mis à jour',
-      'Marge : recalculée',
-      'Répartition propriétaire (commissions + résiduel) : mise à jour automatiquement',
-      'Cashflow, Profit par camion, Gains par rotation : mis à jour automatiquement dès le prochain chargement de la page, sans action supplémentaire',
-      'Portail Propriétaire : le propriétaire du véhicule voit désormais un badge "🔄 Coûts recalculés" sur la livraison concernée, avec le détail avant → après et le motif si renseigné — le recalcul n\'est donc pas une correction silencieuse',
-    ],
-    attention: [
-      "Corrigez toujours la route AVANT de lancer un recalcul — l'outil applique les paramètres de route ACTUELS, pas une valeur saisie dans l'outil lui-même.",
-      "Vérifiez toujours l'aperçu avant de confirmer — l'action n'est pas réversible automatiquement (il faudrait relancer un recalcul en sens inverse).",
-      'Outil réservé aux Administrateurs — ce n\'est pas un geste opérationnel quotidien.',
-      "Ne modifie jamais le CA ni les livraisons futures — seulement les coûts variables des livraisons déjà enregistrées, sur le périmètre choisi.",
-    ],
-    precedent: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
-    suivant: { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
-    articlesConnexes: [
-      { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
-      { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
-      { href: '/portail-proprietaire/historique-rotations', titre: 'Historique rotations (vue propriétaire)', section: 'Portail Propriétaire' },
     ],
   },
   {
@@ -352,7 +338,7 @@ export const guides: Guide[] = [
       "Ce réglage se décide client par client, dans sa fiche. Il n'existe pas de réglage global qui l'activerait pour tout le monde.",
       'Le mode choisi est figé sur chaque livraison au moment du déchargement : changer la politique du client ne modifie pas les livraisons déjà en cours.',
     ],
-    precedent: { href: '/transport/guides/recalculer-couts-variables', titre: 'Recalculer les coûts variables' },
+    precedent: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
     suivant: { href: '/transport/guides/traiter-ecart-destinataire', titre: 'Traiter un écart signalé par le destinataire' },
     articlesConnexes: [
       { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison', section: 'Guides' },
@@ -446,10 +432,65 @@ export const guides: Guide[] = [
       "La cloche ne concerne que les confirmations de destinataires. Les alertes d'activité (écart de volume, camion inactif, marge inhabituelle) passent par WhatsApp, pas par elle.",
     ],
     precedent: { href: '/transport/guides/traiter-ecart-destinataire', titre: 'Traiter un écart signalé par le destinataire' },
+    suivant: { href: '/transport/guides/recalculer-couts-variables', titre: 'Recalculer les coûts variables' },
     articlesConnexes: [
       { href: '/transport/cas-particuliers/lien-confirmation-affiche-une-fois', titre: "La fenêtre du lien de confirmation n'apparaît qu'une fois", section: 'Cas particuliers' },
       { href: '/transport/cas-particuliers/destinataire-sans-reponse', titre: 'Le destinataire ne répond pas', section: 'Cas particuliers' },
       { href: '/confirmation-livraison', titre: 'Confirmer une livraison Datakö (vue destinataire)', section: 'Destinataire' },
+    ],
+  },
+  {
+    id: 'recalculer-couts-variables',
+    title: 'Recalculer les coûts variables',
+    objectif:
+      "Corriger le carburant et la prime chauffeur déjà enregistrés sur des livraisons passées, après avoir détecté une erreur de paramétrage sur une route — sans réimporter tout l'historique.",
+    prerequis: [
+      'Avoir le rôle Administrateur',
+      "Avoir déjà corrigé la route concernée dans Tarifs de transport (nouvelle consommation carburant ou nouvelle prime)",
+    ],
+    etapes: [
+      "Corrigez d'abord la route concernée dans Tarifs de transport : mettez à jour la consommation carburant ou la prime chauffeur.",
+      'Allez dans Paramètres → onglet Transport → Outils de maintenance.',
+      'Ouvrez "Recalcul des coûts variables".',
+      'Choisissez la période, le véhicule (ou "Tous les véhicules") et la route (ou "Toutes les routes") concernés par l\'erreur.',
+      'Cliquez sur "Prévisualiser" — cette étape est obligatoire, aucune donnée n\'est modifiée à ce stade.',
+      "Vérifiez l'aperçu : la liste des livraisons concernées, l'ancien montant et le nouveau montant pour le carburant et la prime, ainsi que l'impact sur la marge.",
+      'Si tout est correct, cliquez sur "Confirmer le recalcul". C\'est uniquement à ce moment que les données sont mises à jour.',
+    ],
+    resultat:
+      "Les livraisons du périmètre choisi sont mises à jour avec les coûts variables corrects. La marge, la répartition propriétaire, le Cashflow, le Profit par camion et les Gains par rotation reflètent la correction dès le prochain chargement de la page.",
+    erreurs: [
+      'Si l\'aperçu ne montre aucune livraison, vérifiez que la période, le véhicule ou la route sélectionnés correspondent bien aux rotations concernées.',
+      "Si les montants de l'aperçu n'ont pas changé, la route n'a probablement pas encore été corrigée dans Tarifs de transport.",
+    ],
+    exempleConcret:
+      "Sur la route Conakry → Kankan, la prime chauffeur avait été saisie à tort à 500 000 GNF au lieu de 150 000 GNF lors de l'onboarding. 3 rotations ont été enregistrées avec cette erreur. Après correction de la route (150 000 GNF) puis recalcul, les 3 rotations sont mises à jour et la marge du véhicule sur la page Profit par camion reflète immédiatement la correction.",
+    avantApres: {
+      titre: 'Route Conakry → Kankan — 3 rotations concernées',
+      lignes: [
+        { ligne: 'Prime chauffeur (par rotation)', avant: '500 000 GNF', apres: '150 000 GNF' },
+        { ligne: 'Impact sur la marge (par rotation)', avant: '—', apres: '+350 000 GNF' },
+      ],
+    },
+    impacts: [
+      'CA transport : inchangé',
+      'Coûts variables : mis à jour',
+      'Marge : recalculée',
+      'Répartition propriétaire (commissions + résiduel) : mise à jour automatiquement',
+      'Cashflow, Profit par camion, Gains par rotation : mis à jour automatiquement dès le prochain chargement de la page, sans action supplémentaire',
+      'Portail Propriétaire : le propriétaire du véhicule voit désormais un badge "🔄 Coûts recalculés" sur la livraison concernée, avec le détail avant → après et le motif si renseigné — le recalcul n\'est donc pas une correction silencieuse',
+    ],
+    attention: [
+      "Corrigez toujours la route AVANT de lancer un recalcul — l'outil applique les paramètres de route ACTUELS, pas une valeur saisie dans l'outil lui-même.",
+      "Vérifiez toujours l'aperçu avant de confirmer — l'action n'est pas réversible automatiquement (il faudrait relancer un recalcul en sens inverse).",
+      'Outil réservé aux Administrateurs — ce n\'est pas un geste opérationnel quotidien.',
+      "Ne modifie jamais le CA ni les livraisons futures — seulement les coûts variables des livraisons déjà enregistrées, sur le périmètre choisi.",
+    ],
+    precedent: { href: '/transport/guides/suivre-confirmations-notifications', titre: 'Suivre les confirmations depuis la cloche de notifications' },
+    articlesConnexes: [
+      { href: '/transport/cas-particuliers/charges-fixes-periode', titre: 'Charges fixes vs coûts variables', section: 'Cas particuliers' },
+      { href: '/roles/org_admin', titre: 'Rôle Administrateur', section: 'Rôles' },
+      { href: '/portail-proprietaire/historique-rotations', titre: 'Historique rotations (vue propriétaire)', section: 'Portail Propriétaire' },
     ],
   },
 ]
