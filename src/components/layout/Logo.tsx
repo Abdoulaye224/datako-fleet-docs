@@ -1,7 +1,7 @@
 export function Logo() {
   return (
     <img
-      src="/favicon.ico"
+      src="/logo_old.png"
       alt="Datakö"
       width={32}
       height={32}
