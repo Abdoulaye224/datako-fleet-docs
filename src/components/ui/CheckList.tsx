@@ -15,17 +15,17 @@ export function CheckList({ items, variant, showLabel = true }: CheckListProps) 
     },
     resultat: {
       icon: CheckCircle2,
-      color: 'text-emerald-400',
+      color: 'text-[var(--accent-emerald-icon)]',
       label: 'Résultat attendu',
     },
     erreur: {
       icon: XCircle,
-      color: 'text-red-400',
+      color: 'text-[var(--accent-red-icon)]',
       label: 'Erreurs fréquentes',
     },
     impact: {
       icon: Info,
-      color: 'text-blue-400',
+      color: 'text-[var(--accent-blue-icon)]',
       label: 'Impacts financiers',
     },
   }

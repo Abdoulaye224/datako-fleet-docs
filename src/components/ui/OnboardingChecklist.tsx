@@ -114,7 +114,7 @@ export function OnboardingChecklist({ roleId, steps }: OnboardingChecklistProps)
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <p className={`text-sm font-medium ${isChecked ? 'text-emerald-300' : 'text-[var(--text-primary)]'}`}>
+                      <p className={`text-sm font-medium ${isChecked ? 'text-[var(--accent-emerald-fg)]' : 'text-[var(--text-primary)]'}`}>
                         {step.titre}
                       </p>
                       <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{step.description}</p>

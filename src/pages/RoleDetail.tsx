@@ -78,20 +78,20 @@ export function RoleDetail() {
         </CalloutBlock>
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+          <div className="rounded-2xl border border-[var(--accent-emerald-border)] bg-[var(--accent-emerald-bg)] p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-emerald-400">Ce que vous pouvez faire</h2>
-              <span className="rounded-full border border-emerald-500/20 px-2 py-1 text-xs text-emerald-300">
+              <h2 className="text-base font-semibold text-[var(--accent-emerald-fg)]">Ce que vous pouvez faire</h2>
+              <span className="rounded-full border border-[var(--accent-emerald-border)] px-2 py-1 text-xs text-[var(--accent-emerald-fg)]">
                 {role.peutFaire.length} actions
               </span>
             </div>
             <CheckList items={role.peutFaire} variant="resultat" showLabel={false} />
           </div>
 
-          <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5">
+          <div className="rounded-2xl border border-[var(--accent-red-border)] bg-[var(--accent-red-bg)] p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-red-400">Ce que vous ne pouvez pas faire</h2>
-              <span className="rounded-full border border-red-500/20 px-2 py-1 text-xs text-red-300">
+              <h2 className="text-base font-semibold text-[var(--accent-red-fg)]">Ce que vous ne pouvez pas faire</h2>
+              <span className="rounded-full border border-[var(--accent-red-border)] px-2 py-1 text-xs text-[var(--accent-red-fg)]">
                 {role.nePeutPasFaire.length} limites
               </span>
             </div>

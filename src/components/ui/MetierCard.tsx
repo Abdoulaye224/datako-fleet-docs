@@ -30,23 +30,23 @@ const FADE_MASK = 'linear-gradient(to bottom, #000 45%, rgba(0,0,0,0.45) 78%, tr
 
 const ACCENTS: Record<AccueilAccent, { text: string; border: string; button: string; glow: string; wash: string }> = {
   transport: {
-    text: 'text-blue-400',
+    text: 'text-[var(--accent-blue-icon)]',
     border: 'hover:border-blue-500/40',
-    button: 'bg-blue-500/15 text-blue-300 group-hover:bg-blue-500/25',
+    button: 'bg-[var(--accent-blue-bg)] text-[var(--accent-blue-fg)] group-hover:bg-blue-500/25',
     glow: 'linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0))',
     wash: 'linear-gradient(to bottom, rgba(59,130,246,0.16), rgba(59,130,246,0.04))',
   },
   marketeur: {
-    text: 'text-emerald-400',
+    text: 'text-[var(--accent-emerald-icon)]',
     border: 'hover:border-emerald-500/40',
-    button: 'bg-emerald-500/15 text-emerald-300 group-hover:bg-emerald-500/25',
+    button: 'bg-[var(--accent-emerald-bg)] text-[var(--accent-emerald-fg)] group-hover:bg-emerald-500/25',
     glow: 'linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0))',
     wash: 'linear-gradient(to bottom, rgba(16,185,129,0.16), rgba(16,185,129,0.04))',
   },
   mixte: {
-    text: 'text-amber-400',
+    text: 'text-[var(--accent-amber-icon)]',
     border: 'hover:border-amber-500/40',
-    button: 'bg-amber-500/15 text-amber-300 group-hover:bg-amber-500/25',
+    button: 'bg-[var(--accent-amber-bg)] text-[var(--accent-amber-fg)] group-hover:bg-amber-500/25',
     glow: 'linear-gradient(135deg, rgba(245,158,11,0.10), rgba(245,158,11,0))',
     wash: 'linear-gradient(to bottom, rgba(245,158,11,0.16), rgba(245,158,11,0.04))',
   },

@@ -30,8 +30,8 @@ export function ComparisonTable({ titre, lignes }: ComparisonTableProps) {
             {lignes.map((row, index) => (
               <tr key={row.ligne} className={index % 2 === 0 ? 'bg-[var(--surface-2)]' : 'bg-[var(--surface-3)]'}>
                 <td className="px-4 py-3 font-medium text-[var(--text-primary)]">{row.ligne}</td>
-                <td className="px-4 py-3 text-red-300">{row.avant}</td>
-                <td className="px-4 py-3 text-emerald-300">{row.apres}</td>
+                <td className="px-4 py-3 text-[var(--accent-red-fg)]">{row.avant}</td>
+                <td className="px-4 py-3 text-[var(--accent-emerald-fg)]">{row.apres}</td>
               </tr>
             ))}
           </tbody>

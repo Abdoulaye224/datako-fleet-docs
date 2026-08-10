@@ -5,12 +5,12 @@ interface BadgeProps {
 }
 
 const colorMap = {
-  blue: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-  amber: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-  red: 'bg-red-500/10 text-red-400 border-red-500/20',
-  purple: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-  slate: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
+  blue: 'bg-[var(--accent-blue-bg)] text-[var(--accent-blue-fg)] border-[var(--accent-blue-border)]',
+  emerald: 'bg-[var(--accent-emerald-bg)] text-[var(--accent-emerald-fg)] border-[var(--accent-emerald-border)]',
+  amber: 'bg-[var(--accent-amber-bg)] text-[var(--accent-amber-fg)] border-[var(--accent-amber-border)]',
+  red: 'bg-[var(--accent-red-bg)] text-[var(--accent-red-fg)] border-[var(--accent-red-border)]',
+  purple: 'bg-[var(--accent-purple-bg)] text-[var(--accent-purple-fg)] border-[var(--accent-purple-border)]',
+  slate: 'bg-[var(--accent-slate-bg)] text-[var(--accent-slate-fg)] border-[var(--accent-slate-border)]',
 }
 
 export function Badge({ label, color = 'slate' }: BadgeProps) {

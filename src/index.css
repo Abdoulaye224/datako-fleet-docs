@@ -19,6 +19,31 @@
   --warning: #F59E0B;
   --error: #EF4444;
   --info: #3B82F6;
+
+  --accent-blue-bg: rgba(37, 99, 235, 0.07);
+  --accent-blue-border: rgba(37, 99, 235, 0.28);
+  --accent-blue-fg: #1E40AF;
+  --accent-blue-icon: #2563EB;
+  --accent-amber-bg: rgba(180, 83, 9, 0.08);
+  --accent-amber-border: rgba(180, 83, 9, 0.28);
+  --accent-amber-fg: #92400E;
+  --accent-amber-icon: #B45309;
+  --accent-emerald-bg: rgba(4, 120, 87, 0.08);
+  --accent-emerald-border: rgba(4, 120, 87, 0.28);
+  --accent-emerald-fg: #065F46;
+  --accent-emerald-icon: #047857;
+  --accent-red-bg: rgba(185, 28, 28, 0.07);
+  --accent-red-border: rgba(185, 28, 28, 0.28);
+  --accent-red-fg: #991B1B;
+  --accent-red-icon: #DC2626;
+  --accent-purple-bg: rgba(109, 40, 217, 0.07);
+  --accent-purple-border: rgba(109, 40, 217, 0.28);
+  --accent-purple-fg: #5B21B6;
+  --accent-purple-icon: #7C3AED;
+  --accent-slate-bg: rgba(51, 65, 85, 0.07);
+  --accent-slate-border: rgba(51, 65, 85, 0.25);
+  --accent-slate-fg: #334155;
+  --accent-slate-icon: #475569;
 }
 
 html.dark {
@@ -37,6 +62,31 @@ html.dark {
   --warning: #F59E0B;
   --error: #EF4444;
   --info: #3B82F6;
+
+  --accent-blue-bg: rgba(59, 130, 246, 0.05);
+  --accent-blue-border: rgba(59, 130, 246, 0.20);
+  --accent-blue-fg: #93C5FD;
+  --accent-blue-icon: #60A5FA;
+  --accent-amber-bg: rgba(245, 158, 11, 0.05);
+  --accent-amber-border: rgba(245, 158, 11, 0.20);
+  --accent-amber-fg: #FCD34D;
+  --accent-amber-icon: #FBBF24;
+  --accent-emerald-bg: rgba(16, 185, 129, 0.05);
+  --accent-emerald-border: rgba(16, 185, 129, 0.20);
+  --accent-emerald-fg: #6EE7B7;
+  --accent-emerald-icon: #34D399;
+  --accent-red-bg: rgba(239, 68, 68, 0.05);
+  --accent-red-border: rgba(239, 68, 68, 0.20);
+  --accent-red-fg: #FCA5A5;
+  --accent-red-icon: #F87171;
+  --accent-purple-bg: rgba(168, 85, 247, 0.06);
+  --accent-purple-border: rgba(168, 85, 247, 0.22);
+  --accent-purple-fg: #D8B4FE;
+  --accent-purple-icon: #C084FC;
+  --accent-slate-bg: rgba(148, 163, 184, 0.06);
+  --accent-slate-border: rgba(148, 163, 184, 0.20);
+  --accent-slate-fg: #CBD5E1;
+  --accent-slate-icon: #94A3B8;
 }
 
 * {

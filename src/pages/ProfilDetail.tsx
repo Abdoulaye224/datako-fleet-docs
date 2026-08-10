@@ -168,7 +168,7 @@ export function ProfilDetail() {
             {profil.erreursFréquentes.map((erreur, index) => (
               <div key={`${erreur.situation}-${index}`} className="rounded-2xl border border-[var(--border)] bg-surface-2 p-5">
                 <p className="text-sm font-semibold text-[var(--text-primary)]">{erreur.situation}</p>
-                <p className="mt-2 text-sm text-amber-300">Conséquence : {erreur.consequence}</p>
+                <p className="mt-2 text-sm text-[var(--accent-amber-fg)]">Conséquence : {erreur.consequence}</p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">Solution : {erreur.solution}</p>
                 {erreur.articleLie && (
                   <Link to={erreur.articleLie} className="mt-4 inline-flex text-sm font-medium text-blue-400 hover:text-blue-300">
