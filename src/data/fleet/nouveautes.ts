@@ -1,6 +1,11 @@
 export type NouveauteTypeLivree = 'nouveau' | 'amelioration' | 'corrige' | 'deprecated'
 export type NouveauteType = NouveauteTypeLivree | 'a_venir'
 
+export interface NouveauteLien {
+  href: string
+  titre: string
+}
+
 interface NouveauteBase {
   id: string
   titre: string
@@ -12,6 +17,7 @@ export interface NouveauteLivree extends NouveauteBase {
   type: NouveauteTypeLivree
   date: string
   mois: string
+  liens?: NouveauteLien[]
 }
 
 export interface NouveauteAVenir extends NouveauteBase {
@@ -39,6 +45,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Le centre de notifications ne s\'accumule plus. Une livraison confirmée sans écart se retire de la liste dès que vous l\'avez lue ; un écart de quantité, lui, y reste tant qu\'il n\'a pas été tranché — le lire ne suffit plus à le faire disparaître. Les notifications résolues sont effacées après quelques jours, mais le journal de la livraison conserve tout et reste la référence en cas de litige.',
     type: 'amelioration',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/suivre-confirmations-notifications', titre: 'Suivre les confirmations depuis la cloche' },
+    ],
   },
   {
     id: 'qr-notifications-livraison',
@@ -48,6 +57,11 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Quand le destinataire est présent au déchargement, plus besoin d\'attendre un message : la fenêtre du lien de confirmation affiche aussi un QR code à faire scanner sur place. Ce n\'est pas un second circuit — c\'est le même lien à usage unique que celui envoyé par WhatsApp ou par e-mail, qui ouvre la même page. En parallèle, une cloche apparaît en haut de l\'écran pour les Administrateurs et les Opérateurs : elle signale deux événements seulement, la confirmation du destinataire en vert et l\'écart de quantité en rouge, et ouvre la livraison concernée en un clic.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
+      { href: '/transport/guides/suivre-confirmations-notifications', titre: 'Suivre les confirmations depuis la cloche' },
+      { href: '/transport/cas-particuliers/lien-confirmation-affiche-une-fois', titre: 'Retrouver un lien de confirmation fermé trop tôt' },
+    ],
   },
   {
     id: 'double-validation-livraison',
@@ -57,6 +71,11 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Vous pouvez désormais demander au destinataire de confirmer lui-même la quantité reçue. Le réglage se fait client par client dans sa fiche, bloc "Validation des livraisons". Le destinataire reçoit un lien, sans compte ni installation, et déclare ce qu\'il a reçu ; si son chiffre diffère du vôtre, la livraison passe en écart signalé et attend un arbitrage. Par défaut, rien ne change : tous les clients restent en "Opérateur uniquement".',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/configurer-double-validation', titre: 'Activer la double validation pour un client' },
+      { href: '/transport/guides/traiter-ecart-destinataire', titre: 'Traiter un écart signalé par le destinataire' },
+      { href: '/confirmation-livraison', titre: 'Ce que voit le destinataire' },
+    ],
   },
   {
     id: 'dossier-livraison-documents',
@@ -66,6 +85,10 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Chaque livraison peut porter jusqu\'à cinq pièces au format PDF : bon de livraison, bon de commande, facture, chèque, preuve de réception. Un indicateur "Dossier complet" ou "Dossier incomplet" signale les rotations dont le numéro de bon de livraison ou les pièces manquent, avec un filtre dédié et une colonne dans l\'export. Les fichiers volumineux sont optimisés automatiquement à l\'ajout.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/valider-livraison', titre: 'Déclarer une livraison et joindre ses pièces' },
+      { href: '/indicateurs/dossier-livraison-complet', titre: 'Comprendre l\'indicateur Dossier complet' },
+    ],
   },
   {
     id: 'v2-facturation-transport',
@@ -75,6 +98,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Générez une facture PDF directement depuis la page Livraisons. Sélectionnez les rotations d\'un client, choisissez TVA et délai de règlement — le PDF se télécharge et les rotations sont marquées facturées (FT-2026-001).',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture de transport' },
+    ],
   },
   {
     id: 'v2-white-label-branding',
@@ -93,6 +119,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Visualisez le profit réel de chaque véhicule de votre flotte — marge des rotations moins les charges fixes — avec classement automatique.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/pages/profit-camion', titre: 'Comprendre la page Profit par camion' },
+    ],
   },
   {
     id: 'v1-4-simulations',
@@ -102,6 +131,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Testez l\'impact d\'un nouveau camion, d\'un changement de tarif ou d\'une hausse de volume sur votre cashflow — sans modifier les données réelles.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/pages/simulations', titre: 'Comprendre la page Simulations' },
+    ],
   },
   {
     id: 'v1-3-export-excel',
@@ -111,6 +143,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'L\'export Excel des Livraisons inclut désormais les colonnes Volume chargé, Volume livré, Manquant et Statut de paiement.',
     type: 'amelioration',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/exporter-excel', titre: 'Exporter vos données vers Excel' },
+    ],
   },
   {
     id: 'v1-3-releve-pdf',
@@ -120,6 +155,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Générez un relevé de compte client sur n\'importe quelle période — toutes les livraisons, statuts de paiement, total dû.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/guides/releve-client-pdf', titre: 'Générer le relevé PDF d\'un client' },
+    ],
   },
   {
     id: 'v1-2-bilan-proprietaire',
@@ -129,6 +167,9 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Les propriétaires de camions gérés peuvent maintenant télécharger leur bilan mensuel : rotations effectuées, gains bruts, part nette.',
     type: 'nouveau',
     module: 'Portail Propriétaire',
+    liens: [
+      { href: '/transport/guides/bilan-proprietaire-pdf', titre: 'Générer le bilan PDF d\'un propriétaire' },
+    ],
   },
   {
     id: 'v1-2-cashflow',
@@ -138,6 +179,10 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Trésorerie nette mensuelle avec déduction du crédit-bail. Visualisation de la tendance sur 6 mois.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/transport/pages/cashflow', titre: 'Comprendre la page Cashflow' },
+      { href: '/indicateurs/cashflow-net', titre: 'Comprendre l\'indicateur Cashflow net' },
+    ],
   },
   {
     id: 'v1-1-manquant-fix',
@@ -147,6 +192,10 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Le manquant (différence volume chargé / livré) était parfois affiché négatif par erreur. Corrigé — le manquant est toujours un nombre positif.',
     type: 'corrige',
     module: 'Transport',
+    liens: [
+      { href: '/transport/cas-particuliers/volume-livre-different', titre: 'Volume livré différent du volume chargé' },
+      { href: '/transport/cas-particuliers/ecart-vs-manquant', titre: 'Différence entre écart signalé et manquant' },
+    ],
   },
   {
     id: 'v1-0-launch',
@@ -156,5 +205,8 @@ export const NOUVEAUTES: NouveauteLivree[] = [
     description: 'Première version de Fleet Manager déployée pour EGUITRA Group. Modules disponibles : Transport (rotations, livraisons, flotte, gains), Répartition acteurs.',
     type: 'nouveau',
     module: 'Transport',
+    liens: [
+      { href: '/onboarding', titre: 'Démarrer avec le parcours d\'onboarding' },
+    ],
   },
 ]

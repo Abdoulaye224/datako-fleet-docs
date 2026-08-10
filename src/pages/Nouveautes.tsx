@@ -1,3 +1,5 @@
+import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/Badge'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { StaggerList } from '@/components/ui/StaggerList'
@@ -86,6 +88,25 @@ export function Nouveautes() {
                       </div>
                       <h3 className="mt-3 text-base font-semibold text-[var(--text-primary)]">{item.titre}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{item.description}</p>
+                      {item.liens && item.liens.length > 0 && (
+                        <div className="mt-4 border-t border-[var(--border)] pt-3">
+                          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                            Comment s'en servir
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {item.liens.map(lien => (
+                              <Link
+                                key={lien.href}
+                                to={lien.href}
+                                className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:border-blue-500/40 hover:bg-surface-3 hover:text-[var(--text-primary)]"
+                              >
+                                {lien.titre}
+                                <ArrowRight size={12} />
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )
                 })}
