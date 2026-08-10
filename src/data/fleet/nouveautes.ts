@@ -12,6 +12,24 @@ export interface Nouveaute {
 
 export const NOUVEAUTES: Nouveaute[] = [
   {
+    id: 'notifications-retention',
+    date: '2026-08-10',
+    mois: 'Août 2026',
+    titre: 'Amélioration : la cloche ne garde que ce qui attend une action',
+    description: 'Le centre de notifications ne s\'accumule plus. Une livraison confirmée sans écart se retire de la liste dès que vous l\'avez lue ; un écart de quantité, lui, y reste tant qu\'il n\'a pas été tranché — le lire ne suffit plus à le faire disparaître. Les notifications résolues sont effacées après quelques jours, mais le journal de la livraison conserve tout et reste la référence en cas de litige.',
+    type: 'amelioration',
+    module: 'Transport',
+  },
+  {
+    id: 'qr-notifications-livraison',
+    date: '2026-08-08',
+    mois: 'Août 2026',
+    titre: 'Nouveau : QR code de confirmation et cloche de notifications',
+    description: 'Quand le destinataire est présent au déchargement, plus besoin d\'attendre un message : la fenêtre du lien de confirmation affiche aussi un QR code à faire scanner sur place. Ce n\'est pas un second circuit — c\'est le même lien à usage unique que celui envoyé par WhatsApp ou par e-mail, qui ouvre la même page. En parallèle, une cloche apparaît en haut de l\'écran pour les Administrateurs et les Opérateurs : elle signale deux événements seulement, la confirmation du destinataire en vert et l\'écart de quantité en rouge, et ouvre la livraison concernée en un clic.',
+    type: 'nouveau',
+    module: 'Transport',
+  },
+  {
     id: 'double-validation-livraison',
     date: '2026-08-08',
     mois: 'Août 2026',

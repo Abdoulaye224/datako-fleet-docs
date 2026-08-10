@@ -185,6 +185,18 @@ export const FAQ_ITEMS: FAQItem[] = [
     reponse: 'La cloche n\'est affichée qu\'aux Administrateurs et aux Opérateurs, car ce sont eux qui traitent les livraisons. Si vous avez l\'un de ces rôles et qu\'elle reste vide, c\'est simplement qu\'aucun destinataire n\'a encore répondu : elle ne se remplit que sur deux événements, la confirmation d\'une livraison et le signalement d\'un écart de quantité.',
   },
   {
+    id: 'notification-disparue-cloche',
+    categorie: 'transport',
+    question: 'Une notification a disparu de la cloche. Est-ce que j\'ai perdu l\'information ?',
+    reponse: 'Non. La cloche ne conserve que ce qui attend encore quelque chose de vous : une livraison confirmée sans écart se retire dès que vous l\'avez lue, et un écart de quantité se retire une fois qu\'il a été tranché. Rien n\'est perdu pour autant — le détail de chaque livraison conserve l\'historique complet, définitif, et c\'est lui qui fait foi en cas de litige. La cloche est un pense-bête, pas un registre.',
+  },
+  {
+    id: 'ecart-reste-dans-cloche',
+    categorie: 'transport',
+    question: 'J\'ai lu la notification d\'écart, pourquoi reste-t-elle affichée ?',
+    reponse: 'Parce qu\'un écart de quantité appelle une décision, pas seulement une lecture. Il reste donc dans la cloche tant qu\'un administrateur ne l\'a pas tranché depuis la livraison concernée. Ce que la lecture change, c\'est uniquement la couleur de la cloche : elle cesse d\'être rouge, mais la ligne, elle, demeure jusqu\'à l\'arbitrage.',
+  },
+  {
     id: 'que-signifie-ecart-signale',
     categorie: 'transport',
     question: 'Que signifie la mention "Écart signalé" ?',

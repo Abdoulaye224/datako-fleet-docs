@@ -428,16 +428,19 @@ export const guides: Guide[] = [
       'Repérez la couleur : vert pour une livraison confirmée, rouge pour un écart de quantité signalé.',
       'Cliquez sur une notification pour ouvrir directement la livraison concernée.',
       'Vous pouvez aussi cliquer sur "Marquer comme lue" pour la traiter plus tard sans quitter votre écran.',
+      "Pour faire disparaître un écart de la cloche, tranchez-le depuis la livraison : la lecture seule ne suffit pas.",
     ],
     resultat:
-      "Vous êtes prévenu des réponses de vos destinataires sans surveiller la page Livraisons. Tant qu'un écart de quantité n'a pas été lu, la cloche elle-même passe en rouge : c'est le signal qu'une décision est attendue. Les notifications déjà lues restent consultables, simplement estompées, et ouvrir une livraison depuis la cloche la marque automatiquement comme lue.",
+      "Vous êtes prévenu des réponses de vos destinataires sans surveiller la page Livraisons. La cloche ne garde que ce qui demande encore votre attention : une livraison confirmée sans écart disparaît de la liste dès que vous l'avez lue, tandis qu'un écart de quantité y reste tant qu'il n'a pas été tranché, même une fois lu. Tant qu'un écart n'a pas été ouvert, la cloche elle-même passe en rouge : c'est le signal qu'une décision est attendue. Ouvrir une livraison depuis la cloche marque automatiquement sa notification comme lue.",
     erreurs: [
       "Attendre une notification pour chaque étape : seuls deux événements sont notifiés, la confirmation du destinataire et l'écart de quantité. L'envoi du lien, la relance ou la finalisation ne le sont pas.",
       "Croire que la cloche remplace la page Livraisons : elle affiche les vingt notifications les plus récentes, pas l'ensemble de votre activité.",
       "S'étonner de ne rien voir sur des livraisons anciennes : seules les confirmations survenues après la mise en service alimentent la cloche.",
+      "Chercher à retrouver une confirmation déjà lue dans la cloche : elle n'y est plus. L'historique complet reste dans le détail de la livraison, qui n'est jamais purgé.",
     ],
     attention: [
-      "La cloche signale ce qui n'a pas été lu, pas ce qui reste à traiter : dès que vous ouvrez une notification d'écart, elle redevient neutre, même si l'écart n'a pas encore été tranché. Le suivi des écarts en attente d'arbitrage se fait dans la page Livraisons, pas dans la cloche.",
+      "Les deux types de notification ne se comportent pas pareil : une confirmation conforme est une information, elle se retire dès sa lecture ; un écart de quantité est une action attendue, il reste affiché jusqu'à son arbitrage. La pastille rouge de la cloche, elle, ne signale que les écarts pas encore ouverts.",
+      "La cloche est un pense-bête, pas un registre : les notifications résolues sont effacées définitivement après quelques jours. Le journal de la livraison, lui, conserve tout et fait foi en cas de litige.",
       'Chaque personne a ses propres notifications : les marquer comme lues n\'affecte pas vos collègues.',
       'Le compteur se met à jour tout seul, et se rafraîchit dès que vous revenez sur l\'onglet.',
       "La cloche ne concerne que les confirmations de destinataires. Les alertes d'activité (écart de volume, camion inactif, marge inhabituelle) passent par WhatsApp, pas par elle.",
