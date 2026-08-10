@@ -1,6 +1,7 @@
 import { Menu, Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { SearchBar } from '@/components/search/SearchBar'
+import { Logo } from '@/components/layout/Logo'
 import { useTheme } from '@/context/ThemeContext'
 
 interface MobileHeaderProps {
@@ -22,12 +23,7 @@ export function MobileHeader({ onMenuOpen }: MobileHeaderProps) {
       </button>
 
       <Link to="/" className="flex items-center gap-2">
-        <div
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold text-white"
-          style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))' }}
-        >
-          D
-        </div>
+        <Logo />
         <span className="text-sm font-semibold text-[var(--text-primary)]">Datakö Fleet</span>
       </Link>
 

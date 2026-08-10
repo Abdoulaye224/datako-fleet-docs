@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, MessageCircle, Package, Sparkles, Truck, Users, X, Zap } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import { Logo } from '@/components/layout/Logo'
 import { useProfil } from '@/context/ProfilContext'
 import { PROFILS } from '@/data/fleet'
 import { TRANSITIONS } from '@/lib/motion'
@@ -117,12 +118,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <div className="border-b border-[var(--border)] px-5 py-4">
               <div className="flex items-center justify-between">
                 <Link to="/" onClick={onClose} className="flex items-center gap-2">
-                  <div
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white"
-                    style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))' }}
-                  >
-                    D
-                  </div>
+                  <Logo />
                   <div>
                     <p className="text-sm font-semibold text-[var(--text-primary)]">Datakö Fleet</p>
                     <p className="text-xs text-[var(--text-muted)]">Documentation</p>
