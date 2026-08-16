@@ -215,7 +215,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     groupe: 'chiffres',
     titre: 'Renseigner vos routes',
     ceQueCest:
-      "Pour chaque trajet dépôt → destination que vous exploitez : la distance, la consommation de vos camions, la prime du chauffeur et le péage.",
+      "Les charges variables de chaque trajet dépôt → destination que vous exploitez : la distance, la consommation de carburant, la prime du chauffeur et le péage. Ce sont les coûts qui n'existent que parce que le camion prend la route — ils changent avec le trajet, pas avec le mois.",
     ou: 'Configuration → onglet Routes',
     qui: 'Administrateur ou Opérateur',
     pourquoiMaintenant:
@@ -223,8 +223,10 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     siOnSaute:
       "Le calcul retombe sur les valeurs générales de votre organisation : votre coût carburant, donc votre marge, est estimé au lieu d'être calculé sur la consommation réelle de vos camions sur ce trajet.",
     details: [
+      "C'est ici, et nulle part ailleurs, que se définissent les charges variables liées au trajet. Les charges fixes du camion se saisissent à l'étape 9, celles de la structure à l'étape 10.",
       'La distance vous est proposée automatiquement à la sélection de la destination — vous pouvez la corriger.',
       'La consommation se renseigne route par route, jamais globalement : une même destination ne se parcourt pas au même coût selon vos camions.',
+      'Ces quatre valeurs sont reprises automatiquement à la création de la rotation, dès que le trajet est sélectionné.',
     ],
     attention:
       "Les dépôts et destinations proposés proviennent du référentiel Datakö. Si une destination vous manque, contactez le support.",
@@ -237,19 +239,27 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     id: 'tarifs',
     numero: 8,
     groupe: 'chiffres',
-    titre: 'Poser vos tarifs contractuels',
+    titre: 'Poser vos tarifs contractuels — seulement si besoin',
     ceQueCest:
-      "Le prix au litre transporté que vous facturez réellement, quand il diffère du tarif national de référence.",
+      "Le prix au litre transporté que vous facturez, quand il diffère de la péréquation transport nationale.",
     ou: 'Configuration → onglet Tarifs de transport',
     qui: 'Administrateur ou Opérateur',
     pourquoiMaintenant:
-      "Après l'étape 6, puisqu'un tarif peut être propre à un client. Et avant votre première rotation : le tarif retenu est figé sur la rotation au moment de l'enregistrement, le corriger ensuite ne la met pas à jour.",
+      "Cette étape peut rester vide. Par défaut, le système applique la péréquation transport nationale à chaque rotation : c'est le cas de la plupart des organisations, et le calcul est juste sans que vous saisissiez quoi que ce soit.",
     siOnSaute:
-      "C'est le tarif national de référence qui s'applique. Votre chiffre d'affaires est alors calculé sur un prix que vous n'avez pas négocié — trop haut ou trop bas, mais dans tous les cas faux.",
+      "Rien ne casse : c'est la péréquation nationale qui s'applique. Votre chiffre d'affaires n'est faux que dans un cas — vous facturez réellement un autre prix que la péréquation sur une distance donnée, et vous ne l'avez pas déclaré ici.",
     details: [
-      "Trois niveaux existent, du plus fort au plus faible : le tarif négocié avec un client précis, puis votre tarif général pour la route, puis le tarif national de référence.",
-      "Le tarif national de référence ne se modifie pas : il vous est fourni.",
+      "Ne créez un tarif contractuel que si votre prix diffère de la péréquation sur une distance donnée, et qu'il s'applique à tous vos clients sur ce trajet.",
+      "S'il ne s'agit que d'une remise accordée à un client précis, ne créez pas de tarif : saisissez une ristourne au moment de créer la rotation. Elle se déduit du tarif facturé, rotation par rotation, et se lit ensuite sur la livraison.",
+      "Trois niveaux existent, du plus fort au plus faible : le tarif négocié avec un client précis, puis votre tarif général pour la route, puis la péréquation nationale.",
+      'La péréquation transport nationale ne se modifie pas : elle vous est fournie.',
     ],
+    attention:
+      "Le tarif retenu est figé sur la rotation au moment de l'enregistrement. Le corriger ensuite ne met pas à jour les rotations déjà enregistrées.",
+    pourAllerPlusLoin: {
+      titre: 'Créer une rotation',
+      href: '/transport/guides/creer-rotation',
+    },
   },
   {
     id: 'charges-vehicules',
