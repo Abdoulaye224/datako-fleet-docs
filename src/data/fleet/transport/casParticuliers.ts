@@ -11,8 +11,8 @@ export const casParticuliers: CasParticulier[] = [
     id: 'vehicule-propre-vs-gere',
     titre: 'Véhicule propre vs véhicule géré',
     contexte: 'Votre flotte peut contenir deux types de véhicules : les véhicules qui vous appartiennent et ceux qui appartiennent à des propriétaires externes.',
-    regle: 'Véhicule propre : 100% des gains restent dans l\'organisation. Véhicule géré : une part revient au propriétaire selon les règles de répartition configurées dans Paramètres.',
-    exemple: 'Un camion géré à 65% propriétaire : sur 5 000 000 GNF de gain, le propriétaire reçoit 3 250 000 GNF.',
+    regle: 'Véhicule propre : 100 % de la marge reste dans votre organisation. Véhicule géré : le propriétaire reçoit tout ce qui n\'a pas été attribué à quelqu\'un d\'autre. Votre entreprise ne se rémunère sur ce camion que si vous avez défini sa part dans Configuration → onglet Acteurs.',
+    exemple: 'Camion géré, marge du mois 5 000 000 GNF. Sans part définie pour votre entreprise, le propriétaire reçoit les 5 000 000 GNF. Avec une commission de 35 % pour votre entreprise, elle en garde une partie et le propriétaire reçoit le reste.',
   },
   {
     id: 'volume-livre-different',

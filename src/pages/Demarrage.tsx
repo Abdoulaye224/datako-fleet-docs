@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   CircleDot,
   MapPin,
+  Repeat,
   Rocket,
   ShieldCheck,
   Sparkles,
@@ -19,6 +20,22 @@ import {
   AVANT_DE_COMMENCER_ACCROCHE,
   AVANT_DE_COMMENCER_NOTE,
   AVANT_DE_COMMENCER_TITRE,
+  COMPTE_DE_TIERS_ACCROCHE,
+  COMPTE_DE_TIERS_ALERTE,
+  COMPTE_DE_TIERS_ALERTE_CONSEQUENCE,
+  COMPTE_DE_TIERS_ALERTE_TITRE,
+  COMPTE_DE_TIERS_ANCRE,
+  COMPTE_DE_TIERS_ETAPES,
+  COMPTE_DE_TIERS_GUIDE,
+  COMPTE_DE_TIERS_LIEN,
+  COMPTE_DE_TIERS_QUESTION,
+  COMPTE_DE_TIERS_SIGNAL,
+  COMPTE_DE_TIERS_MODIFICATION,
+  COMPTE_DE_TIERS_POURQUOI_ALLER_RETOUR,
+  COMPTE_DE_TIERS_TITRE,
+  COMPTE_DE_TIERS_TYPES,
+  COMPTE_DE_TIERS_TYPES_NOTE,
+  COMPTE_DE_TIERS_TYPES_TITRE,
   CE_QUE_DATAKO_A_FAIT,
   CE_QUE_DATAKO_A_FAIT_TITRE,
   CE_QUE_VOUS_FAITES,
@@ -180,6 +197,34 @@ export function Demarrage() {
           <CalloutBlock variant="astuce">{AVANT_DE_COMMENCER_NOTE}</CalloutBlock>
         </section>
 
+        <motion.section
+          whileHover={{ y: -2 }}
+          transition={TRANSITIONS.spring}
+          className="rounded-2xl border border-[var(--accent-amber-border)] bg-[var(--accent-amber-bg)] p-5"
+        >
+          <h2 className="flex items-center gap-2 text-base font-semibold text-[var(--accent-amber-fg)]">
+            <Repeat size={16} className="flex-shrink-0" />
+            {COMPTE_DE_TIERS_QUESTION}
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{COMPTE_DE_TIERS_SIGNAL}</p>
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            <a
+              href={`#${COMPTE_DE_TIERS_ANCRE}`}
+              className="inline-flex items-center gap-2 rounded-xl border border-[var(--accent-amber-border)] bg-surface-2 px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition-colors hover:bg-surface-3"
+            >
+              {COMPTE_DE_TIERS_LIEN}
+              <ArrowRight size={14} className="flex-shrink-0" />
+            </a>
+            <Link
+              to={COMPTE_DE_TIERS_GUIDE.href}
+              className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-surface-2 px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition-colors hover:bg-surface-3"
+            >
+              {COMPTE_DE_TIERS_GUIDE.titre}
+              <ArrowRight size={14} className="flex-shrink-0" />
+            </Link>
+          </div>
+        </motion.section>
+
         {GROUPES_DEMARRAGE.map(groupe => {
           const etapes = ETAPES_DEMARRAGE.filter(etape => etape.groupe === groupe.id)
           return (
@@ -202,6 +247,79 @@ export function Demarrage() {
             </section>
           )
         })}
+
+        <section id={COMPTE_DE_TIERS_ANCRE} className="scroll-mt-24 space-y-4">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">{COMPTE_DE_TIERS_TITRE}</h2>
+              <Badge label="Gestion pour compte de tiers" color="amber" />
+            </div>
+            <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{COMPTE_DE_TIERS_ACCROCHE}</p>
+          </div>
+
+          <CalloutBlock variant="attention" title="Pourquoi vous repassez deux fois par Acteurs">
+            {COMPTE_DE_TIERS_POURQUOI_ALLER_RETOUR}
+          </CalloutBlock>
+
+          <StaggerList className="space-y-3">
+            {COMPTE_DE_TIERS_ETAPES.map(etape => (
+              <div
+                key={etape.numero}
+                className="flex gap-4 rounded-2xl border border-[var(--border)] bg-surface-2 p-5"
+              >
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[var(--surface-3)] text-sm font-semibold text-[var(--text-primary)]">
+                  {etape.numero}
+                </div>
+                <div className="min-w-0 space-y-1.5">
+                  <h3 className="text-sm font-semibold text-[var(--text-primary)]">{etape.titre}</h3>
+                  <p className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                    <MapPin size={12} className="flex-shrink-0" />
+                    {etape.ou}
+                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{etape.quoi}</p>
+                </div>
+              </div>
+            ))}
+          </StaggerList>
+
+          <div className="rounded-2xl border border-[var(--accent-red-border)] bg-[var(--accent-red-bg)] p-5">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--accent-red-fg)]">
+              <Repeat size={15} className="flex-shrink-0" />
+              {COMPTE_DE_TIERS_ALERTE_TITRE}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{COMPTE_DE_TIERS_ALERTE}</p>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {COMPTE_DE_TIERS_ALERTE_CONSEQUENCE}
+            </p>
+          </div>
+
+          <CalloutBlock variant="attention" title="Un camion basculé en « Géré » après coup">
+            {COMPTE_DE_TIERS_MODIFICATION}
+          </CalloutBlock>
+
+          <div className="space-y-3 rounded-2xl border border-[var(--border)] bg-surface-2 p-5">
+            <h3 className="text-sm font-semibold text-[var(--text-primary)]">{COMPTE_DE_TIERS_TYPES_TITRE}</h3>
+            <dl className="space-y-3">
+              {COMPTE_DE_TIERS_TYPES.map(type => (
+                <div key={type.label}>
+                  <dt className="text-sm font-medium text-[var(--text-primary)]">{type.label}</dt>
+                  <dd className="mt-0.5 text-sm leading-relaxed text-[var(--text-secondary)]">{type.description}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="text-xs leading-relaxed text-[var(--text-muted)]">{COMPTE_DE_TIERS_TYPES_NOTE}</p>
+          </div>
+
+          <motion.div whileHover={{ x: 4 }} transition={TRANSITIONS.fast}>
+            <Link
+              to={COMPTE_DE_TIERS_GUIDE.href}
+              className="group flex items-center justify-between gap-3 rounded-xl border border-[var(--border)] bg-surface-2 p-4 transition-colors hover:bg-surface-3"
+            >
+              <span className="text-sm font-medium text-[var(--text-primary)]">{COMPTE_DE_TIERS_GUIDE.titre}</span>
+              <ArrowRight size={14} className="flex-shrink-0 text-[var(--text-muted)]" />
+            </Link>
+          </motion.div>
+        </section>
 
         <section className="space-y-4">
           <div>

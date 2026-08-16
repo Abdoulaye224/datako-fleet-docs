@@ -138,7 +138,8 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
       "L'immatriculation et la capacité en litres sont obligatoires. La capacité doit être supérieure à zéro : elle sert à calculer votre taux de remplissage.",
       'Un véhicule « Propre » vous appartient : la totalité de la marge reste dans votre organisation.',
       "Un véhicule « Géré » appartient à un tiers : une part de la marge lui revient. Son propriétaire et sa date de début de gestion sont alors obligatoires.",
-      "En enregistrant un véhicule géré avec son propriétaire, une règle de répartition résiduelle est créée automatiquement pour cet acteur sur ce véhicule.",
+      "En enregistrant un véhicule géré avec son propriétaire, la part du propriétaire est posée automatiquement sur ce camion : il recevra tout ce qui n'est attribué à personne d'autre. Revenez ensuite à l'étape 5 définir la part de votre entreprise.",
+      "Cette attribution automatique n'a lieu qu'à la création. Un camion déjà enregistré que vous basculez en « Géré » par une modification n'en bénéficie pas : vous devrez poser la part du propriétaire vous-même.",
     ],
     attention:
       "Si votre camion est géré, son propriétaire doit déjà exister comme acteur : le formulaire ne permet que de le sélectionner, pas de le créer. Faites l'étape 4 d'abord pour ces véhicules-là.",
@@ -160,6 +161,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     details: [
       'Un acteur porte un type : Organisation, Propriétaire, Exploitant, Banque, Investisseur, Partenaire ou Conducteur.',
       "Ne déclarez comme acteur que ce qui donne lieu à un partage de revenus — un client ne s'enregistre pas ici, mais à l'étape 6.",
+      "Si vous exploitez les camions d'un propriétaire, créez-le ici avant d'enregistrer son camion à l'étape 3 : vous ne pourrez pas le sélectionner sur le camion s'il n'existe pas encore.",
     ],
     pourAllerPlusLoin: {
       titre: 'Configurer la répartition entre acteurs',
@@ -170,22 +172,23 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     id: 'repartition',
     numero: 5,
     groupe: 'chiffres',
-    titre: 'Vérifier vos règles de répartition',
+    titre: 'Définir la part de votre entreprise',
     ceQueCest:
-      "La façon dont la marge d'un camion se partage entre votre organisation et vos acteurs : commissions d'abord, puis le résiduel, c'est-à-dire tout ce qui reste.",
+      "La façon dont la marge d'un camion se partage : la part de votre entreprise, celle d'un exploitant tiers s'il y en a un, et ce qui revient au propriétaire.",
     ou: 'Configuration → onglet Acteurs',
     qui: 'Administrateur',
     pourquoiMaintenant:
-      "Cette étape est une vérification, pas une saisie : pour chaque véhicule géré enregistré avec son propriétaire, la règle résiduelle a déjà été créée à l'étape 3. Vous n'ajoutez ici que vos commissions.",
+      "Après l'étape 3, et pas avant : une part se pose sur un véhicule, donc le véhicule doit déjà exister. C'est pour cela que vous revenez ici après être passé par la Flotte.",
     siOnSaute:
-      "La part du propriétaire n'est pas explicitement attribuée : votre organisation reçoit par défaut la marge d'exploitation diminuée des commissions. Le montant affiché ressemble à un résultat, mais il ne reflète aucun accord.",
+      "Sur un camion géré, tout ce qui n'est attribué à personne revient au propriétaire. Tant que vous n'avez pas défini la part de votre entreprise, elle ne se rémunère pas sur ce camion : 100 % du résultat part au propriétaire. Rien ne le signale à l'écran.",
     details: [
-      'Une commission peut être un pourcentage, un montant fixe mensuel ou un montant fixe par rotation.',
-      "Le résiduel est le solde : il se calcule après application de toutes les autres règles.",
-      "Une règle peut viser un camion précis, ou l'ensemble de vos camions propres, ou l'ensemble de vos camions gérés.",
+      "Deux choix seulement sont proposés à l'écran : « Commission (%) », un pourcentage du chiffre d'affaires brut, et « Résiduel », qui attribue tout ce qui reste après les commissions et les charges.",
+      "Utilisez « Commission (%) » pour la part de votre entreprise et pour celle d'un exploitant tiers.",
+      "Chaque part s'applique à un périmètre : un camion précis, l'ensemble de vos camions propres, ou l'ensemble de vos camions gérés.",
+      "Sur un camion géré enregistré à l'étape 3 avec son propriétaire, la part du propriétaire a déjà été posée automatiquement. Il vous reste à poser la vôtre.",
     ],
     attention:
-      "L'écran indique qu'il n'y a « qu'un seul résiduel par organisation ». C'est imprécis : l'unicité porte sur un périmètre. Vous pouvez avoir un résiduel par camion, ou un résiduel pour vos camions propres et un autre pour vos camions gérés.",
+      "L'écran indique qu'il n'y a « qu'un seul résiduel par organisation ». C'est imprécis : l'unicité porte sur un périmètre. Vous pouvez avoir une part de ce type par camion, ou une pour vos camions propres et une autre pour vos camions gérés.",
     pourAllerPlusLoin: {
       titre: 'Configurer la répartition entre acteurs',
       href: '/transport/guides/configurer-repartition-acteurs',
@@ -340,6 +343,91 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     pourAllerPlusLoin: { titre: 'Les rôles et leurs permissions', href: '/roles' },
   },
 ]
+
+export interface EtapeCompteDeTiers {
+  numero: number
+  titre: string
+  ou: string
+  quoi: string
+}
+
+export const COMPTE_DE_TIERS_TITRE = 'Cas particulier : vous exploitez les camions de propriétaires'
+
+export const COMPTE_DE_TIERS_QUESTION = 'Exploitez-vous des camions qui ne vous appartiennent pas ?'
+
+export const COMPTE_DE_TIERS_SIGNAL =
+  "Si votre entreprise exploite les camions d'autres personnes ou d'autres sociétés, votre démarrage comporte un passage supplémentaire, et c'est le plus délicat de tous. Les douze étapes ci-dessous restent valables telles quelles : lisez simplement ce cas avant d'attaquer les étapes 3 à 5, elles ne s'enchaînent pas dans l'ordre des numéros pour vous."
+
+export const COMPTE_DE_TIERS_LIEN = 'Lire le cas de la gestion pour compte de tiers'
+
+export const COMPTE_DE_TIERS_GUIDE = {
+  titre: 'Mettre en place un camion géré, de bout en bout',
+  href: '/transport/guides/mettre-en-place-camion-gere',
+}
+
+export const COMPTE_DE_TIERS_ANCRE = 'compte-de-tiers'
+
+export const COMPTE_DE_TIERS_ACCROCHE =
+  "Beaucoup d'entreprises exploitent des camions qui ne leur appartiennent pas. C'est le passage le plus délicat du démarrage, et l'ordre n'est pas négociable : ce n'est pas une préférence de présentation, c'est celui que l'application impose."
+
+export const COMPTE_DE_TIERS_POURQUOI_ALLER_RETOUR =
+  "Vous allez passer par Acteurs, puis par Flotte, puis revenir dans Acteurs. Ce retour est normal : une part se pose sur un véhicule, donc le véhicule doit déjà exister quand vous la définissez. N'essayez pas de tout faire depuis Acteurs en une seule fois, vous n'y arriverez pas."
+
+export const COMPTE_DE_TIERS_ETAPES: EtapeCompteDeTiers[] = [
+  {
+    numero: 1,
+    titre: 'Créer le propriétaire',
+    ou: 'Configuration → onglet Acteurs',
+    quoi: "Déclarez le propriétaire du camion comme acteur. Créez aussi l'exploitant s'il y a un tiers qui exploite le camion à vos côtés et touche une part.",
+  },
+  {
+    numero: 2,
+    titre: 'Créer le camion et le rattacher à son propriétaire',
+    ou: 'Flotte',
+    quoi: "Enregistrez le camion, déclarez-le « Géré », puis sélectionnez le propriétaire que vous venez de créer et la date de début de gestion. Les deux sont obligatoires : sans eux, l'enregistrement est refusé.",
+  },
+  {
+    numero: 3,
+    titre: 'Revenir définir les parts',
+    ou: 'Configuration → onglet Acteurs',
+    quoi: "Définissez ce que votre entreprise gagne sur ce camion, et la part de l'exploitant tiers s'il y en a un. C'est l'étape que tout le monde oublie, et celle qui coûte le plus cher.",
+  },
+  {
+    numero: 4,
+    titre: 'Commencer à exploiter le camion',
+    ou: 'Nouvelle Rotation',
+    quoi: 'Seulement maintenant. Une rotation enregistrée avant que les parts soient posées sera partagée selon ce qui existe à ce moment-là.',
+  },
+]
+
+export const COMPTE_DE_TIERS_ALERTE_TITRE = "Sans part définie, votre entreprise ne gagne rien sur ce camion"
+
+export const COMPTE_DE_TIERS_ALERTE =
+  "À la création d'un camion géré, l'application attribue automatiquement au propriétaire tout ce qui reste une fois les parts des autres déduites. Tant que vous n'avez pas défini la part de votre entreprise, il ne reste rien à déduire : 100 % du résultat du camion part au propriétaire. Si vous avez posé des parts pour des tiers sans jamais poser la vôtre, le propriétaire reçoit tout le reste."
+
+export const COMPTE_DE_TIERS_ALERTE_CONSEQUENCE =
+  "Rien ne vous le signale à l'écran, rien n'est bloqué, et vos rotations s'enregistrent normalement. Le bilan que vous remettez au propriétaire est juste de son point de vue ; c'est le résultat de votre entreprise qui est faux, et vous ne le verrez qu'en constatant que ce camion ne vous rapporte rien."
+
+export const COMPTE_DE_TIERS_MODIFICATION =
+  "Cette attribution automatique n'a lieu qu'à la création du camion. Si vous prenez un camion déjà enregistré et que vous le basculez en « Géré » par une modification, aucune part n'est créée pour le propriétaire : vous devrez la poser vous-même dans Configuration → Acteurs."
+
+export const COMPTE_DE_TIERS_TYPES_TITRE = 'Les deux façons de définir une part'
+
+export const COMPTE_DE_TIERS_TYPES: Array<{ label: string; description: string }> = [
+  {
+    label: 'Commission (%)',
+    description:
+      "Un pourcentage du chiffre d'affaires brut. C'est ce que vous choisissez pour la part de votre entreprise ou pour celle d'un exploitant tiers.",
+  },
+  {
+    label: 'Résiduel',
+    description:
+      "Le bénéficiaire reçoit tout ce qui reste une fois les commissions et les charges déduites. C'est la part attribuée automatiquement au propriétaire d'un camion géré.",
+  },
+]
+
+export const COMPTE_DE_TIERS_TYPES_NOTE =
+  "Ce sont les deux seuls choix proposés à l'écran. Chaque part s'applique à un périmètre : tous vos véhicules propres, tous vos véhicules gérés, ou des véhicules que vous désignez un par un."
 
 export const PREMIERE_ROTATION_TITRE = 'Votre première rotation'
 

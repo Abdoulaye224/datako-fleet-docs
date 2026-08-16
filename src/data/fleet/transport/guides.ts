@@ -72,8 +72,51 @@ export const guides: Guide[] = [
     precedent: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
     suivant: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
     articlesConnexes: [
+      { href: '/transport/guides/mettre-en-place-camion-gere', titre: 'Mettre en place un camion géré, de bout en bout', section: 'Guides' },
       { href: '/transport/pages/repartition-acteurs', titre: 'Répartition acteurs', section: 'Pages' },
       { href: '/transport/cas-particuliers/vehicule-propre-vs-gere', titre: 'Véhicule propre ou géré', section: 'Cas particuliers' },
+      { href: '/indicateurs/part-proprietaire', titre: 'Part propriétaire', section: 'Indicateurs' },
+    ],
+  },
+  {
+    id: 'mettre-en-place-camion-gere',
+    title: 'Mettre en place un camion géré, de bout en bout',
+    objectif:
+      "Enregistrer le camion d'un propriétaire et poser la part de votre entreprise, dans l'ordre imposé par l'application, avant d'exploiter le camion.",
+    prerequis: [
+      'Avoir le rôle Administrateur',
+      "Savoir qui est le propriétaire du camion et à partir de quelle date vous le gérez",
+      "Savoir ce que votre entreprise gagne sur ce camion, et la part d'un exploitant tiers s'il y en a un",
+    ],
+    etapes: [
+      'Allez dans Configuration, onglet Acteurs, et créez le propriétaire du camion. Créez aussi l\'exploitant si un tiers exploite le camion à vos côtés et touche une part.',
+      'Allez dans Flotte et créez le camion : immatriculation, capacité en litres.',
+      'Déclarez-le « Géré », sélectionnez le propriétaire que vous venez de créer et saisissez la date de début de gestion. Les deux sont obligatoires.',
+      'Enregistrez. La part du propriétaire est posée automatiquement sur ce camion.',
+      'Revenez dans Configuration, onglet Acteurs, et créez une part pour votre entreprise sur ce camion : type « Commission (%) », le pourcentage convenu, périmètre « Véhicules spécifiques » en cochant le camion.',
+      "Faites de même pour l'exploitant tiers s'il y en a un.",
+      'Vérifiez le résultat dans Répartition acteurs, puis commencez à enregistrer des rotations sur ce camion.',
+    ],
+    resultat:
+      "Le camion apparaît dans la Flotte comme géré, rattaché à son propriétaire. Chaque rotation partage désormais la marge : la part de votre entreprise, celle de l'exploitant s'il y en a un, et le reste au propriétaire. Le bilan propriétaire devient exploitable des deux côtés.",
+    erreurs: [
+      "Vouloir tout faire depuis Acteurs : c'est impossible. Une part se pose sur un véhicule, donc le véhicule doit exister avant. L'aller-retour Acteurs → Flotte → Acteurs n'est pas contournable.",
+      "Créer le camion avant le propriétaire : le formulaire du véhicule permet seulement de sélectionner un propriétaire existant, pas d'en créer un.",
+      "Oublier l'étape du retour dans Acteurs. C'est l'erreur la plus coûteuse : tant que la part de votre entreprise n'est pas posée, 100 % du résultat du camion part au propriétaire.",
+      'Le pourcentage doit être supérieur à 0 et ne pas dépasser 100. Le total des commissions de votre organisation ne peut pas dépasser 100 %.',
+    ],
+    attention: [
+      "Tant que vous n'avez pas défini la part de votre entreprise, elle ne se rémunère pas sur ce camion. Rien ne vous le signale à l'écran, rien n'est bloqué, les rotations s'enregistrent normalement — et le bilan remis au propriétaire est juste de son point de vue, faux du vôtre.",
+      "La part du propriétaire n'est posée automatiquement qu'à la création du camion. Si vous prenez un camion déjà enregistré et que vous le basculez en « Géré » par une modification, rien n'est créé : vous devrez poser la part du propriétaire vous-même.",
+      "Deux types de parts seulement sont proposés à l'écran : « Commission (%) », un pourcentage du chiffre d'affaires brut, et « Résiduel », qui attribue tout ce qui reste après les commissions et les charges.",
+      "Une part enregistrée s'applique aux prochaines rotations. Une rotation déjà enregistrée avant que la part existe n'est pas repartagée rétroactivement.",
+    ],
+    precedent: { href: '/transport/guides/configurer-repartition-acteurs', titre: 'Configurer la répartition pour un véhicule géré' },
+    suivant: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
+    articlesConnexes: [
+      { href: '/demarrage', titre: 'Mettre en route votre organisation', section: 'Démarrage' },
+      { href: '/transport/cas-particuliers/vehicule-propre-vs-gere', titre: 'Véhicule propre ou géré', section: 'Cas particuliers' },
+      { href: '/transport/pages/repartition-acteurs', titre: 'Répartition acteurs', section: 'Pages' },
       { href: '/indicateurs/part-proprietaire', titre: 'Part propriétaire', section: 'Indicateurs' },
     ],
   },
