@@ -152,7 +152,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     ceQueCest:
       'Les personnes et les sociétés qui touchent une part de vos revenus : propriétaires de camions gérés, exploitants, partenaires, banques, investisseurs.',
     ou: 'Configuration → onglet Acteurs',
-    qui: 'Administrateur ou Opérateur',
+    qui: 'Administrateur',
     pourquoiMaintenant:
       "C'est le préalable de l'étape 5, et le préalable immédiat de tout véhicule géré enregistré à l'étape 3.",
     siOnSaute:
@@ -174,7 +174,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     ceQueCest:
       "La façon dont la marge d'un camion se partage entre votre organisation et vos acteurs : commissions d'abord, puis le résiduel, c'est-à-dire tout ce qui reste.",
     ou: 'Configuration → onglet Acteurs',
-    qui: 'Administrateur ou Opérateur',
+    qui: 'Administrateur',
     pourquoiMaintenant:
       "Cette étape est une vérification, pas une saisie : pour chaque véhicule géré enregistré avec son propriétaire, la règle résiduelle a déjà été créée à l'étape 3. Vous n'ajoutez ici que vos commissions.",
     siOnSaute:
@@ -217,7 +217,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     ceQueCest:
       "Pour chaque trajet dépôt → destination que vous exploitez : la distance, la consommation de vos camions, la prime du chauffeur et le péage.",
     ou: 'Configuration → onglet Routes',
-    qui: 'Administrateur',
+    qui: 'Administrateur ou Opérateur',
     pourquoiMaintenant:
       "Dès la première rotation, ces valeurs déterminent le coût carburant retenu. Une route corrigée après coup oblige à relancer un recalcul sur les rotations déjà enregistrées.",
     siOnSaute:
@@ -280,7 +280,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     ceQueCest:
       "Les coûts qui ne se rattachent à aucun camion en particulier : salaires, HSE, formation, assurance, administratif.",
     ou: 'Configuration → onglet Charges fixes',
-    qui: 'Administrateur',
+    qui: 'Administrateur ou Finance',
     pourquoiMaintenant:
       "Après l'étape 3 également : ces charges sont réparties en quote-part entre vos camions, il faut donc qu'ils existent.",
     siOnSaute:
@@ -298,7 +298,7 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     titre: 'Enregistrer vos conducteurs',
     ceQueCest: 'Les chauffeurs qui prendront la route, avec leur nom et leur téléphone.',
     ou: 'Configuration → onglet Conducteurs',
-    qui: 'Tous les rôles sauf Lecteur',
+    qui: 'Administrateur ou Opérateur',
     pourquoiMaintenant:
       "Après l'étape 3, pour pouvoir désigner le conducteur habituel de chaque camion et gagner du temps à chaque saisie.",
     siOnSaute:

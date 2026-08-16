@@ -148,7 +148,7 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       id: `role-${role.id}`,
       titre: role.nom,
       chapeau: role.mission,
-      contenu: `${role.mission} ${role.utilisateurs} ${role.peutFaire.join(' ')} ${role.nePeutPasFaire.join(' ')} ${role.exemple}`,
+      contenu: `${role.mission} ${role.utilisateurs} ${role.aQuiLAttribuer} ${role.peutConsulter.join(' ')} ${role.peutGerer.join(' ')} ${role.restrictions.join(' ')} ${role.exemple}`,
       section: 'roles',
       categorie: 'Les rôles',
       href: `/roles/${role.id}`,

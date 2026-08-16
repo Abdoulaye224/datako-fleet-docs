@@ -10,13 +10,14 @@ const roleAliases: Record<string, string> = {
   administrateur: 'org_admin',
   operateur: 'operator',
   proprietaire: 'owner',
+  lecteur: 'viewer',
 }
 
 const roleKeywords: Record<string, string[]> = {
   org_admin: ['Administrateur'],
   operator: ['Opérateur'],
   finance: ['Finance'],
-  viewer: ['Observateur'],
+  viewer: ['Lecteur'],
   owner: ['Propriétaire'],
 }
 
@@ -45,11 +46,7 @@ export function RoleDetail() {
     <PageTransition>
       <div className="space-y-8">
         <Breadcrumb
-          items={[
-            { label: 'Accueil', href: '/' },
-            { label: 'Les rôles', href: '/roles' },
-            { label: role.nom },
-          ]}
+          items={[{ label: 'Accueil', href: '/' }, { label: 'Les rôles', href: '/roles' }, { label: role.nom }]}
         />
 
         <section className="overflow-hidden rounded-3xl border border-[var(--border)] bg-surface-2">
@@ -73,30 +70,40 @@ export function RoleDetail() {
           </div>
         </section>
 
-        <CalloutBlock variant="astuce" title="Utilisateurs concernés">
-          {role.utilisateurs}
+        <CalloutBlock variant="astuce" title="À qui attribuer ce rôle">
+          {role.aQuiLAttribuer} <span className="text-[var(--text-muted)]">({role.utilisateurs})</span>
         </CalloutBlock>
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-[var(--accent-emerald-border)] bg-[var(--accent-emerald-bg)] p-5">
+          <div className="rounded-2xl border border-[var(--border)] bg-surface-2 p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-[var(--accent-emerald-fg)]">Ce que vous pouvez faire</h2>
-              <span className="rounded-full border border-[var(--accent-emerald-border)] px-2 py-1 text-xs text-[var(--accent-emerald-fg)]">
-                {role.peutFaire.length} actions
+              <h2 className="text-base font-semibold text-[var(--text-primary)]">Peut consulter</h2>
+              <span className="rounded-full border border-[var(--border)] px-2 py-1 text-xs text-[var(--text-secondary)]">
+                {role.peutConsulter.length} éléments
               </span>
             </div>
-            <CheckList items={role.peutFaire} variant="resultat" showLabel={false} />
+            <CheckList items={role.peutConsulter} variant="prerequis" showLabel={false} />
           </div>
 
-          <div className="rounded-2xl border border-[var(--accent-red-border)] bg-[var(--accent-red-bg)] p-5">
+          <div className="rounded-2xl border border-[var(--accent-emerald-border)] bg-[var(--accent-emerald-bg)] p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-[var(--accent-red-fg)]">Ce que vous ne pouvez pas faire</h2>
-              <span className="rounded-full border border-[var(--accent-red-border)] px-2 py-1 text-xs text-[var(--accent-red-fg)]">
-                {role.nePeutPasFaire.length} limites
+              <h2 className="text-base font-semibold text-[var(--accent-emerald-fg)]">Peut gérer</h2>
+              <span className="rounded-full border border-[var(--accent-emerald-border)] px-2 py-1 text-xs text-[var(--accent-emerald-fg)]">
+                {role.peutGerer.length} actions
               </span>
             </div>
-            <CheckList items={role.nePeutPasFaire} variant="erreur" showLabel={false} />
+            <CheckList items={role.peutGerer} variant="resultat" showLabel={false} />
           </div>
+        </section>
+
+        <section className="rounded-2xl border border-[var(--accent-red-border)] bg-[var(--accent-red-bg)] p-5">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="text-base font-semibold text-[var(--accent-red-fg)]">Restrictions principales</h2>
+            <span className="rounded-full border border-[var(--accent-red-border)] px-2 py-1 text-xs text-[var(--accent-red-fg)]">
+              {role.restrictions.length} limites
+            </span>
+          </div>
+          <CheckList items={role.restrictions} variant="erreur" showLabel={false} />
         </section>
 
         <CalloutBlock variant="exemple" title="Exemple concret">

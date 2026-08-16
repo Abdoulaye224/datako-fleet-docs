@@ -43,7 +43,7 @@ export const ONBOARDING_PARCOURS: OnboardingParcours[] = [
       { titre: 'Créer une rotation', description: 'Enregistrez le départ d\'un camion : camion, client, destination, volume chargé.', href: '/transport/guides/creer-rotation' },
       { titre: 'Valider une livraison', description: 'Saisissez le volume livré réel et validez la livraison.', href: '/transport/guides/valider-livraison' },
       { titre: 'Gérer un volume manquant', description: 'Que faire si le volume livré est inférieur au volume chargé.', href: '/transport/cas-particuliers/volume-livre-different' },
-      { titre: 'Confirmer un paiement', description: 'Marquer une livraison comme payée à réception des fonds.', href: '/transport/guides/confirmer-paiement' },
+      { titre: 'Générer un relevé client', description: 'Éditer le relevé d\'un client sur une période pour appuyer une relance.', href: '/transport/guides/releve-client-pdf' },
     ],
   },
   {

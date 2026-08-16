@@ -223,8 +223,8 @@ export const PROFILS: Profil[] = [
     erreursFréquentes: [
       {
         situation: 'Modifier les données de rotation pour corriger une erreur comptable',
-        consequence: 'Le rôle Finance ne permet pas les modifications — action impossible',
-        solution: 'Demander à un Administrateur de corriger. Le Finance peut uniquement consulter et confirmer les paiements.',
+        consequence: 'Le rôle Finance ne permet pas de modifier les données métier d\'une rotation — action impossible',
+        solution: 'Demander à un Administrateur ou à un Opérateur de corriger. Le Finance pilote le volet financier : encaissements, dates de paiement, factures, charges de l\'organisation et Cashflow.',
       },
       {
         situation: 'Exporter les données sans sélectionner la bonne période',
@@ -353,7 +353,7 @@ export const PROFILS: Profil[] = [
       {
         situation: 'Essayer de générer une facture client',
         consequence: 'Bouton "Générer une facture" non visible pour l\'Opérateur',
-        solution: 'La facturation est réservée aux rôles Administrateur, Directeur et Finance. Les rotations facturées sont signalées par un badge "Facturée" dans la liste — l\'Opérateur peut les voir mais pas les créer.',
+        solution: 'La facturation est réservée aux rôles Administrateur et Finance. Les rotations facturées sont signalées par un badge "Facturée" dans la liste — l\'Opérateur peut les voir mais pas les créer.',
       },
       {
         situation: 'Croire qu\'une livraison est bloquée parce qu\'elle reste "en cours" après la déclaration du volume',

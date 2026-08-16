@@ -102,7 +102,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 'generer-facture-transport',
     categorie: 'finance',
     question: 'Comment générer une facture pour un client ?',
-    reponse: 'Dans Livraisons, cliquez sur "Générer une facture" pour le client concerné. Sélectionnez les rotations livrées à inclure, choisissez si la TVA s\'applique (18%), définissez le délai de règlement, puis cliquez "Générer". Le PDF se télécharge immédiatement et les rotations sont marquées facturées. Seuls les rôles Administrateur, Directeur et Finance peuvent générer des factures.',
+    reponse: 'Dans Livraisons, cliquez sur "Générer une facture" pour le client concerné. Sélectionnez les rotations livrées à inclure, choisissez si la TVA s\'applique (18%), définissez le délai de règlement, puis cliquez "Générer". Le PDF se télécharge immédiatement et les rotations sont marquées facturées. Seuls les rôles Administrateur et Finance peuvent générer des factures.',
   },
   {
     id: 'branding-entreprise',

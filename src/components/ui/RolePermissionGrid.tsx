@@ -1,33 +1,20 @@
 import type { ReactNode } from 'react'
-
-export interface Permission {
-  action: string
-  admin: boolean
-  operator: boolean
-  finance: boolean
-  viewer: boolean
-  owner: boolean
-}
+import type { PermissionLigne } from '@/data/fleet/roles'
 
 interface RolePermissionGridProps {
-  permissions: Permission[]
+  permissions: PermissionLigne[]
 }
 
-export const ROLE_PERMISSIONS: Permission[] = [
-  { action: 'Créer des rotations', admin: true, operator: true, finance: false, viewer: false, owner: false },
-  { action: 'Valider des livraisons', admin: true, operator: true, finance: false, viewer: false, owner: false },
-  { action: 'Confirmer des paiements', admin: true, operator: true, finance: true, viewer: false, owner: false },
-  { action: 'Supprimer des données', admin: true, operator: false, finance: false, viewer: false, owner: false },
-  { action: 'Gérer les membres', admin: true, operator: false, finance: false, viewer: false, owner: false },
-  { action: 'Configurer les paramètres', admin: true, operator: false, finance: false, viewer: false, owner: false },
-  { action: 'Exporter PDF / Excel', admin: true, operator: true, finance: true, viewer: false, owner: false },
-  { action: 'Voir les tableaux de bord', admin: true, operator: true, finance: true, viewer: true, owner: false },
-  { action: 'Consulter ses propres camions', admin: false, operator: false, finance: false, viewer: false, owner: true },
-  { action: 'Télécharger son bilan PDF', admin: false, operator: false, finance: false, viewer: false, owner: true },
-]
-
 function renderPermission(value: boolean): ReactNode {
-  return value ? <span className="text-emerald-400">✅</span> : <span className="text-[var(--text-muted)]">—</span>
+  return value ? (
+    <span className="text-[var(--accent-emerald-icon)]" title="Autorisé">
+      ✅
+    </span>
+  ) : (
+    <span className="text-[var(--text-muted)]" title="Non autorisé">
+      —
+    </span>
+  )
 }
 
 export function RolePermissionGrid({ permissions }: RolePermissionGridProps) {
@@ -37,10 +24,10 @@ export function RolePermissionGrid({ permissions }: RolePermissionGridProps) {
         <thead className="bg-surface text-left text-[var(--text-secondary)]">
           <tr>
             <th className="px-4 py-3 font-semibold">Action</th>
-            <th className="px-4 py-3 font-semibold">Admin 🏢</th>
+            <th className="px-4 py-3 font-semibold">Administrateur 🏢</th>
             <th className="px-4 py-3 font-semibold">Opérateur 🚛</th>
             <th className="px-4 py-3 font-semibold">Finance 📊</th>
-            <th className="px-4 py-3 font-semibold">Observateur 👁</th>
+            <th className="px-4 py-3 font-semibold">Lecteur 👁</th>
             <th className="px-4 py-3 font-semibold">Propriétaire 🔑</th>
           </tr>
         </thead>

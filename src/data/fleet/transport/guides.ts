@@ -199,7 +199,7 @@ export const guides: Guide[] = [
     id: 'confirmer-paiement',
     title: 'Confirmer un paiement',
     objectif: "Enregistrer qu'un client a payé sa facture pour mettre à jour le suivi des créances.",
-    prerequis: ['Avoir le rôle Administrateur, Opérateur ou Finance', 'La livraison doit être validée (statut Livré)'],
+    prerequis: ['Avoir le rôle Administrateur ou Finance', 'La livraison doit être validée (statut Livré)'],
     etapes: [
       'Allez dans la page Livraisons.',
       'Trouvez la livraison avec le badge paiement "En attente" ou "Impayé".',
@@ -208,7 +208,10 @@ export const guides: Guide[] = [
       'Confirmez.',
     ],
     resultat: 'Le badge passe au vert "Payé". La créance est soldée dans les indicateurs financiers.',
-    erreurs: ['Si le badge n\'est pas cliquable, vérifiez votre rôle (Observateur ne peut pas modifier).'],
+    erreurs: ["Si le badge n'est pas cliquable, vérifiez votre rôle : l'encaissement est réservé à l'Administrateur et au Finance."],
+    attention: [
+      "L'encaissement et la date de paiement sont réservés aux rôles Administrateur et Finance. L'Opérateur voit le badge de paiement mais ne peut pas le modifier : c'est volontaire, le suivi des règlements reste entre les mains de la personne qui gère la trésorerie.",
+    ],
     precedent: { href: '/transport/guides/valider-livraison', titre: 'Valider une livraison' },
     suivant: { href: '/transport/guides/releve-client-pdf', titre: 'Générer un relevé client PDF' },
   },
@@ -262,7 +265,7 @@ export const guides: Guide[] = [
       'Le fichier Excel est téléchargé automatiquement.',
     ],
     resultat: 'Un fichier .xlsx est téléchargé avec toutes les colonnes de la période sélectionnée.',
-    erreurs: ['Si le bouton Exporter n\'est pas visible, vérifiez votre rôle (Observateur ne peut pas exporter).'],
+    erreurs: ["Si le bouton Exporter n'est pas visible, vérifiez votre rôle (le Lecteur ne peut pas exporter)."],
     precedent: { href: '/transport/guides/bilan-proprietaire-pdf', titre: 'Générer un bilan propriétaire PDF' },
     suivant: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
   },
@@ -271,7 +274,7 @@ export const guides: Guide[] = [
     title: 'Générer une facture transport',
     objectif: 'Créer une facture PDF multi-rotations pour un client, avec numéro auto-incrémenté, TVA optionnelle et délai de règlement.',
     prerequis: [
-      'Avoir le rôle Administrateur, Directeur ou Finance',
+      'Avoir le rôle Administrateur ou Finance',
       'Au moins une livraison livrée et non encore facturée pour ce client',
     ],
     etapes: [
@@ -288,7 +291,7 @@ export const guides: Guide[] = [
     ],
     resultat: 'Un PDF de facture est généré avec le numéro FT-2026-001 (auto-incrémenté par organisation), l\'en-tête de l\'entreprise, le tableau des rotations, les montants HT/TVA/TTC, le délai de règlement et le commentaire. Les rotations facturées affichent désormais un badge "Facturée" dans la liste des livraisons.',
     erreurs: [
-      'Si le bouton "Générer une facture" n\'est pas visible, vérifiez votre rôle : seuls les Administrateurs, Directeurs et Finances peuvent générer des factures. L\'Opérateur ne peut pas.',
+      'Si le bouton "Générer une facture" n\'est pas visible, vérifiez votre rôle : seuls l\'Administrateur et le Finance peuvent générer des factures. L\'Opérateur ne peut pas.',
       'Si des rotations n\'apparaissent pas dans la modale, elles sont soit déjà facturées (badge "Facturée"), soit pas encore livrées (statut "En cours").',
       'La TVA ne peut pas être modifiée une fois la facture générée. Vérifiez le paramètre avant de cliquer "Générer".',
       'Si le branding white-label est actif sur votre organisation, l\'en-tête du PDF affichera le logo et les couleurs de votre entreprise plutôt que l\'identité Datakö.',
