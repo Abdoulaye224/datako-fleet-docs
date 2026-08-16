@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, MessageCircle, Package, Sparkles, Truck, Users, Zap } from 'lucide-react'
+import { BarChart3, BookOpen, ChevronDown, Compass, HelpCircle, Home, MessageCircle, Package, Rocket, Sparkles, Truck, Users, Zap } from 'lucide-react'
 import { SearchBar } from '@/components/search/SearchBar'
 import { Logo } from '@/components/layout/Logo'
 import { ProfilProgress } from '@/components/ui/ProfilProgress'
@@ -11,6 +11,7 @@ import { TRANSITIONS } from '@/lib/motion'
 
 const navItems = [
   { label: 'Accueil', href: '/', icon: Home },
+  { label: 'Mettre en route', href: '/demarrage', icon: Rocket },
   { label: 'Profils', href: '/profils', icon: Compass },
   { label: 'Onboarding', href: '/onboarding', icon: Zap },
   {

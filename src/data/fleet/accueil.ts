@@ -71,10 +71,16 @@ export const ACCUEIL_SECONDAIRE_TITRE = 'Besoin d’autre chose ?'
 
 export const ENTREES_SECONDAIRES: EntreeSecondaire[] = [
   {
+    titre: 'Mettre en route votre organisation',
+    description: "Vous venez de recevoir vos accès : les 12 étapes jusqu'à votre première rotation",
+    href: '/demarrage',
+    icon: 'rocket',
+  },
+  {
     titre: 'Premiers pas',
     description: 'Découvrir Datakö Fleet et bien démarrer',
     href: '/onboarding',
-    icon: 'rocket',
+    icon: 'clipboard',
   },
   {
     titre: 'Comprendre mon rôle',

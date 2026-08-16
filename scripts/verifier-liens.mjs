@@ -27,7 +27,7 @@ ajouter('/vente/indicateurs/', 'src/data/fleet/vente/indicateurs.ts')
 ajouter('/portail-proprietaire/', 'src/data/fleet/portail/index.ts')
 
 const ROUTES_STATIQUES = [
-  '/', '/transport', '/transport/guides', '/transport/pages', '/transport/cycle',
+  '/', '/demarrage', '/transport', '/transport/guides', '/transport/pages', '/transport/cycle',
   '/transport/cas-particuliers', '/roles', '/indicateurs', '/faq', '/nouveautes',
   '/onboarding', '/profils', '/recherche', '/vente', '/vente/cycle', '/vente/guides',
   '/vente/pages', '/vente/indicateurs', '/whatsapp', '/portail-proprietaire',

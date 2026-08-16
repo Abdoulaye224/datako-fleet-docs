@@ -1,8 +1,8 @@
-import { Clock3 } from 'lucide-react'
+import { Clock3, Rocket } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { StaggerList } from '@/components/ui/StaggerList'
-import { ONBOARDING_PARCOURS } from '@/data/fleet'
+import { ONBOARDING_PARCOURS, DEMARRAGE_RENVOI } from '@/data/fleet'
 
 export function OnboardingSelect() {
   return (
@@ -15,6 +15,26 @@ export function OnboardingSelect() {
             Suivez un parcours guidé selon votre rôle pour être opérationnel rapidement dans Fleet Manager.
           </p>
         </div>
+
+        <Link
+          to={DEMARRAGE_RENVOI.href}
+          className="group flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-surface-2 p-5 transition-colors hover:border-blue-500/30 hover:bg-surface-3"
+        >
+          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--accent-blue-bg)]">
+            <Rocket size={16} className="text-[var(--accent-blue-icon)]" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-sm font-semibold text-[var(--text-primary)] transition-colors group-hover:text-blue-400">
+              {DEMARRAGE_RENVOI.titre}
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {DEMARRAGE_RENVOI.description}
+            </p>
+            <span className="mt-2 inline-block text-xs font-medium text-[var(--accent-blue-fg)] group-hover:underline">
+              {DEMARRAGE_RENVOI.cta} →
+            </span>
+          </div>
+        </Link>
 
         <StaggerList className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {ONBOARDING_PARCOURS.map(parcours => (

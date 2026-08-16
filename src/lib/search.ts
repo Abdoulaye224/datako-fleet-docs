@@ -15,6 +15,7 @@ import type { CycleEtape as VenteCycleEtape } from '@/data/fleet/vente/cycle'
 import type { GuideConfirmationDestinataire } from '@/data/fleet/transport/confirmationDestinataire'
 import type { WhatsAppFlux } from '@/data/fleet/whatsapp'
 import type { PortailSection } from '@/data/fleet/portail'
+import type { EtapeDemarrage } from '@/data/fleet/demarrage'
 
 export interface SearchEntry {
   id: string
@@ -78,6 +79,7 @@ interface SearchData {
   guideDestinataire?: GuideConfirmationDestinataire
   whatsappFlux?: WhatsAppFlux[]
   portailSections?: PortailSection[]
+  demarrage?: EtapeDemarrage[]
 }
 
 export function buildSearchIndex(data: SearchData): SearchEntry[] {
@@ -314,6 +316,19 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       categorie: 'Portail Propriétaire',
       href: section.href,
       tags: ['portail', 'propriétaire', 'bilan'],
+    })
+  })
+
+  data.demarrage?.forEach(etape => {
+    entries.push({
+      id: `demarrage-${etape.id}`,
+      titre: `${etape.numero}. ${etape.titre}`,
+      chapeau: etape.ceQueCest,
+      contenu: `${etape.ceQueCest} ${etape.ou} ${etape.qui} ${etape.pourquoiMaintenant} ${etape.siOnSaute} ${etape.details?.join(' ') ?? ''} ${etape.attention ?? ''}`,
+      section: 'onboarding',
+      categorie: 'Mettre en route votre organisation',
+      href: '/demarrage',
+      tags: ['démarrage', 'mise en route', 'configuration'],
     })
   })
 

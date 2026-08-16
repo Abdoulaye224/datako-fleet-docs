@@ -6,6 +6,7 @@ import { SearchProvider, useSearch } from '@/context/SearchContext'
 import { ThemeProvider } from '@/context/ThemeContext'
 
 const Home = lazy(() => import('@/pages/Home').then(m => ({ default: m.Home })))
+const Demarrage = lazy(() => import('@/pages/Demarrage').then(m => ({ default: m.Demarrage })))
 const TransportIndex = lazy(() => import('@/pages/transport/index').then(m => ({ default: m.TransportIndex })))
 const PagesList = lazy(() => import('@/pages/transport/PagesList').then(m => ({ default: m.PagesList })))
 const PageDetail = lazy(() => import('@/pages/transport/PageDetail').then(m => ({ default: m.PageDetail })))
@@ -67,6 +68,7 @@ function AppRoutes() {
     <Routes location={location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Suspense fallback={suspenseFallback}><Home /></Suspense>} />
+          <Route path="demarrage" element={<Suspense fallback={suspenseFallback}><Demarrage /></Suspense>} />
           <Route path="transport" element={<Suspense fallback={suspenseFallback}><TransportIndex /></Suspense>} />
           <Route path="transport/pages" element={<Suspense fallback={suspenseFallback}><PagesList /></Suspense>} />
           <Route path="transport/pages/:id" element={<Suspense fallback={suspenseFallback}><PageDetail /></Suspense>} />

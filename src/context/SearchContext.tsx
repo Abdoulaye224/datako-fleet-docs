@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 import {
+  ETAPES_DEMARRAGE,
   FAQ_ITEMS,
   INDICATEURS,
   NOUVEAUTES,
@@ -58,6 +59,7 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
         guideDestinataire: GUIDE_CONFIRMATION_DESTINATAIRE,
         whatsappFlux: WHATSAPP_FLUX,
         portailSections: PORTAIL_SECTIONS,
+        demarrage: ETAPES_DEMARRAGE,
       }),
     [],
   )
