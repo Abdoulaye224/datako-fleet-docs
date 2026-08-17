@@ -180,15 +180,16 @@ export const ETAPES_DEMARRAGE: EtapeDemarrage[] = [
     pourquoiMaintenant:
       "Après l'étape 3, et pas avant : une part se pose sur un véhicule, donc le véhicule doit déjà exister. C'est pour cela que vous revenez ici après être passé par la Flotte.",
     siOnSaute:
-      "Sur un camion géré, tout ce qui n'est attribué à personne revient au propriétaire. Tant que vous n'avez pas défini la part de votre entreprise, elle ne se rémunère pas sur ce camion : 100 % du résultat part au propriétaire. Rien ne le signale à l'écran.",
+      "Sur un camion géré, tout ce qui n'est attribué à personne revient au propriétaire. Tant que vous n'avez pas défini la part de votre entreprise, elle ne se rémunère pas sur ce camion : 100 % du résultat part au propriétaire. Rien n'est bloqué — seule la mention « Aucune part pour l'organisation » dans la Flotte vous l'indique.",
     details: [
       "Deux choix seulement sont proposés à l'écran : « Commission (%) », un pourcentage du chiffre d'affaires brut, et « Résiduel », qui attribue tout ce qui reste après les commissions et les charges.",
       "Utilisez « Commission (%) » pour la part de votre entreprise et pour celle d'un exploitant tiers.",
       "Chaque part s'applique à un périmètre : un camion précis, l'ensemble de vos camions propres, ou l'ensemble de vos camions gérés.",
       "Sur un camion géré enregistré à l'étape 3 avec son propriétaire, la part du propriétaire a déjà été posée automatiquement. Il vous reste à poser la vôtre.",
+      "Une seule part de type « Résiduel » coexiste par périmètre : une par camion, ou une pour l'ensemble de vos camions propres et une autre pour l'ensemble de vos camions gérés.",
     ],
     attention:
-      "L'écran indique qu'il n'y a « qu'un seul résiduel par organisation ». C'est imprécis : l'unicité porte sur un périmètre. Vous pouvez avoir une part de ce type par camion, ou une pour vos camions propres et une autre pour vos camions gérés.",
+      "Dans la Flotte, un camion géré sur lequel votre entreprise ne reçoit rien porte la mention « Aucune part pour l'organisation ». C'est le signal que cette étape reste à faire pour ce camion — et le moyen de vérifier, d'un coup d'œil sur la liste, qu'il n'en reste aucun.",
     pourAllerPlusLoin: {
       titre: 'Configurer la répartition entre acteurs',
       href: '/transport/guides/configurer-repartition-acteurs',
@@ -390,7 +391,7 @@ export const COMPTE_DE_TIERS_ETAPES: EtapeCompteDeTiers[] = [
     numero: 3,
     titre: 'Revenir définir les parts',
     ou: 'Configuration → onglet Acteurs',
-    quoi: "Définissez ce que votre entreprise gagne sur ce camion, et la part de l'exploitant tiers s'il y en a un. C'est l'étape que tout le monde oublie, et celle qui coûte le plus cher.",
+    quoi: "Définissez ce que votre entreprise gagne sur ce camion, et la part de l'exploitant tiers s'il y en a un. C'est l'étape que tout le monde oublie, et celle qui coûte le plus cher. Dans la Flotte, tant qu'elle n'est pas faite, le camion porte la mention « Aucune part pour l'organisation ».",
   },
   {
     numero: 4,
@@ -406,7 +407,7 @@ export const COMPTE_DE_TIERS_ALERTE =
   "À la création d'un camion géré, l'application attribue automatiquement au propriétaire tout ce qui reste une fois les parts des autres déduites. Tant que vous n'avez pas défini la part de votre entreprise, il ne reste rien à déduire : 100 % du résultat du camion part au propriétaire. Si vous avez posé des parts pour des tiers sans jamais poser la vôtre, le propriétaire reçoit tout le reste."
 
 export const COMPTE_DE_TIERS_ALERTE_CONSEQUENCE =
-  "Rien ne vous le signale à l'écran, rien n'est bloqué, et vos rotations s'enregistrent normalement. Le bilan que vous remettez au propriétaire est juste de son point de vue ; c'est le résultat de votre entreprise qui est faux, et vous ne le verrez qu'en constatant que ce camion ne vous rapporte rien."
+  "Vos rotations s'enregistrent normalement et rien n'est bloqué. Le seul signal est la mention « Aucune part pour l'organisation » sur la ligne du camion dans la Flotte. Sans elle, vous ne le verriez qu'en constatant que ce camion ne vous rapporte rien : le bilan remis au propriétaire est juste de son point de vue, c'est le résultat de votre entreprise qui est faux."
 
 export const COMPTE_DE_TIERS_MODIFICATION =
   "Cette attribution automatique n'a lieu qu'à la création du camion. Si vous prenez un camion déjà enregistré et que vous le basculez en « Géré » par une modification, aucune part n'est créée pour le propriétaire : vous devrez la poser vous-même dans Configuration → Acteurs."
