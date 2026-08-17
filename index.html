@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function () {
-        var theme = localStorage.getItem('hc-theme') || 'dark'
+        var theme = localStorage.getItem('hc-theme') || 'light'
         if (theme === 'dark') document.documentElement.classList.add('dark')
         // GitHub Pages SPA redirect — restore path from ?p= set by 404.html
         var p = new URLSearchParams(window.location.search).get('p')
