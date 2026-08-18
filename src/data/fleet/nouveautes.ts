@@ -26,17 +26,34 @@ export interface NouveauteAVenir extends NouveauteBase {
 
 export type Nouveaute = NouveauteLivree | NouveauteAVenir
 
-export const NOUVEAUTES_A_VENIR: NouveauteAVenir[] = [
-  {
-    id: 'mission-conducteur-whatsapp',
-    titre: 'Le conducteur suivra sa mission depuis WhatsApp',
-    description: 'Le conducteur sera prévenu par WhatsApp dès qu\'une mission lui est affectée, et pourra depuis WhatsApp démarrer sa mission puis signaler son arrivée et le déchargement. La validation finale ne changera pas : c\'est le même QR code à usage unique que celui déjà en service qui sera présenté, pas un second système de confirmation. Ce chantier est en cours de conception : aucune date n\'est annoncée à ce stade.',
-    type: 'a_venir',
-    module: 'Transport',
-  },
-]
+export const NOUVEAUTES_A_VENIR: NouveauteAVenir[] = []
 
 export const NOUVEAUTES: NouveauteLivree[] = [
+  {
+    id: 'mission-conducteur-whatsapp',
+    date: '2026-08-18',
+    mois: 'Août 2026',
+    titre: 'Nouveau : le conducteur suit sa mission depuis WhatsApp',
+    description: 'Le conducteur est désormais prévenu par WhatsApp dès qu\'une mission lui est affectée : camion, client, produit, quantité, départ, destination et date de chargement, avec un bouton « Démarrer » valable 12 heures. Une fois la mission démarrée, un bouton « Fin de mission » lui permet de déclarer la quantité réellement déposée — saisie libre, jamais préremplie — puis de présenter un QR au réceptionnaire, qui confirme lui-même la quantité reçue. Sa déclaration ne clôture pas la livraison : elle ouvre la confirmation du destinataire. Côté exploitation, l\'état de la mission est visible depuis les livraisons, une mission non démarrée à l\'échéance est signalée en retard, et une mission peut être annulée avec motif. Fonctionnalité premium réservée au plan Business avec le module Transport, activée par Datakö.',
+    type: 'nouveau',
+    module: 'Transport',
+    liens: [
+      { href: '/whatsapp/mission-conducteur', titre: 'Comprendre la Mission Conducteur WhatsApp' },
+      { href: '/confirmation-livraison', titre: 'Ce que voit le destinataire' },
+    ],
+  },
+  {
+    id: 'confirmation-nom-attestation',
+    date: '2026-08-18',
+    mois: 'Août 2026',
+    titre: 'Amélioration : le destinataire décline son nom et atteste sa réception',
+    description: 'La page de confirmation de réception demande désormais, en plus de la quantité reçue, le nom de la personne qui confirme et une case d\'attestation. Ce changement vaut pour toutes les confirmations, y compris celles envoyées par vos opérateurs, sans rapport avec les missions conducteur. Une confirmation cesse d\'être rattachée à un lien anonyme : elle porte un nom. Ce sont des mentions déclaratives, elles ne vérifient pas l\'identité du réceptionnaire.',
+    type: 'amelioration',
+    module: 'Transport',
+    liens: [
+      { href: '/confirmation-livraison', titre: 'Ce que voit le destinataire' },
+    ],
+  },
   {
     id: 'notifications-retention',
     date: '2026-08-10',

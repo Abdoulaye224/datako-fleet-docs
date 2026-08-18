@@ -8,6 +8,7 @@ import { appPages as ventePages } from '@/data/fleet/vente/pages'
 import { guides as venteGuides } from '@/data/fleet/vente/guides'
 import { INDICATEURS as venteIndicateurs } from '@/data/fleet/vente/indicateurs'
 import { GUIDE_CONFIRMATION_DESTINATAIRE } from '@/data/fleet/transport/confirmationDestinataire'
+import { MISSION_CONDUCTEUR_ACCROCHE, MISSION_CONDUCTEUR_TITRE } from '@/data/fleet/whatsapp/missionConducteur'
 import { MobileHeader } from './MobileHeader'
 import { MobileMenu } from './MobileMenu'
 import { Sidebar } from './Sidebar'
@@ -44,6 +45,7 @@ function RouteMeta() {
     if (pathname === '/vente/guides') return { title: 'Guides Marketeur', description: 'Guides pas-à-pas pour maîtriser votre activité de distribution.' }
     if (pathname === '/vente/indicateurs') return { title: 'Indicateurs Marketeur', description: 'Marge nette, CA facturé, position TVA, créances clients — définitions et formules.' }
     if (pathname === '/whatsapp') return { title: 'WhatsApp avec Datakö Fleet', description: 'Piloter son activité, agir depuis le terrain et faire confirmer ses livraisons via WhatsApp.' }
+    if (pathname === '/whatsapp/mission-conducteur') return { title: MISSION_CONDUCTEUR_TITRE, description: MISSION_CONDUCTEUR_ACCROCHE }
     if (pathname === '/portail-proprietaire') return { title: 'Portail Propriétaire', description: 'Espace dédié aux propriétaires de véhicules gérés : bilans et exports PDF.' }
     if (pathname === '/parcours-complet') return { title: 'Transport & Marketeur', description: 'Les deux parcours côte à côte et les points où les deux activités se rejoignent.' }
     if (pathname === '/confirmation-livraison') return { title: GUIDE_CONFIRMATION_DESTINATAIRE.titre, description: GUIDE_CONFIRMATION_DESTINATAIRE.accroche }

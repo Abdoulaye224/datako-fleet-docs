@@ -30,7 +30,7 @@ const ROUTES_STATIQUES = [
   '/', '/demarrage', '/transport', '/transport/guides', '/transport/pages', '/transport/cycle',
   '/transport/cas-particuliers', '/roles', '/indicateurs', '/faq', '/nouveautes',
   '/onboarding', '/profils', '/recherche', '/vente', '/vente/cycle', '/vente/guides',
-  '/vente/pages', '/vente/indicateurs', '/whatsapp', '/portail-proprietaire',
+  '/vente/pages', '/vente/indicateurs', '/whatsapp', '/whatsapp/mission-conducteur', '/portail-proprietaire',
   '/parcours-complet', '/confirmation-livraison',
 ]
 ROUTES_STATIQUES.forEach(route => cibles.add(route))

@@ -20,6 +20,7 @@ import { INDICATEURS as venteIndicateurs } from '@/data/fleet/vente/indicateurs'
 import { cycleEtapes as venteCycle } from '@/data/fleet/vente/cycle'
 import { GUIDE_CONFIRMATION_DESTINATAIRE } from '@/data/fleet/transport/confirmationDestinataire'
 import { WHATSAPP_FLUX } from '@/data/fleet/whatsapp'
+import { MISSION_CONDUCTEUR_ETAPES, MISSION_CONDUCTEUR_VIGILANCE } from '@/data/fleet/whatsapp/missionConducteur'
 import { PORTAIL_SECTIONS } from '@/data/fleet/portail'
 import { buildSearchIndex, scoreEntry, type SearchEntry } from '@/lib/search'
 
@@ -58,6 +59,8 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
         venteCycle,
         guideDestinataire: GUIDE_CONFIRMATION_DESTINATAIRE,
         whatsappFlux: WHATSAPP_FLUX,
+        missionConducteurEtapes: MISSION_CONDUCTEUR_ETAPES,
+        missionConducteurVigilance: MISSION_CONDUCTEUR_VIGILANCE,
         portailSections: PORTAIL_SECTIONS,
         demarrage: ETAPES_DEMARRAGE,
       }),

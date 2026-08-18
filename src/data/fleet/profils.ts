@@ -325,12 +325,14 @@ export const PROFILS: Profil[] = [
       { href: '/transport/pages/livraisons', label: 'Page Livraisons — vue d\'ensemble', priorite: 'importante' },
       { href: '/transport/cas-particuliers/dossier-livraison-complet', label: 'Compléter le dossier documentaire d\'une livraison', priorite: 'importante' },
       { href: '/confirmation-livraison', label: 'Ce que voit le destinataire quand il reçoit le lien', priorite: 'utile' },
+      { href: '/whatsapp/mission-conducteur', label: 'Mission Conducteur WhatsApp — ce que fait votre conducteur', priorite: 'utile' },
       { href: '/transport/guides/ajouter-maintenance', label: 'Signaler une maintenance', priorite: 'utile' },
     ],
     actionsTupiques: [
       { titre: 'Enregistrer le départ du camion le matin', guide: '/transport/guides/creer-rotation' },
       { titre: 'Saisir le volume livré à l\'arrivée et valider', guide: '/transport/guides/valider-livraison' },
       { titre: 'Envoyer au destinataire le lien de confirmation de réception', guide: '/transport/guides/valider-livraison' },
+      { titre: 'Vérifier où en est la mission WhatsApp du conducteur', guide: '/whatsapp/mission-conducteur' },
       { titre: 'Joindre le bon de livraison scanné au dossier de la rotation', guide: '/transport/cas-particuliers/dossier-livraison-complet' },
       { titre: 'Gérer un volume manquant (différence chargé / livré)', guide: '/transport/cas-particuliers/volume-livre-different' },
     ],
@@ -373,6 +375,18 @@ export const PROFILS: Profil[] = [
         solution: 'Renvoyer d\'abord un lien au destinataire, puis solliciter un administrateur si le silence persiste.',
         articleLie: '/transport/cas-particuliers/destinataire-sans-reponse',
       },
+      {
+        situation: 'Croire qu\'une mission conducteur « Terminée » signifie que la livraison est livrée',
+        consequence: 'La livraison est considérée comme close alors qu\'elle attend encore un arbitrage, notamment si le destinataire a signalé un écart',
+        solution: 'La mission passe en « Terminée » dès que le destinataire répond, écart compris. Le statut de la livraison reste la seule référence.',
+        articleLie: '/whatsapp/mission-conducteur',
+      },
+      {
+        situation: 'Vouloir annuler une mission conducteur dont le dépotage est déjà déclaré',
+        consequence: 'L\'annulation de la mission est refusée à ce stade',
+        solution: 'Annulez la livraison : cela éteint aussi la déclaration du conducteur et le lien remis au destinataire.',
+        articleLie: '/whatsapp/mission-conducteur',
+      },
     ],
     indicateurs: [
       { nom: 'Livraisons du jour', pourquoi: 'Suivi temps réel de l\'activité', href: '/transport/pages/livraisons' },
@@ -399,6 +413,7 @@ export const PROFILS: Profil[] = [
       { href: '/transport/guides/ajouter-charge-fixe', label: 'Ajouter les charges fixes', priorite: 'critique' },
       { href: '/transport/guides/ajouter-maintenance', label: 'Enregistrer une maintenance', priorite: 'critique' },
       { href: '/transport/cas-particuliers/vehicule-propre-vs-gere', label: 'Véhicule propre vs géré', priorite: 'importante' },
+      { href: '/whatsapp/mission-conducteur', label: 'Mission Conducteur WhatsApp — suivre ses conducteurs', priorite: 'importante' },
       { href: '/transport/pages/profit-camion', label: 'Profit par camion — performance', priorite: 'importante' },
       { href: '/indicateurs/charges-fixes-vehicule', label: 'Comprendre les charges fixes', priorite: 'importante' },
       { href: '/transport/cas-particuliers/charges-fixes-periode', label: 'Charges sur période de gestion', priorite: 'utile' },
@@ -407,6 +422,7 @@ export const PROFILS: Profil[] = [
       { titre: 'Configurer un nouveau camion dans Fleet Manager', guide: '/transport/guides/ajouter-camion' },
       { titre: 'Enregistrer l\'assurance annuelle et la répartir sur l\'année', guide: '/transport/guides/ajouter-charge-fixe' },
       { titre: 'Suivre les interventions mécaniques et leur coût', guide: '/transport/guides/ajouter-maintenance' },
+      { titre: 'Repérer les missions conducteur non démarrées à l\'échéance', guide: '/whatsapp/mission-conducteur' },
     ],
     erreursFréquentes: [
       {
@@ -419,6 +435,12 @@ export const PROFILS: Profil[] = [
         consequence: 'Les charges annuelles sont sous-évaluées d\'un facteur 12',
         solution: 'Toujours entrer le montant total de la charge + la période de référence (mensuel / annuel / unique).',
         articleLie: '/indicateurs/charges-fixes-vehicule',
+      },
+      {
+        situation: 'Attendre qu\'une mission conducteur en retard se règle d\'elle-même',
+        consequence: 'La mission reste bloquée : rien ne l\'annule ni ne la clôture automatiquement, et le conducteur ne peut plus la démarrer passé 12 heures',
+        solution: 'Le retard est un signal, pas une action. Contactez le conducteur, puis annulez la mission avec un motif si le départ n\'a pas eu lieu.',
+        articleLie: '/whatsapp/mission-conducteur',
       },
     ],
     indicateurs: [

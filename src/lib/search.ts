@@ -14,6 +14,7 @@ import type { Indicateur as VenteIndicateur } from '@/data/fleet/vente/indicateu
 import type { CycleEtape as VenteCycleEtape } from '@/data/fleet/vente/cycle'
 import type { GuideConfirmationDestinataire } from '@/data/fleet/transport/confirmationDestinataire'
 import type { WhatsAppFlux } from '@/data/fleet/whatsapp'
+import type { MissionEtape, MissionVigilance } from '@/data/fleet/whatsapp/missionConducteur'
 import type { PortailSection } from '@/data/fleet/portail'
 import type { EtapeDemarrage } from '@/data/fleet/demarrage'
 
@@ -78,6 +79,8 @@ interface SearchData {
   venteCycle?: VenteCycleEtape[]
   guideDestinataire?: GuideConfirmationDestinataire
   whatsappFlux?: WhatsAppFlux[]
+  missionConducteurEtapes?: MissionEtape[]
+  missionConducteurVigilance?: MissionVigilance[]
   portailSections?: PortailSection[]
   demarrage?: EtapeDemarrage[]
 }
@@ -297,8 +300,34 @@ export function buildSearchIndex(data: SearchData): SearchEntry[] {
       contenu: `${flux.description} ${flux.etapes.join(' ')} ${flux.resultat ?? ''} ${flux.exempleMessage ?? ''} ${flux.acces}`,
       section: 'whatsapp',
       categorie: 'WhatsApp',
-      href: '/whatsapp',
+      href: flux.href ?? '/whatsapp',
       tags: ['whatsapp', flux.bloc, flux.acteur],
+    })
+  })
+
+  data.missionConducteurEtapes?.forEach(etape => {
+    entries.push({
+      id: `mission-conducteur-etape-${etape.numero}`,
+      titre: etape.titre,
+      chapeau: etape.description,
+      contenu: `${etape.description} ${etape.details.join(' ')} ${etape.message ?? ''} ${etape.aRetenir ?? ''}`,
+      section: 'whatsapp',
+      categorie: 'Mission Conducteur',
+      href: '/whatsapp/mission-conducteur',
+      tags: ['whatsapp', 'mission conducteur', 'conducteur', etape.acteur],
+    })
+  })
+
+  data.missionConducteurVigilance?.forEach((point, index) => {
+    entries.push({
+      id: `mission-conducteur-vigilance-${index}`,
+      titre: point.titre,
+      chapeau: point.description,
+      contenu: point.description,
+      section: 'whatsapp',
+      categorie: 'Mission Conducteur',
+      href: '/whatsapp/mission-conducteur',
+      tags: ['whatsapp', 'mission conducteur', 'vigilance'],
     })
   })
 

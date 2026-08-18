@@ -42,6 +42,7 @@ const VenteIndicateurDetail = lazy(() => import('@/pages/vente/IndicateurDetail'
 
 // V2 — WhatsApp
 const WhatsAppIndex = lazy(() => import('@/pages/whatsapp/index').then(m => ({ default: m.WhatsAppIndex })))
+const MissionConducteur = lazy(() => import('@/pages/whatsapp/MissionConducteur').then(m => ({ default: m.MissionConducteur })))
 
 // V2 — Portail Propriétaire
 const PortailProprietaireIndex = lazy(() => import('@/pages/portail-proprietaire/index').then(m => ({ default: m.PortailProprietaireIndex })))
@@ -99,6 +100,7 @@ function AppRoutes() {
           <Route path="vente/indicateurs/:id" element={<Suspense fallback={suspenseFallback}><VenteIndicateurDetail /></Suspense>} />
           {/* V2 — WhatsApp */}
           <Route path="whatsapp" element={<Suspense fallback={suspenseFallback}><WhatsAppIndex /></Suspense>} />
+          <Route path="whatsapp/mission-conducteur" element={<Suspense fallback={suspenseFallback}><MissionConducteur /></Suspense>} />
           {/* V2 — Portail Propriétaire */}
           <Route path="portail-proprietaire" element={<Suspense fallback={suspenseFallback}><PortailProprietaireIndex /></Suspense>} />
           <Route path="portail-proprietaire/:id" element={<Suspense fallback={suspenseFallback}><PortailSectionDetail /></Suspense>} />

@@ -31,7 +31,14 @@ const navItems = [
       { label: 'Indicateurs Marketeur', href: '/vente/indicateurs' },
     ],
   },
-  { label: 'WhatsApp', href: '/whatsapp', icon: MessageCircle },
+  {
+    label: 'WhatsApp',
+    icon: MessageCircle,
+    children: [
+      { label: "Vue d'ensemble", href: '/whatsapp' },
+      { label: 'Mission Conducteur', href: '/whatsapp/mission-conducteur' },
+    ],
+  },
   {
     label: 'Portail Propriétaire',
     icon: BookOpen,

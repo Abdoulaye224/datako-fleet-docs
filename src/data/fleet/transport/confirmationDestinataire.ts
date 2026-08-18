@@ -30,7 +30,7 @@ export const GUIDE_CONFIRMATION_DESTINATAIRE: GuideConfirmationDestinataire = {
     {
       titre: 'Ouvrez le lien reçu',
       description:
-        'Le lien vous parvient par e-mail ou par WhatsApp. Si vous êtes sur place au moment du déchargement, la personne qui enregistre la livraison peut aussi vous présenter un QR code à scanner sur son écran : il ouvre exactement la même page, sans attendre le message. Dans les deux cas, vous arrivez sur une page intitulée « Confirmation de réception », au nom du transporteur qui vous a livré.',
+        'Le lien vous parvient par e-mail ou par WhatsApp. Si vous êtes sur place au moment du déchargement, la personne qui enregistre la livraison peut aussi vous présenter un QR code à scanner sur son écran — et, si le transporteur utilise la Mission Conducteur, c’est le conducteur lui-même qui vous présente ce QR à la fin du dépotage. Le QR ouvre exactement la même page, sans attendre le message. Dans tous les cas, vous arrivez sur une page intitulée « Confirmation de réception », au nom du transporteur qui vous a livré.',
     },
     {
       titre: 'Vérifiez les informations de la livraison',
@@ -48,6 +48,11 @@ export const GUIDE_CONFIRMATION_DESTINATAIRE: GuideConfirmationDestinataire = {
         'Le commentaire est facultatif. Il devient utile si votre quantité diffère de celle annoncée : expliquez brièvement pourquoi, cela évitera des échanges plus tard.',
     },
     {
+      titre: 'Indiquez votre nom et cochez l’attestation',
+      description:
+        'La page vous demande le nom de la personne qui confirme — prénom et nom — puis de cocher la phrase « J’atteste être la personne qui réceptionne cette livraison et confirmer personnellement la quantité indiquée. » Les deux sont obligatoires : sans eux, la confirmation ne part pas.',
+    },
+    {
       titre: 'Confirmez la réception',
       description:
         'Cliquez sur « Confirmer la réception ». Le message « Merci, votre réception est enregistrée. » vous indique que c’est terminé. Votre confirmation est horodatée et conservée comme preuve de réception.',
@@ -55,6 +60,7 @@ export const GUIDE_CONFIRMATION_DESTINATAIRE: GuideConfirmationDestinataire = {
   ],
   aRetenir: [
     'Vous n’avez aucun compte à créer et rien à installer.',
+    'Deux informations sont obligatoires en plus de la quantité : votre nom et la case d’attestation.',
     'Si votre chiffre diffère de celui annoncé, la page vous le signale avant l’envoi — vous pouvez donc corriger une faute de frappe avant qu’elle ne devienne un désaccord.',
     'Une quantité différente n’est pas un problème en soi : elle ouvre simplement une vérification entre vous et le transporteur.',
     'Votre réponse est définitive une fois envoyée.',
@@ -70,6 +76,11 @@ export const GUIDE_CONFIRMATION_DESTINATAIRE: GuideConfirmationDestinataire = {
       question: 'Ai-je besoin d’un compte pour confirmer ?',
       reponse:
         'Non. Le lien que vous avez reçu suffit. Vous n’avez rien à créer, rien à installer et aucun mot de passe à retenir.',
+    },
+    {
+      question: 'Pourquoi me demande-t-on mon nom et une attestation ?',
+      reponse:
+        'Parce que votre confirmation vaut preuve de réception. Le nom de la personne qui confirme et la case d’attestation rattachent cette déclaration à quelqu’un, plutôt qu’à un lien anonyme. Ce sont des mentions déclaratives : elles ne vérifient pas votre identité, elles engagent votre parole.',
     },
     {
       question: 'Quelle quantité dois-je indiquer ?',

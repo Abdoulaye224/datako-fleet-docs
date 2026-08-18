@@ -62,14 +62,12 @@ export function Nouveautes() {
         )}
 
         <div className="space-y-8">
-          {NOUVEAUTES_A_VENIR.length > 0 && (
-            <div className="border-t border-[var(--border)] pt-6">
-              <h2 className="text-base font-semibold text-[var(--text-primary)]">Déjà disponible</h2>
-              <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                Les fonctionnalités ci-dessous sont en service, classées par mois de mise à disposition.
-              </p>
-            </div>
-          )}
+          <div className="border-t border-[var(--border)] pt-6">
+            <h2 className="text-base font-semibold text-[var(--text-primary)]">Déjà disponible</h2>
+            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+              Les fonctionnalités ci-dessous sont en service, classées par mois de mise à disposition.
+            </p>
+          </div>
           {Object.entries(grouped).map(([mois, items]) => (
             <section key={mois} className="space-y-4">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">{mois}</h2>

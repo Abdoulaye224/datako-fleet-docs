@@ -31,6 +31,7 @@ export interface WhatsAppFlux {
   exempleMessage?: string
   acces: string
   disponibilite: WhatsAppDisponibilite
+  href?: string
 }
 
 export const WHATSAPP_TITRE = 'WhatsApp avec Datakö Fleet'
@@ -60,6 +61,11 @@ export const WHATSAPP_BLOCS: WhatsAppBloc[] = [
     pourQui: 'Conducteur, chef d’exploitation, opérateur de vente',
     icon: 'zap',
     accent: 'blue',
+    lien: {
+      texte: 'La Mission Conducteur va plus loin : le conducteur est prévenu de son affectation, démarre sa mission et fait confirmer la réception par le destinataire.',
+      label: 'Voir la Mission Conducteur',
+      href: '/whatsapp/mission-conducteur',
+    },
   },
   {
     id: 'validation-client',
@@ -158,6 +164,25 @@ export const WHATSAPP_FLUX: WhatsAppFlux[] = [
   },
 
   // ── Actions terrain ────────────────────────────────────────────────────────
+  {
+    id: 'mission-conducteur',
+    bloc: 'actions-terrain',
+    titre: 'Suivre une mission de bout en bout',
+    acteur: 'Conducteur',
+    description:
+      'Le conducteur est prévenu par WhatsApp dès qu’une mission lui est affectée. Il la démarre, déclare la quantité déposée en fin de livraison, puis présente un QR au réceptionnaire pour que celui-ci confirme lui-même la réception.',
+    etapes: [
+      'Recevoir le message d’affectation et appuyer sur « Démarrer », dans les 12 heures.',
+      'À l’arrivée, appuyer sur « Fin de mission » et saisir la quantité réellement déposée en litres.',
+      'Ouvrir le lien reçu et présenter le QR au réceptionnaire, qui confirme lui-même la quantité reçue.',
+    ],
+    resultat:
+      'La déclaration du conducteur ne clôture pas la livraison : elle ouvre la confirmation du destinataire. L’exploitant suit l’état de la mission depuis la page Livraisons.',
+    acces:
+      'Fonctionnalité premium, réservée au plan Business avec le module Transport. Son activation passe par Datakö.',
+    disponibilite: 'disponible',
+    href: '/whatsapp/mission-conducteur',
+  },
   {
     id: 'conducteur-missions',
     bloc: 'actions-terrain',
@@ -434,9 +459,9 @@ export const WHATSAPP_LIMITES: WhatsAppLimite[] = [
       'Les délais et pourcentages qui déclenchent les alertes automatiques sont définis avec Datakö. Pour les ajuster, passez par le support.',
   },
   {
-    titre: 'Le conducteur confirme, il ne pilote pas',
+    titre: 'Le conducteur agit sur ses missions, il ne pilote pas',
     description:
-      'Un conducteur ne peut ni créer de rotation, ni consulter de chiffres. Son menu se limite à ses missions, à la confirmation d’arrivée et au signalement d’un problème.',
+      'Un conducteur ne peut ni créer de rotation, ni consulter de chiffres. Son menu se limite à ses missions, au démarrage et à la fin de mission, à la confirmation d’arrivée et au signalement d’un problème.',
   },
   {
     titre: 'Les badges conducteur n’apparaissent que si le module est actif',
