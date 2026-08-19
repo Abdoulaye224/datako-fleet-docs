@@ -39,9 +39,9 @@ export const appPages: AppPage[] = [
     id: 'flotte',
     name: 'Flotte',
     onglet: 'Opérations',
-    see: 'La performance de chaque camion : CA généré, coûts d\'exploitation, marge.',
-    why: 'Identifier les camions rentables et ceux qui coûtent de l\'argent.',
-    read: 'Un camion "Rentable" (>5% de marge) rapporte. "Déficitaire" (<0%) : il faut analyser pourquoi (maintenance, peu de rotations, charges élevées).',
+    see: 'La performance de chaque camion : CA généré, coûts d\'exploitation, marge. En cliquant sur une ligne, sa fiche détaillée s\'ouvre : Performance, Répartition, Activité, Maintenances, Location et Documents.',
+    why: 'Identifier les camions rentables et ceux qui coûtent de l\'argent, et garder les papiers de chaque véhicule à jour.',
+    read: 'Un camion "Rentable" (>5% de marge) rapporte. "Déficitaire" (<0%) : il faut analyser pourquoi (maintenance, peu de rotations, charges élevées). Dans l\'onglet Documents, la pastille ✅ Conforme, ⚠️ Expire bientôt ou 🔴 Non conforme résume l\'état des papiers obligatoires.',
     guideAssocie: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
   },
   {

@@ -27,15 +27,68 @@ export const guides: Guide[] = [
       "Renseignez l'immatriculation, la capacité en litres et le type de véhicule.",
       'Indiquez si le véhicule est "Propre" (appartient à l\'organisation) ou "Géré" (propriétaire externe).',
       'Si géré, sélectionnez ou créez le propriétaire et renseignez le pourcentage de répartition.',
-      'Ajoutez les documents obligatoires : assurance, vignette, visite technique.',
       'Cliquez sur "Enregistrer".',
+      "Déposez ensuite les documents réglementaires du camion : cela ne se fait pas dans ce formulaire, mais après enregistrement, depuis l'onglet Documents de sa fiche.",
     ],
     resultat: 'Le camion apparaît dans la liste de la Flotte et dans le menu déroulant du formulaire Nouvelle Rotation.',
     erreurs: [
       'Si le camion n\'apparaît pas dans Nouvelle Rotation, vérifiez que son statut est "Actif".',
-      'Un camion sans assurance valide affichera un badge rouge dans le formulaire.',
+      "Chercher un champ « assurance » ou « carte grise » dans le formulaire de création : il n'y en a pas. Les documents se déposent après, depuis la fiche du véhicule.",
+      "Un camion dont les documents obligatoires manquent ou sont expirés déclenche une alerte rouge au moment de créer une rotation.",
     ],
+    suivant: { href: '/transport/guides/documents-vehicule', titre: 'Déposer les documents réglementaires d\'un véhicule' },
+    articlesConnexes: [
+      { href: '/transport/guides/documents-vehicule', titre: "Déposer les documents réglementaires d'un véhicule", section: 'Guides' },
+    ],
+  },
+  {
+    id: 'documents-vehicule',
+    title: "Déposer les documents réglementaires d'un véhicule",
+    objectif:
+      "Enregistrer l'assurance, la visite technique, la carte grise et le certificat de conformité d'un camion, pour que l'application signale d'elle-même les papiers manquants ou sur le point d'expirer avant qu'il ne parte en rotation.",
+    prerequis: [
+      'Avoir le rôle Administrateur ou Opérateur — en Consultation, les boutons d\'ajout et de suppression n\'apparaissent pas',
+      'Le véhicule doit déjà exister dans la Flotte',
+      'Avoir chaque document scanné au format PDF, de 10 Mo maximum',
+    ],
+    etapes: [
+      'Allez dans la section Flotte depuis le menu principal.',
+      'Cliquez sur la ligne du camion concerné : sa fiche détaillée s\'ouvre.',
+      'Allez sur l\'onglet "Documents". C\'est le dernier de la fiche, après Performance, Répartition, Activité, Maintenances et Location : sur un écran étroit, faites défiler la barre d\'onglets vers la droite pour le voir apparaître.',
+      'Cliquez sur "Ajouter" en haut à droite — ou sur le lien "Ajouter" affiché en face d\'un document signalé "Manquant", ce qui présélectionne le bon type.',
+      'Choisissez le type de document dans la liste : Assurance, Visite technique, Carte grise, Certificat de conformité, Contrat de gestion, Contrat crédit-bail ou Autre document.',
+      'Si vous avez choisi "Autre document", donnez-lui un libellé — par exemple "Autorisation préfectorale". Il est obligatoire.',
+      "Renseignez la date d'expiration. Elle est obligatoire pour l'assurance, la visite technique et le certificat de conformité : sans elle, le bouton Enregistrer reste inactif.",
+      "Renseignez la date d'émission si vous l'avez : elle est facultative, mais elle s'affiche sous le document et aide à retrouver la bonne version.",
+      'Cliquez sur "Choisir un fichier PDF…" et sélectionnez le scan. Seul le format PDF est accepté, dans la limite de 10 Mo.',
+      'Ajoutez une note si besoin — numéro de police, compagnie d\'assurance, centre de visite.',
+      'Cliquez sur "Enregistrer", puis répétez l\'opération pour chacun des quatre documents obligatoires.',
+    ],
+    resultat:
+      "Chaque document apparaît sous son type, avec son nom de fichier et son poids. Le lien « ↗ Voir » ouvre le PDF, la croix le supprime. En haut de l'onglet, une pastille résume l'état du camion : ✅ Conforme, ⚠️ Expire bientôt ou 🔴 Non conforme. À partir de deux mois avant l'échéance, le compte à rebours s'affiche en face du document concerné — « ⚠️ dans 45j », puis « Expirée » une fois la date passée.",
+    erreurs: [
+      "Chercher le dépôt dans le formulaire de création du véhicule : il n'y est pas. Le véhicule doit d'abord exister, les documents se déposent ensuite depuis sa fiche.",
+      "Ne pas trouver l'onglet Documents : il est en bout de barre et peut être hors écran. Faites défiler les onglets horizontalement.",
+      "Envoyer une photo prise au téléphone : les images JPEG ou PNG sont refusées, seul le PDF est accepté.",
+      "Un scan refusé pour son poids : au-delà de 10 Mo, rescannez le document à plus basse résolution — 200 dpi suffisent pour un document administratif.",
+      "Ne déposer que l'assurance : trois autres documents comptent pour la conformité. Tant qu'il en manque un, le camion reste 🔴 Non conforme.",
+    ],
+    attention: [
+      "Quatre documents déterminent la conformité d'un camion : l'assurance, la visite technique, la carte grise et le certificat de conformité. Les contrats de gestion, de crédit-bail et les autres documents se rangent au même endroit, mais n'entrent pas dans ce calcul.",
+      "La carte grise n'a pas besoin de date d'expiration. Sans date, elle est considérée comme valable et la fiche affiche « Pas d'expiration ».",
+      "Un camion devient 🔴 Non conforme dès qu'un des quatre documents manque ou est expiré, et ⚠️ Expire bientôt lorsqu'il reste 30 jours ou moins avant une échéance.",
+      "Un véhicule non conforme n'est jamais bloqué. Au moment de créer une rotation, une alerte liste les documents en cause et vous laisse passer outre — mais « Continuer quand même » est enregistré et remonte dans les rapports de direction.",
+      "Renouveler un document ne demande pas de supprimer l'ancien : déposez simplement le nouveau sous le même type. C'est toujours l'échéance la plus lointaine qui fait foi pour la conformité, et l'historique reste consultable.",
+    ],
+    exempleConcret:
+      "L'assurance du camion BN-4121-02 expire le 30 septembre. Le 15 août, la fiche du véhicule affiche « ⚠️ dans 46j » en face de l'assurance, mais la pastille reste ✅ Conforme : le seuil d'alerte est à 30 jours. Le 5 septembre, la pastille passe à ⚠️ Expire bientôt et chaque nouvelle rotation sur ce camion affiche l'alerte. L'exploitant dépose la nouvelle attestation, valable jusqu'au 30 septembre de l'année suivante : la pastille repasse ✅ Conforme immédiatement.",
+    precedent: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
     suivant: { href: '/transport/guides/configurer-repartition-acteurs', titre: 'Configurer la répartition pour un véhicule géré' },
+    articlesConnexes: [
+      { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion', section: 'Guides' },
+      { href: '/transport/pages/flotte', titre: 'Flotte', section: 'Pages' },
+      { href: '/transport/guides/creer-rotation', titre: 'Créer une rotation', section: 'Guides' },
+    ],
   },
   {
     id: 'configurer-repartition-acteurs',
@@ -69,7 +122,7 @@ export const guides: Guide[] = [
       "La page Répartition acteurs ne fait qu'afficher le résultat. La règle se crée uniquement dans Configuration, onglet Acteurs.",
       "Une seule règle de type « Résiduel » coexiste par périmètre : une par véhicule, ou une pour l'ensemble des véhicules propres et une autre pour l'ensemble des véhicules gérés.",
     ],
-    precedent: { href: '/transport/guides/ajouter-camion', titre: 'Ajouter un camion' },
+    precedent: { href: '/transport/guides/documents-vehicule', titre: "Déposer les documents réglementaires d'un véhicule" },
     suivant: { href: '/transport/guides/ajouter-charge-fixe', titre: 'Ajouter une charge fixe' },
     articlesConnexes: [
       { href: '/transport/guides/mettre-en-place-camion-gere', titre: 'Mettre en place un camion géré, de bout en bout', section: 'Guides' },
@@ -384,6 +437,7 @@ export const guides: Guide[] = [
     attention: [
       "Ce réglage se décide client par client, dans sa fiche. Il n'existe pas de réglage global qui l'activerait pour tout le monde.",
       'Le mode choisi est figé sur chaque livraison au moment du déchargement : changer la politique du client ne modifie pas les livraisons déjà en cours.',
+      "Ne confondez pas ce réglage avec le fait de solliciter le destinataire. Si vous utilisez la Mission Conducteur, le QR que le conducteur présente au terme de sa mission existe chez tous vos clients, y compris ceux restés en \"Opérateur uniquement\". Ce réglage ne décide pas si une réponse peut être recueillie, il décide de ce qu'elle vaut : attestation tracée et horodatée, sans effet sur la clôture, d'un côté ; accord opposable qui conditionne la finalisation, de l'autre. La fenêtre de lien et de QR que vous voyez au moment de déclarer le déchargement, elle, ne s'ouvre que pour les clients en double validation.",
     ],
     precedent: { href: '/transport/guides/generer-facture-transport', titre: 'Générer une facture transport' },
     suivant: { href: '/transport/guides/traiter-ecart-destinataire', titre: 'Traiter un écart signalé par le destinataire' },

@@ -21,6 +21,18 @@ export const FAQ_ITEMS: FAQItem[] = [
     reponse: 'Seul un Administrateur peut modifier une livraison validée. Allez dans Livraisons, cliquez sur la rotation, puis utilisez le bouton "Modifier". Toute modification est tracée avec la date et l\'auteur.',
   },
   {
+    id: 'ou-deposer-documents-vehicule',
+    categorie: 'operations',
+    question: 'Où déposer les documents d\'un véhicule (assurance, carte grise, visite technique) ?',
+    reponse: 'Pas dans le formulaire de création du véhicule : il ne contient aucun champ de document. Allez dans Flotte, cliquez sur la ligne du camion pour ouvrir sa fiche, puis sur l\'onglet "Documents" — c\'est le dernier de la barre, après Location, et il peut être hors écran : faites défiler les onglets vers la droite. Cliquez ensuite sur "Ajouter". Seuls les fichiers PDF de 10 Mo maximum sont acceptés.',
+  },
+  {
+    id: 'rotation-camion-non-conforme',
+    categorie: 'operations',
+    question: 'Puis-je créer une rotation avec un camion dont les papiers sont expirés ?',
+    reponse: 'Oui. L\'application n\'interdit rien : elle affiche une alerte listant les documents manquants ou expirés, et vous laisse continuer. Mais le fait de passer outre est enregistré et remonte dans les rapports de direction. Les quatre documents qui déclenchent cette alerte sont l\'assurance, la visite technique, la carte grise et le certificat de conformité.',
+  },
+  {
     id: 'cashflow-vs-marge',
     categorie: 'finance',
     question: 'Pourquoi le Cashflow est différent de la Marge d\'Exploitation ?',
@@ -152,7 +164,19 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 'pourquoi-certaines-livraisons-a-confirmer',
     categorie: 'transport',
     question: 'Pourquoi certaines livraisons doivent-elles être confirmées par le destinataire, et pas d\'autres ?',
-    reponse: 'Cela dépend uniquement du client. Le mode de validation se règle client par client, dans le bloc "Validation des livraisons" de sa fiche. Par défaut, tous les clients sont en "Opérateur uniquement" : rien ne change pour eux. Seuls les clients passés en "Opérateur et destinataire" déclenchent une demande de confirmation.',
+    reponse: 'Cela dépend uniquement du client. Le mode de validation se règle client par client, dans le bloc "Validation des livraisons" de sa fiche. Par défaut, tous les clients sont en "Opérateur uniquement" — la colonne Validation de la liste des clients les affiche alors "Standard" : la livraison est finalisée dès que votre opérateur la valide. Seuls les clients passés en "Opérateur et destinataire", signalés par un badge "Double validation", attendent la réponse du destinataire avant d\'être finalisés. Attention à ne pas confondre ce réglage avec le fait de solliciter le destinataire : si vous utilisez la Mission Conducteur, le conducteur présente un QR de réception chez tous vos clients. C\'est bien ce réglage, et lui seul, qui décide si la réponse obtenue conditionne la clôture.',
+  },
+  {
+    id: 'qr-conducteur-client-standard',
+    categorie: 'transport',
+    question: 'Mon client n\'est pas en double validation : pourquoi le conducteur lui présente-t-il quand même un QR ?',
+    reponse: 'Parce que le QR présenté par le conducteur au terme de sa mission existe chez tous vos clients, quel que soit leur mode de validation — c\'est un chemin distinct de la fenêtre de lien que votre opérateur voit au déchargement, elle réservée à la double validation. Ce qui change, c\'est la portée de la réponse recueillie. En "Opérateur et destinataire", elle est opposable et peut finaliser la livraison. En "Opérateur uniquement" — affiché "Standard" dans la liste des clients — elle vaut attestation de réception : elle est tracée et horodatée, elle prouve que quelqu\'un a bien réceptionné, mais elle ne clôture rien et n\'écrit aucun montant. Votre opérateur conserve exactement son parcours de validation habituel.',
+  },
+  {
+    id: 'confirmation-standard-ne-cloture-pas',
+    categorie: 'transport',
+    question: 'Le destinataire a répondu, mais la livraison n\'est pas clôturée. Est-ce normal ?',
+    reponse: 'Oui, si ce client est en "Opérateur uniquement" (affiché "Standard"). Sa réponse est enregistrée comme attestation de réception, avec sa date et son heure, et vous la retrouvez sur la livraison — mais elle ne finalise pas la livraison et ne déclenche ni chiffre d\'affaires ni facturation. La clôture reste l\'acte de votre opérateur, par le parcours normal. Même une quantité différente de la vôtre n\'y fait pas obstacle : elle est signalée, elle ne bloque pas. Si vous voulez que la réponse du destinataire conditionne la clôture, passez ce client en "Opérateur et destinataire" — le mode étant figé au moment du déchargement, le changement ne vaudra que pour les livraisons dont le déchargement n\'a pas encore été déclaré.',
   },
   {
     id: 'savoir-si-destinataire-a-confirme',
@@ -170,7 +194,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 'qr-et-lien-difference',
     categorie: 'transport',
     question: 'Le QR code et le lien WhatsApp, est-ce la même chose ?',
-    reponse: 'Oui. Le QR code contient exactement le même lien à usage unique que celui envoyé par WhatsApp ou par e-mail, et mène à la même page de confirmation. C\'est simplement une autre façon d\'y accéder, pratique quand le destinataire est présent au déchargement : il scanne et répond sur place, sans attendre un message. Utiliser le QR n\'annule pas le lien envoyé, et inversement — c\'est le même lien, donc la première réponse enregistrée clôt la demande.',
+    reponse: 'Oui. Le QR code contient exactement le même lien à usage unique que celui envoyé par WhatsApp ou par e-mail, et mène à la même page de confirmation. C\'est simplement une autre façon d\'y accéder, pratique quand le destinataire est présent au déchargement : il scanne et répond sur place, sans attendre un message. Utiliser le QR n\'annule pas le lien envoyé, et inversement — c\'est le même lien, donc la première réponse enregistrée clôt la demande. Attention à ne pas le confondre avec le QR que présente le conducteur après son dépotage : celui-là existe chez tous vos clients, alors que cette fenêtre-ci ne s\'ouvre que pour les clients en double validation.',
   },
   {
     id: 'notification-cloche-rouge',

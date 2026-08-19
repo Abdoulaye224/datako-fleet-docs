@@ -83,6 +83,11 @@ export const GUIDE_CONFIRMATION_DESTINATAIRE: GuideConfirmationDestinataire = {
         'Parce que votre confirmation vaut preuve de réception. Le nom de la personne qui confirme et la case d’attestation rattachent cette déclaration à quelqu’un, plutôt qu’à un lien anonyme. Ce sont des mentions déclaratives : elles ne vérifient pas votre identité, elles engagent votre parole.',
     },
     {
+      question: 'Ma réponse clôture-t-elle la livraison ?',
+      reponse:
+        'Cela dépend du mode de validation retenu par le transporteur pour votre entreprise, et la page ne l’affiche pas. Dans un cas, votre réponse fait partie du processus contradictoire : elle est opposable et conditionne la clôture de la livraison. Dans l’autre, elle vaut attestation de réception — elle est enregistrée, datée et horodatée, elle prouve que vous avez bien reçu, mais c’est l’exploitant du transporteur qui clôture la livraison par son propre parcours. Dans les deux cas votre réponse est conservée : répondez de la même façon, avec ce que vous avez réellement constaté.',
+    },
+    {
       question: 'Quelle quantité dois-je indiquer ?',
       reponse:
         'Celle que vous avez réellement reçue, mesurée après dépotage. Pas celle inscrite sur le bon de livraison, ni celle annoncée par le chauffeur : c’est votre propre constat qui est demandé.',
