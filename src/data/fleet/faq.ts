@@ -30,7 +30,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 'rotation-camion-non-conforme',
     categorie: 'operations',
     question: 'Puis-je créer une rotation avec un camion dont les papiers sont expirés ?',
-    reponse: 'Oui. L\'application n\'interdit rien : elle affiche une alerte listant les documents manquants ou expirés, et vous laisse continuer. Mais le fait de passer outre est enregistré et remonte dans les rapports de direction. Les quatre documents qui déclenchent cette alerte sont l\'assurance, la visite technique, la carte grise et le certificat de conformité.',
+    reponse: 'Oui. L\'application n\'interdit rien : elle affiche une alerte listant les documents manquants ou expirés, et vous laisse continuer. Le fait de passer outre est enregistré — la rotation, le camion, les documents en cause, l\'auteur et l\'heure sont conservés. L\'alerte annonce que cette trace est "visible dans les rapports de direction" : à ce jour, aucun écran de l\'application ne la restitue, elle n\'existe qu\'en base. Un rapport de direction reprenant ces passages en force est à venir. Les quatre documents qui déclenchent cette alerte sont l\'assurance, la visite technique, la carte grise et le certificat de conformité.',
   },
   {
     id: 'cashflow-vs-marge',
